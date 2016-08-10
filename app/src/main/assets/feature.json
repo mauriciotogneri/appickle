@@ -1,0 +1,66 @@
+{
+    "tags": [
+        "@main"
+    ],
+    "description": [
+        "Some terse yet descriptive text of what is desired",
+        "Textual description of the business value of this feature",
+        "Business rules that govern the scope of the feature",
+        "Any additional information that will make the feature easier to understand"
+    ],
+    "backgrounds": [
+        {
+            "tags": [
+                "@login"
+            ],
+            "steps": [
+                "Do something before each scenario is executed"
+            ]
+        }
+    ],
+    "scenarios": [
+        {
+            "tags": [
+                "@uat"
+            ],
+            "type": "standard",
+            "description": [
+                "Some determinable business situation"
+            ],
+            "steps": [
+                "Given some precondition",
+                "And some other precondition"
+            ]
+        },
+        {
+            "type": "outline",
+            "description": [
+                "Eating"
+            ],
+            "steps": [
+                "Given there are <start> cucumbers",
+                "When I eat <eat> cucumbers",
+                "Then I should have <left> cucumbers"
+            ],
+            "examples": {
+                "headers": [
+                    "start",
+                    "eat",
+                    "left"
+                ],
+                "values": [
+                    [
+                        12,
+                        5,
+                        7
+                    ],
+                    [
+                        20,
+                        5,
+                        15
+                    ]
+                ]
+            }
+        }
+    ]
+}
