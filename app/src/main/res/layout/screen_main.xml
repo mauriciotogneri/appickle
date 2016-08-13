@@ -4,39 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/screen.background"
+    android:gravity="bottom"
     android:orientation="vertical"
     android:padding="@dimen/margin.default">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:textColor="@color/text.default"/>
-
-    <android.support.design.widget.TextInputLayout
-        style="@style/textInput"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            style="@style/editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/action.settings"
-            android:inputType="text"/>
-
-    </android.support.design.widget.TextInputLayout>
-
-    <CheckBox
-        style="@style/checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/action.settings"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/primaryDark"
+        android:textAllCaps="true"
+        android:textSize="50sp"
+        android:text="@string/app.name"/>
 
     <Button
+        android:id="@+id/screen.main.button.scan"
         style="@style/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app.name"/>
+        android:text="@string/screen.main.button.scan"/>
+
+    <Button
+        android:id="@+id/screen.main.button.load"
+        style="@style/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/screen.main.button.load"/>
 
 </LinearLayout>

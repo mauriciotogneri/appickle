@@ -1,5 +1,6 @@
 package com.mauriciotogneri.appickle.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -32,26 +33,41 @@ public abstract class BaseActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        toolbar.setNavigationOnClickListener(new OnClickListener()
+        if (displayBackButton())
         {
-            @Override
-            public void onClick(View view)
+            toolbar.setNavigationOnClickListener(new OnClickListener()
             {
-                onBackButton();
+                @Override
+                public void onClick(View view)
+                {
+                    onBackButton();
+                }
+            });
+
+            ActionBar actionBar = getSupportActionBar();
+
+            if (actionBar != null)
+            {
+                actionBar.setDisplayHomeAsUpEnabled(true);
             }
-        });
-
-        ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null)
-        {
-            actionBar.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    protected void openActivity(Class clazz)
+    {
+        Intent intent = new Intent(this, clazz);
+        startActivity(intent);
     }
 
     protected abstract int layout();
 
+    protected boolean displayBackButton()
+    {
+        return true;
+    }
+
     protected void onBackButton()
     {
+        finish();
     }
 }

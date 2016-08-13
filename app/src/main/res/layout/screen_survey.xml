@@ -22,7 +22,7 @@
             style="@style/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/action.settings"
+            android:hint="@string/app.name"
             android:inputType="text"/>
 
     </android.support.design.widget.TextInputLayout>
@@ -31,7 +31,7 @@
         style="@style/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/action.settings"/>
+        android:text="@string/app.name"/>
 
     <Button
         style="@style/button"

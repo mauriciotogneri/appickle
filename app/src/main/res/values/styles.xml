@@ -15,6 +15,9 @@
 
     <style name="button" parent="Widget.AppCompat.Button.Colored">
         <item name="android:textColor">@color/button.text</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
     </style>
 
     <style name="editText">
