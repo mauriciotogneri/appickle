@@ -1,0 +1,107 @@
+{
+    "id": "a6ec7cda-1eb7-497b-95cc-605f5b8d3952",
+    "title": "This is a sample index",
+    "description": "This is a sample description for the index",
+    "thumbnails": [
+        "http://www.example.com/image1.jpg",
+        "http://www.example.com/image2.jpg",
+        "http://www.example.com/image3.jpg"
+    ],
+    "survey": {
+        "description": "We need some data from you before we start",
+        "fields": [
+            {
+                "id": "field_id_1",
+                "type": "field",
+                "format": "text|integer|float|telephone|email|uri",
+                "description": "The description",
+                "placeholder": "Input here",
+                "default": "Bla bla bla",
+                "required": true
+            },
+            {
+                "id": "field_id_2",
+                "type": "text",
+                "description": "The description",
+                "placeholder": "Input here",
+                "default": "",
+                "required": true
+            },
+            {
+                "id": "field_id_3",
+                "type": "radio|select",
+                "description": "The description",
+                "values": [
+                    {
+                        "key": "A",
+                        "label": "Android"
+                    },
+                    {
+                        "key": "I",
+                        "label": "iOS"
+                    }
+                ],
+                "default": "A",
+                "required": true
+            },
+            {
+                "id": "field_id_4",
+                "type": "checkbox",
+                "description": "The description",
+                "values": [
+                    {
+                        "key": "A",
+                        "label": "Android",
+                        "default": true
+                    },
+                    {
+                        "key": "I",
+                        "label": "iOS",
+                        "default": true
+                    }
+                ],
+                "required": true
+            },
+            {
+                "id": "field_id_5",
+                "type": "switch",
+                "description": "The description",
+                "default": true,
+                "required": true
+            },
+            {
+                "id": "field_id_6",
+                "type": "range",
+                "description": "The description",
+                "min": 0,
+                "max": 100,
+                "default": 0,
+                "required": true
+            },
+            {
+                "id": "field_id_7",
+                "type": "time",
+                "description": "The description",
+                "required": true
+            },
+            {
+                "id": "field_id_8",
+                "type": "date",
+                "description": "The description",
+                "required": true
+            }
+        ]
+    },
+    "report": {
+        "uri": "http://www.example.com/report",
+        "auth": {
+            "user": "user",
+            "password": "password"
+        }
+    },
+    "features": [
+        "http://www.example.com/features/file1.feature",
+        "http://www.example.com/features/file2.feature",
+        "http://www.example.com/features/file3.feature"
+    ]
+}

@@ -1,13 +1,13 @@
 package com.mauriciotogneri.appickle;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.mauriciotogneri.appickle.json.JsonFeature;
@@ -30,13 +30,14 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         setTitle("Feature title");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener()
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new OnClickListener()
         {
             @Override
-            public void onClick(View view)
+            public void onClick(View v)
             {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Toast.makeText(MainActivity.this, "Back pressed!", Toast.LENGTH_SHORT).show();
             }
         });
 
