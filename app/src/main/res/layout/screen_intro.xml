@@ -1,16 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/screen.background"
-    android:orientation="vertical"
-    android:padding="@dimen/margin.default">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/sessionId"
-        style="@style/labelText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/margin.default"
+        android:paddingRight="@dimen/margin.default"
+        android:paddingTop="@dimen/margin.default"
+        android:scrollbarStyle="outsideOverlay">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/session.title"
+                style="@style/labelText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin.default"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="@string/dummy.short"/>
+
+            <TextView
+                android:id="@+id/session.description"
+                style="@style/labelText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin.default"
+                tools:text="@string/dummy.long"/>
+
+            <LinearLayout
+                android:id="@+id/thumbnail.container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/screen.intro.button.next"
+        style="@style/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin.default"
+        android:text="@string/screen.intro.button.next"/>
 
 </LinearLayout>

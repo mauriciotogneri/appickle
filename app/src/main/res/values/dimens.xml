@@ -3,4 +3,6 @@
 
     <dimen name="margin.default">15dp</dimen>
 
+    <dimen name="text.default">18sp</dimen>
+
 </resources>

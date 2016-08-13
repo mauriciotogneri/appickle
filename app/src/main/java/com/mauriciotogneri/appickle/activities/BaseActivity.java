@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.mauriciotogneri.appickle.R;
 
@@ -52,6 +53,20 @@ public abstract class BaseActivity extends AppCompatActivity
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
         }
+    }
+
+    protected void toolbarTitle(int titleId)
+    {
+        toolbarTitle(getString(titleId));
+    }
+
+    protected void toolbarTitle(String title)
+    {
+        setTitle("");
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        TextView titleLabel = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        titleLabel.setText(title);
     }
 
     @SuppressWarnings("unchecked")

@@ -11,7 +11,7 @@ public class LoadSessionActivity extends BaseActivity
     {
         super.onCreate(savedInstanceState);
 
-        setTitle(R.string.screen_load_title);
+        toolbarTitle(R.string.screen_load_title);
     }
 
     @Override

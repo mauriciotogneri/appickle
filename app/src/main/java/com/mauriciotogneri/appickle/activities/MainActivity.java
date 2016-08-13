@@ -14,7 +14,7 @@ public class MainActivity extends BaseActivity
     {
         super.onCreate(savedInstanceState);
 
-        setTitle(R.string.app_name);
+        toolbarTitle(R.string.app_name);
 
         ButterKnife.bind(this);
     }

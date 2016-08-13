@@ -9,8 +9,13 @@ import com.mauriciotogneri.appickle.model.Session;
 import com.mauriciotogneri.appickle.resources.FileContent;
 import com.mauriciotogneri.appickle.storage.SessionsIndexStorage;
 
+import java.io.IOException;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class NewSessionActivity extends BaseActivity
 {
@@ -21,33 +26,57 @@ public class NewSessionActivity extends BaseActivity
     {
         super.onCreate(savedInstanceState);
 
-        setTitle(R.string.screen_new_title);
+        toolbarTitle(R.string.screen_new_title);
 
         ButterKnife.bind(this);
+
+        sessionFromInternet();
     }
 
-    private void openIntro(Uri uri)
+    // TODO: remove
+    private void sessionFromInternet()
     {
-        try
+        Thread thread = new Thread(new Runnable()
         {
-            FileContent fileContent = new FileContent(uri);
-            Session session = Session.fromJson(fileContent.content());
+            @Override
+            public void run()
+            {
+                try
+                {
+                    OkHttpClient client = new OkHttpClient();
 
-            SessionsIndexStorage sessionsIndexStorage = new SessionsIndexStorage(this);
-            sessionsIndexStorage.saveSession(session);
+                    Request request = new Request.Builder().url("http://zeronest.com/appickle/session.json").build();
 
-            Bundle parameters = new Bundle();
-            parameters.putString(IntroSessionActivity.PARAMETER_SESSION_ID, session.id());
-            openActivity(IntroSessionActivity.class, parameters);
+                    Response response = client.newCall(request).execute();
 
-            finish();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+                    openIntro(Session.fromJson(response.body().string()));
+                }
+                catch (Exception e)
+                {
+                    errorDialog(R.string.screen_new_button_file_error);
+                }
+            }
+        });
+        thread.start();
+    }
 
-            errorDialog(R.string.screen_new_button_file_error);
-        }
+    private Session sessionFromUri(Uri uri) throws IOException
+    {
+        FileContent fileContent = new FileContent(uri);
+
+        return Session.fromJson(fileContent.content());
+    }
+
+    private void openIntro(Session session)
+    {
+        SessionsIndexStorage sessionsIndexStorage = new SessionsIndexStorage(this);
+        sessionsIndexStorage.saveSession(session);
+
+        Bundle parameters = new Bundle();
+        parameters.putString(IntroSessionActivity.PARAMETER_SESSION_ID, session.id());
+        openActivity(IntroSessionActivity.class, parameters);
+
+        finish();
     }
 
     @OnClick(R.id.screen_new_button_file)
@@ -64,7 +93,18 @@ public class NewSessionActivity extends BaseActivity
         if ((requestCode == SELECT_FILE_REQUEST_CODE) && (resultCode == RESULT_OK))
         {
             Uri uri = data.getData();
-            openIntro(uri);
+
+            try
+            {
+                Session session = sessionFromUri(uri);
+                openIntro(session);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+
+                errorDialog(R.string.screen_new_button_file_error);
+            }
         }
     }
 

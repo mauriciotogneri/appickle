@@ -29,10 +29,11 @@
 
     <style name="labelText">
         <item name="android:textColor">@color/text.default</item>
+        <item name="android:textSize">@dimen/text.default</item>
     </style>
 
     <style name="editText">
-        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
         <item name="android:textColor">@color/hint</item>
         <item name="android:textColorHint">@color/hint</item>
     </style>
