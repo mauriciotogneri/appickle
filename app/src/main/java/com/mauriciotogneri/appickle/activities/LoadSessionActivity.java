@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.mauriciotogneri.appickle.R;
 
-public class LoadActivity extends BaseActivity
+public class LoadSessionActivity extends BaseActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)

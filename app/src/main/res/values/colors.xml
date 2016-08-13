@@ -7,11 +7,13 @@
 
     <color name="toolbar.text">#FFFFFF</color>
 
+    <color name="dialog.background">#FFFFFF</color>
+
     <color name="screen.background">#FFFFFF</color>
 
     <color name="button.text">#FFFFFF</color>
 
-    <color name="text.default">#888888</color>
+    <color name="text.default">#666666</color>
 
     <color name="hint">#AAAAAA</color>
 

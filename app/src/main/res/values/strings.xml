@@ -3,9 +3,16 @@
 
     <string name="app.name">Appickle</string>
 
-    <string name="screen.main.button.scan">Scan</string>
-    <string name="screen.main.button.load">Load</string>
+    <string name="dialog.ok">OK</string>
 
-    <string name="screen.load.title">Load</string>
+    <string name="screen.main.button.new">New session</string>
+    <string name="screen.main.button.load">Load session</string>
+
+    <string name="screen.new.title">New session</string>
+    <string name="screen.new.button.qrCode">From QR code</string>
+    <string name="screen.new.button.file">From file</string>
+    <string name="screen.new.button.file.error">Error loading session from file</string>
+
+    <string name="screen.load.title">Load session</string>
 
 </resources>

@@ -3,6 +3,7 @@ package com.mauriciotogneri.appickle.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -53,9 +54,31 @@ public abstract class BaseActivity extends AppCompatActivity
         }
     }
 
+    @SuppressWarnings("unchecked")
+    protected <T> T parameter(String key)
+    {
+        return (T) getIntent().getExtras().get(key);
+    }
+
+    protected void errorDialog(int message)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle(message);
+        builder.setPositiveButton(R.string.dialog_ok, null);
+        builder.show();
+    }
+
     protected void openActivity(Class clazz)
     {
+        openActivity(clazz, new Bundle());
+    }
+
+    protected void openActivity(Class clazz, Bundle parameters)
+    {
         Intent intent = new Intent(this, clazz);
+        intent.putExtras(parameters);
+
         startActivity(intent);
     }
 

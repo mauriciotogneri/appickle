@@ -5,6 +5,8 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".app.Appickle"
@@ -38,7 +40,15 @@
         </activity>
 
         <activity
-            android:name=".activities.LoadActivity"
+            android:name=".activities.NewSessionActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+
+        <activity
+            android:name=".activities.LoadSessionActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+
+        <activity
+            android:name=".activities.IntroSessionActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"/>
 
         <activity
