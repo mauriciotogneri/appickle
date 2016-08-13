@@ -14,7 +14,21 @@
     </style>
 
     <style name="button" parent="Widget.AppCompat.Button.Colored">
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/button.text</item>
+    </style>
+
+    <style name="editText">
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/hint</item>
+        <item name="android:textColorHint">@color/hint</item>
+    </style>
+
+    <style name="textInput">
+        <item name="android:textColorHint">@color/hint</item>
+    </style>
+
+    <style name="checkbox">
+        <item name="android:textColor">@color/text.default</item>
     </style>
 
 </resources>

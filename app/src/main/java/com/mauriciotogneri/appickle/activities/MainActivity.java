@@ -1,15 +1,11 @@
-package com.mauriciotogneri.appickle;
+package com.mauriciotogneri.appickle.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.json.JsonFeature;
 import com.mauriciotogneri.appickle.model.Feature;
 
@@ -18,28 +14,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        setTitle("Feature title");
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        toolbar.setNavigationOnClickListener(new OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Toast.makeText(MainActivity.this, "Back pressed!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        setTitle("THE TITLE!");
 
         try
         {
@@ -52,6 +34,12 @@ public class MainActivity extends AppCompatActivity
         {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected int layout()
+    {
+        return R.layout.screen_main;
     }
 
     private String getAsset(String path) throws IOException

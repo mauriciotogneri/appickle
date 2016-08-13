@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="primary">#3F51B5</color>
-    <color name="primaryDark">#303F9F</color>
-    <color name="accent">#7487F2</color>
+    <color name="primary">#229954</color>
+    <color name="primaryDark">#1E8449</color>
+    <color name="accent">#17A589</color>
+
+    <color name="toolbar.text">#FFFFFF</color>
+
+    <color name="screen.background">#FFFFFF</color>
+
+    <color name="button.text">#FFFFFF</color>
+
+    <color name="text.default">#888888</color>
+
+    <color name="hint">#AAAAAA</color>
 
 </resources>
