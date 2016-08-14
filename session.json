@@ -13,7 +13,7 @@
             {
                 "id": "field_id_1",
                 "type": "field",
-                "format": "text|integer|float|telephone|email|uri",
+                "format": "text|integer|decimal|telephone|email|uri",
                 "description": "The description",
                 "placeholder": "Input here",
                 "default": "Bla bla bla",
@@ -64,7 +64,7 @@
             },
             {
                 "id": "field_id_5",
-                "type": "switch",
+                "type": "toggle",
                 "description": "The description",
                 "default": true,
                 "required": true

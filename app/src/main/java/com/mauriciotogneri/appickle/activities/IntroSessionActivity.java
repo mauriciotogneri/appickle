@@ -16,12 +16,13 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class IntroSessionActivity extends BaseActivity
 {
     private static final String PARAMETER_SESSION_ID = "session.id";
 
-    private Session session;
+    private String sessionId;
 
     @BindView(R.id.session_title)
     public TextView sessionTitle;
@@ -35,7 +36,7 @@ public class IntroSessionActivity extends BaseActivity
     public static Intent createIntent(Context context, String sessionId)
     {
         Bundle parameters = new Bundle();
-        parameters.putString(IntroSessionActivity.PARAMETER_SESSION_ID, sessionId);
+        parameters.putString(PARAMETER_SESSION_ID, sessionId);
 
         Intent intent = new Intent(context, IntroSessionActivity.class);
         intent.putExtras(parameters);
@@ -50,11 +51,10 @@ public class IntroSessionActivity extends BaseActivity
 
         ButterKnife.bind(this);
 
-        String sessionId = parameter(PARAMETER_SESSION_ID);
-        SessionStorage sessionStorage = new SessionStorage(this, sessionId);
-        this.session = sessionStorage.loadSession();
+        this.sessionId = parameter(PARAMETER_SESSION_ID);
 
-        displaySession(session);
+        SessionStorage sessionStorage = new SessionStorage(this, sessionId);
+        displaySession(sessionStorage.loadSession());
 
         toolbarTitle(R.string.screen_intro_title);
     }
@@ -72,6 +72,13 @@ public class IntroSessionActivity extends BaseActivity
             thumbnailContainer.addView(imageView);
             Picasso.with(this).load(thumbnail).into(imageView);
         }
+    }
+
+    @OnClick(R.id.screen_intro_button_next)
+    public void onButtonNext()
+    {
+        Intent intent = SurveyActivity.createIntent(this, sessionId);
+        startActivity(intent);
     }
 
     @Override

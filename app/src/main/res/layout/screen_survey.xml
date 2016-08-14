@@ -3,39 +3,32 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/margin.default">
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:textColor="@color/text.default"/>
-
-    <android.support.design.widget.TextInputLayout
-        style="@style/textInput"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/margin.default"
+        android:paddingRight="@dimen/margin.default"
+        android:paddingTop="@dimen/margin.default"
+        android:scrollbarStyle="outsideOverlay">
 
-        <EditText
-            style="@style/editText"
+        <LinearLayout
+            android:id="@+id/screen.survey.fieldContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/app.name"
-            android:inputType="text"/>
+            android:orientation="vertical"/>
 
-    </android.support.design.widget.TextInputLayout>
-
-    <CheckBox
-        style="@style/checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app.name"/>
+    </ScrollView>
 
     <Button
+        android:id="@+id/screen.survey.button.start"
         style="@style/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app.name"/>
+        android:layout_margin="@dimen/margin.default"
+        android:text="@string/screen.survey.button.start"/>
 
 </LinearLayout>
