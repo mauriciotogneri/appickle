@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="margin.default">15dp</dimen>
+    <dimen name="margin.default">10dp</dimen>
 
     <dimen name="text.default">18sp</dimen>
 

@@ -1,14 +1,10 @@
 package com.mauriciotogneri.appickle.model;
 
-import android.support.design.widget.TextInputLayout;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.mauriciotogneri.appickle.R;
+import com.mauriciotogneri.appickle.model.fields.StandardField;
 
 public class SurveyField
 {
@@ -38,7 +34,8 @@ public class SurveyField
 
     public enum Format
     {
-        text(0x00000001),
+        text(0x00000001 | 0x000000b1),
+        textMultiLine(0x00020001 | 0x000000b1),
         textAutoComplete(0x00010001),
         integer(0x00000002),
         decimal(0x00002002),
@@ -52,6 +49,11 @@ public class SurveyField
         {
             this.value = value;
         }
+
+        public int value()
+        {
+            return value;
+        }
     }
 
     public void view(LayoutInflater inflater, ViewGroup parent)
@@ -59,10 +61,16 @@ public class SurveyField
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.field_standard, parent, false);
         parent.addView(view);
 
+        FieldInitializer fieldInitializer = fieldInitializer();
+        fieldInitializer.init(view, this);
+    }
+
+    private FieldInitializer fieldInitializer()
+    {
         switch (type)
         {
             case standard:
-                initStandardField(view);
+                return new StandardField(description, format, placeholder, defaultValue);
 
             case text:
                 break;
@@ -81,38 +89,12 @@ public class SurveyField
             case time:
                 break;
         }
+
+        throw new RuntimeException();
     }
 
-    private void initStandardField(ViewGroup view)
+    public interface FieldInitializer
     {
-        TextView descriptionLabel = (TextView) view.findViewById(R.id.field_standard_description);
-
-        if (!TextUtils.isEmpty(description))
-        {
-            descriptionLabel.setText(description);
-        }
-        else
-        {
-            descriptionLabel.setVisibility(View.GONE);
-        }
-
-        EditText input = (EditText) view.findViewById(R.id.field_standard_input);
-
-        if (!TextUtils.isEmpty(defaultValue))
-        {
-            input.setText(defaultValue);
-        }
-
-        if (format != null)
-        {
-            input.setInputType(format.value);
-        }
-
-        TextInputLayout inputLayout = (TextInputLayout) view.findViewById(R.id.field_standard_inputLayout);
-
-        if (!TextUtils.isEmpty(placeholder))
-        {
-            inputLayout.setHint(placeholder);
-        }
+        void init(ViewGroup view, SurveyField field);
     }
 }
