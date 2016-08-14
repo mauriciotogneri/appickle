@@ -4,12 +4,16 @@
     <color name="primary">#229954</color>
     <color name="primaryDark">#1E8449</color>
     <color name="accent">#17A589</color>
+    <color name="textPrimary">#FFFFFF</color>
+    <color name="textSecondary">@color/accent</color>
 
     <color name="toolbar.text">#FFFFFF</color>
 
     <color name="dialog.background">#FFFFFF</color>
 
     <color name="screen.background">#FFFFFF</color>
+
+    <color name="list.separator">#CCCCCC</color>
 
     <color name="button.text">#FFFFFF</color>
 

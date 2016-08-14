@@ -3,6 +3,7 @@ package com.mauriciotogneri.appickle.activities;
 import android.os.Bundle;
 
 import com.mauriciotogneri.appickle.R;
+import com.mauriciotogneri.appickle.base.BaseActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

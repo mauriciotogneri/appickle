@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.mauriciotogneri.appickle.R;
+import com.mauriciotogneri.appickle.base.BaseActivity;
 
 public class SurveyActivity extends BaseActivity
 {

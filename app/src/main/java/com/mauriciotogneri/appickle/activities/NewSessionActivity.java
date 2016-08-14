@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.mauriciotogneri.appickle.R;
+import com.mauriciotogneri.appickle.base.BaseActivity;
 import com.mauriciotogneri.appickle.model.Session;
 import com.mauriciotogneri.appickle.resources.FileContent;
 import com.mauriciotogneri.appickle.storage.SessionsIndexStorage;

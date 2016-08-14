@@ -1,4 +1,4 @@
-package com.mauriciotogneri.appickle.activities;
+package com.mauriciotogneri.appickle.base;
 
 import android.content.Intent;
 import android.os.Bundle;
