@@ -93,15 +93,24 @@
         ]
     },
     "report": {
+        "type": "http|email",
         "uri": "http://www.example.com/report",
-        "auth": {
-            "user": "user",
-            "password": "password"
-        }
+        "email": "resport@company.com",
+        "subject": "Report result",
+        "output": "json|html"
     },
     "features": [
-        "http://www.example.com/features/file1.feature",
-        "http://www.example.com/features/file2.feature",
-        "http://www.example.com/features/file3.feature"
+        {
+            "id": "feature_1",
+            "uri": "http://www.example.com/features/file1.feature"
+        },
+        {
+            "id": "feature_2",
+            "uri": "http://www.example.com/features/file2.feature"
+        },
+        {
+            "id": "feature_3",
+            "uri": "http://www.example.com/features/file3.feature"
+        }
     ]
 }

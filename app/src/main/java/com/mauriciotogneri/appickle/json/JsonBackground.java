@@ -1,11 +1,8 @@
 package com.mauriciotogneri.appickle.json;
 
-import com.mauriciotogneri.appickle.model.Scenario;
+import com.mauriciotogneri.appickle.model.ModelEntity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-public class JsonBackground
+public class JsonBackground extends JsonEntity // TODO
 {
     private final String[] tags;
     private final String[] steps;
@@ -16,8 +13,10 @@ public class JsonBackground
         this.steps = steps;
     }
 
-    public Scenario model()
+    @Override
+    public ModelEntity model()
     {
-        return new Scenario(new ArrayList<String>(), Arrays.asList(steps));
+        return null;
+        //return new Scenario(new ArrayList<String>(), Arrays.asList(steps));
     }
 }

@@ -46,7 +46,7 @@ public class LoadSessionActivity extends BaseActivity implements OnItemSelected<
     @Override
     protected int layout()
     {
-        return R.layout.screen_load;
+        return R.layout.screen_load_session;
     }
 
     @Override

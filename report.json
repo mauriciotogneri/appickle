@@ -1,0 +1,43 @@
+{
+    "id": "a6ec7cda-1eb7-497b-95cc-605f5b8d3952",
+    "survey": {
+        "fields": [
+            {
+                "id": "field_id_1",
+                "value": "123"
+            },
+            {
+                "id": "field_id_2",
+                "value": "123"
+            },
+            {
+                "id": "field_id_3",
+                "value": "123"
+            }
+        ]
+    },
+    "features": [
+        {
+            "id": "feature_1",
+            "status": "passed"
+        },
+        {
+            "id": "feature_2",
+            "status": "skipped"
+        },
+        {
+            "id": "feature_3",
+            "status": "failed",
+            "attachments": [
+                {
+                    "type": "text",
+                    "value": "The button doesn't work"
+                },
+                {
+                    "type": "image",
+                    "value": "VHlwZSAob3IgcGFzdGUpIGhlcmUuLi4"
+                }
+            ]
+        }
+    ]
+}

@@ -2,6 +2,7 @@ package com.mauriciotogneri.appickle.storage;
 
 import android.content.Context;
 
+import com.mauriciotogneri.appickle.json.JsonSession;
 import com.mauriciotogneri.appickle.model.Session;
 
 public class SessionStorage extends BaseStorage
@@ -15,13 +16,13 @@ public class SessionStorage extends BaseStorage
 
     public Session loadSession()
     {
-        String json = getString(ATTRIBUTE_JSON, "{}");
+        JsonSession json = getJsonObject(ATTRIBUTE_JSON, JsonSession.class);
 
-        return Session.fromJson(json);
+        return json.model();
     }
 
     public void saveSession(Session session)
     {
-        putString(ATTRIBUTE_JSON, session.json());
+        putJson(ATTRIBUTE_JSON, session.json());
     }
 }

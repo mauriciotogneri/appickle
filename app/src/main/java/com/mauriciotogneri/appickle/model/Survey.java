@@ -1,11 +1,16 @@
 package com.mauriciotogneri.appickle.model;
 
-public class Survey
+import com.mauriciotogneri.appickle.json.JsonSurvey;
+import com.mauriciotogneri.appickle.model.fields.SurveyField;
+
+import java.util.List;
+
+public class Survey extends ModelEntity<JsonSurvey>
 {
     private final String description;
-    private final SurveyField[] fields;
+    private final List<SurveyField> fields;
 
-    public Survey(String description, SurveyField[] fields)
+    public Survey(String description, List<SurveyField> fields)
     {
         this.description = description;
         this.fields = fields;
@@ -16,8 +21,14 @@ public class Survey
         return description;
     }
 
-    public SurveyField[] fields()
+    public List<SurveyField> fields()
     {
         return fields;
+    }
+
+    @Override
+    public JsonSurvey json()
+    {
+        return new JsonSurvey(description, fromList(fields));
     }
 }

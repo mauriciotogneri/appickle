@@ -3,6 +3,9 @@ package com.mauriciotogneri.appickle.storage;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+import com.mauriciotogneri.appickle.json.JsonEntity;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,6 +23,31 @@ public class BaseStorage
     protected Context context()
     {
         return context;
+    }
+
+    protected <T> T getJsonObject(String key, Class<?> clazz)
+    {
+        return getJsonEntity(key, "{}", clazz);
+    }
+
+    protected <T> T getJsonArray(String key, Class<?> clazz)
+    {
+        return getJsonEntity(key, "[]", clazz);
+    }
+
+    @SuppressWarnings("unchecked")
+    private  <T> T getJsonEntity(String key, String defaultValue, Class<?> clazz)
+    {
+        String value = preferences.getString(key, defaultValue);
+
+        return (T) new Gson().fromJson(value, clazz);
+    }
+
+    protected void putJson(String key, JsonEntity json)
+    {
+        String value = new Gson().toJson(json);
+
+        preferences.edit().putString(key, value).apply();
     }
 
     protected String getString(String key, String defaultValue)

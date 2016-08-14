@@ -2,6 +2,8 @@ package com.mauriciotogneri.appickle.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -75,13 +77,21 @@ public abstract class BaseActivity extends AppCompatActivity
         return (T) getIntent().getExtras().get(key);
     }
 
-    protected void errorDialog(int message)
+    protected void errorDialog(final int message)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(false);
-        builder.setTitle(message);
-        builder.setPositiveButton(R.string.dialog_ok, null);
-        builder.show();
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.this);
+                builder.setCancelable(false);
+                builder.setTitle(message);
+                builder.setPositiveButton(R.string.dialog_ok, null);
+                builder.show();
+            }
+        });
     }
 
     protected void openActivity(Class clazz)

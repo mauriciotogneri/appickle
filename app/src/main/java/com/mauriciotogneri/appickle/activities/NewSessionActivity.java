@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.google.gson.Gson;
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.base.BaseActivity;
+import com.mauriciotogneri.appickle.json.JsonSession;
 import com.mauriciotogneri.appickle.model.Session;
 import com.mauriciotogneri.appickle.resources.FileContent;
 import com.mauriciotogneri.appickle.storage.SessionsIndexStorage;
@@ -50,10 +52,14 @@ public class NewSessionActivity extends BaseActivity
 
                     Response response = client.newCall(request).execute();
 
-                    openIntro(Session.fromJson(response.body().string()));
+                    JsonSession jsonSession = new Gson().fromJson(response.body().string(), JsonSession.class);
+
+                    openIntro(jsonSession.model());
                 }
                 catch (Exception e)
                 {
+                    e.printStackTrace();
+
                     errorDialog(R.string.screen_new_button_file_error);
                 }
             }
@@ -64,8 +70,9 @@ public class NewSessionActivity extends BaseActivity
     private Session sessionFromUri(Uri uri) throws IOException
     {
         FileContent fileContent = new FileContent(uri);
+        JsonSession jsonSession = new Gson().fromJson(fileContent.content(), JsonSession.class);
 
-        return Session.fromJson(fileContent.content());
+        return jsonSession.model();
     }
 
     private void openIntro(Session session)
@@ -111,6 +118,6 @@ public class NewSessionActivity extends BaseActivity
     @Override
     protected int layout()
     {
-        return R.layout.screen_new;
+        return R.layout.screen_new_session;
     }
 }

@@ -8,18 +8,18 @@ import android.view.ViewGroup;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.base.BaseActivity;
+import com.mauriciotogneri.appickle.model.Session;
 import com.mauriciotogneri.appickle.model.Survey;
-import com.mauriciotogneri.appickle.model.SurveyField;
+import com.mauriciotogneri.appickle.model.fields.SurveyField;
 import com.mauriciotogneri.appickle.storage.SessionStorage;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SurveyActivity extends BaseActivity
 {
     private static final String PARAMETER_SESSION_ID = "session.id";
-
-    private String sessionId;
 
     @BindView(R.id.screen_survey_fieldContainer)
     public ViewGroup fieldContainer;
@@ -42,12 +42,18 @@ public class SurveyActivity extends BaseActivity
 
         ButterKnife.bind(this);
 
-        this.sessionId = parameter(PARAMETER_SESSION_ID);
-
-        SessionStorage sessionStorage = new SessionStorage(this, sessionId);
-        displaySurvey(sessionStorage.loadSession().survey());
+        displaySurvey(session().survey());
 
         toolbarTitle(R.string.screen_survey_title);
+    }
+
+    private Session session()
+    {
+        String sessionId = parameter(PARAMETER_SESSION_ID);
+
+        SessionStorage sessionStorage = new SessionStorage(this, sessionId);
+
+        return sessionStorage.loadSession();
     }
 
     private void displaySurvey(Survey survey)
@@ -56,13 +62,33 @@ public class SurveyActivity extends BaseActivity
 
         for (SurveyField field : survey.fields())
         {
-            addField(field, inflater);
+            field.init(inflater, fieldContainer);
         }
     }
 
-    private void addField(SurveyField field, LayoutInflater inflater)
+
+    @OnClick(R.id.screen_survey_button_start)
+    public void onButtonStart()
     {
-        field.view(inflater, fieldContainer);
+        if (validateSurvey())
+        {
+            openActivity(FeaturesSummaryActivity.class);
+        }
+    }
+
+    private boolean validateSurvey()
+    {
+        Session session = session();
+
+        for (SurveyField field : session.survey().fields())
+        {
+            if (!field.validate())
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override

@@ -1,10 +1,12 @@
 package com.mauriciotogneri.appickle.json;
 
+import com.mauriciotogneri.appickle.model.ModelEntity;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class JsonExample implements Iterable<Map<String, String>>
+public class JsonExample extends JsonEntity implements Iterable<Map<String, String>>
 {
     private final String[] tags;
     private final String[] headers;
@@ -21,6 +23,12 @@ public class JsonExample implements Iterable<Map<String, String>>
     public Iterator<Map<String, String>> iterator()
     {
         return new ExampleIterator(headers, values);
+    }
+
+    @Override
+    public ModelEntity model()
+    {
+        return null; // TODO
     }
 
     private static class ExampleIterator implements Iterator<Map<String, String>>

@@ -1,5 +1,6 @@
 package com.mauriciotogneri.appickle.json;
 
+import com.mauriciotogneri.appickle.model.ModelEntity;
 import com.mauriciotogneri.appickle.model.Scenario;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class JsonScenario
+public class JsonScenario extends JsonEntity
 {
     private final Type type;
     private final String[] tags;
@@ -31,7 +32,13 @@ public class JsonScenario
         this.examples = examples;
     }
 
-    public List<Scenario> model()
+    @Override
+    public ModelEntity model()
+    {
+        return null;
+    }
+
+    public List<Scenario> model2()
     {
         switch (type)
         {

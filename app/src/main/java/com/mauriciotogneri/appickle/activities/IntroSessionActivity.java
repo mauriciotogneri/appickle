@@ -22,8 +22,6 @@ public class IntroSessionActivity extends BaseActivity
 {
     private static final String PARAMETER_SESSION_ID = "session.id";
 
-    private String sessionId;
-
     @BindView(R.id.session_title)
     public TextView sessionTitle;
 
@@ -51,7 +49,7 @@ public class IntroSessionActivity extends BaseActivity
 
         ButterKnife.bind(this);
 
-        this.sessionId = parameter(PARAMETER_SESSION_ID);
+        String sessionId = parameter(PARAMETER_SESSION_ID);
 
         SessionStorage sessionStorage = new SessionStorage(this, sessionId);
         displaySession(sessionStorage.loadSession());
@@ -77,6 +75,8 @@ public class IntroSessionActivity extends BaseActivity
     @OnClick(R.id.screen_intro_button_next)
     public void onButtonNext()
     {
+        String sessionId = parameter(PARAMETER_SESSION_ID);
+
         Intent intent = SurveyActivity.createIntent(this, sessionId);
         startActivity(intent);
     }

@@ -1,18 +1,21 @@
 package com.mauriciotogneri.appickle.model;
 
-import com.google.gson.Gson;
+import com.mauriciotogneri.appickle.json.JsonSession;
+import com.mauriciotogneri.appickle.model.reports.Report;
 
-public class Session
+import java.util.List;
+
+public class Session extends ModelEntity<JsonSession>
 {
     private final String id;
     private final String title;
     private final String description;
-    private final String[] thumbnails;
+    private final List<String> thumbnails;
     private final Survey survey;
     private final Report report;
-    private final String[] features;
+    private final List<String> features;
 
-    public Session(String id, String title, String description, String[] thumbnails, Survey survey, Report report, String[] features)
+    public Session(String id, String title, String description, List<String> thumbnails, Survey survey, Report report, List<String> features)
     {
         this.id = id;
         this.title = title;
@@ -38,7 +41,7 @@ public class Session
         return description;
     }
 
-    public String[] thumbnails()
+    public List<String> thumbnails()
     {
         return thumbnails;
     }
@@ -48,13 +51,9 @@ public class Session
         return survey;
     }
 
-    public String json()
+    @Override
+    public JsonSession json()
     {
-        return new Gson().toJson(this);
-    }
-
-    public static Session fromJson(String json)
-    {
-        return new Gson().fromJson(json, Session.class);
+        return new JsonSession(id, title, description, thumbnails, survey.json(), report.json(), features);
     }
 }

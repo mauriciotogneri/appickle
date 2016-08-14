@@ -1,23 +1,23 @@
-package com.mauriciotogneri.appickle.model;
+package com.mauriciotogneri.appickle.json;
 
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-
-import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.model.fields.StandardField;
+import com.mauriciotogneri.appickle.model.fields.SurveyField;
 
-public class SurveyField
+public class JsonSurveyField extends JsonEntity<SurveyField>
 {
     // all
-    private String id;
-    private Type type;
-    private String description;
-    private Boolean required;
+    private final String id;
+    private final Type type;
+    private final String description;
+    private final Boolean required;
 
     // standard
-    private Format format;
-    private String placeholder;
-    private String defaultValue;
+    private final Format format;
+    private final String placeholder;
+    private final String defaultValue;
+
+    // result
+    private final String value;
 
     public enum Type
     {
@@ -56,21 +56,25 @@ public class SurveyField
         }
     }
 
-    public void view(LayoutInflater inflater, ViewGroup parent)
+    public JsonSurveyField(String id, Type type, String description, Boolean required, Format format, String placeholder, String defaultValue, String value)
     {
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.field_standard, parent, false);
-        parent.addView(view);
-
-        FieldInitializer fieldInitializer = fieldInitializer();
-        fieldInitializer.init(view, this);
+        this.id = id;
+        this.type = type;
+        this.description = description;
+        this.required = required;
+        this.format = format;
+        this.placeholder = placeholder;
+        this.defaultValue = defaultValue;
+        this.value = value;
     }
 
-    private FieldInitializer fieldInitializer()
+    @Override
+    public SurveyField model()
     {
         switch (type)
         {
             case standard:
-                return new StandardField(description, format, placeholder, defaultValue);
+                return new StandardField(id, description, required, value, format, placeholder, defaultValue);
 
             case text:
                 break;
@@ -91,10 +95,5 @@ public class SurveyField
         }
 
         throw new RuntimeException();
-    }
-
-    public interface FieldInitializer
-    {
-        void init(ViewGroup view, SurveyField field);
     }
 }

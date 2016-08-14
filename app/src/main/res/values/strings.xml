@@ -21,4 +21,6 @@
     <string name="screen.survey.title">Survey</string>
     <string name="screen.survey.button.start">Start</string>
 
+    <string name="screen.features.title">Features</string>
+
 </resources>

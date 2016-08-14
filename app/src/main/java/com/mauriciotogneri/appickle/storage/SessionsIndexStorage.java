@@ -17,11 +17,6 @@ public class SessionsIndexStorage extends BaseStorage
         super(context, "storage");
     }
 
-    public Set<String> loadSessionsIds()
-    {
-        return getStringSet(ATTRIBUTE_SESSIONS_INDEX);
-    }
-
     public List<Session> loadSessions()
     {
         List<Session> sessions = new ArrayList<>();
@@ -46,6 +41,11 @@ public class SessionsIndexStorage extends BaseStorage
         sessionsIndex.add(sessionId);
 
         saveSessions(sessionsIndex);
+    }
+
+    public Set<String> loadSessionsIds()
+    {
+        return getStringSet(ATTRIBUTE_SESSIONS_INDEX);
     }
 
     private void saveSessions(Set<String> sessions)

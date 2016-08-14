@@ -1,13 +1,14 @@
 package com.mauriciotogneri.appickle.json;
 
 import com.mauriciotogneri.appickle.model.Feature;
+import com.mauriciotogneri.appickle.model.ModelEntity;
 import com.mauriciotogneri.appickle.model.Scenario;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class JsonFeature
+public class JsonFeature extends JsonEntity
 {
     private final String[] tags;
     private final String[] description;
@@ -22,7 +23,13 @@ public class JsonFeature
         this.scenarios = scenarios;
     }
 
-    public Feature model()
+    @Override
+    public ModelEntity model()
+    {
+        return null;
+    }
+
+    public Feature model2()
     {
         List<String> description = Arrays.asList(this.description);
         List<Scenario> backgrounds = new ArrayList<>();
@@ -30,12 +37,12 @@ public class JsonFeature
 
         for (JsonBackground background : this.backgrounds)
         {
-            backgrounds.add(background.model());
+            //backgrounds.add(background.model());
         }
 
         for (JsonScenario scenario : this.scenarios)
         {
-            scenarios.addAll(scenario.model());
+            //scenarios.addAll(scenario.model());
         }
 
         return new Feature(description, backgrounds, scenarios);
