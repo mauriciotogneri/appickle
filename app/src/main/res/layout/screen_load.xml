@@ -5,12 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/session.list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@color/list.separator"
-        android:dividerHeight="0.5dp"/>
+        android:scrollbars="vertical"/>
 
     <TextView
         android:id="@+id/label.list.empty"

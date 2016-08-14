@@ -8,6 +8,8 @@
         <item name="android:textColorPrimary">@color/textPrimary</item>
         <item name="android:textColorSecondary">@color/textSecondary</item>
 
+        <item name="colorControlHighlight">@color/accent</item>
+
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 

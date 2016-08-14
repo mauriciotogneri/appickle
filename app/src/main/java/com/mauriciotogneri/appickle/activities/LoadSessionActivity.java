@@ -1,13 +1,12 @@
 package com.mauriciotogneri.appickle.activities;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.adapters.SessionAdapter;
+import com.mauriciotogneri.appickle.adapters.SimpleDividerItemDecoration;
 import com.mauriciotogneri.appickle.base.BaseActivity;
 import com.mauriciotogneri.appickle.model.Session;
 
@@ -22,7 +21,7 @@ public class LoadSessionActivity extends BaseActivity
     private SessionAdapter adapter;
 
     @BindView(R.id.session_list)
-    public ListView sessionList;
+    public RecyclerView sessionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,18 +37,12 @@ public class LoadSessionActivity extends BaseActivity
         sessions.add(new Session("2", "Title 2", "Description 2", new String[0]));
         sessions.add(new Session("3", "Title 3", "Description 3", new String[0]));
 
-        this.adapter = new SessionAdapter(this, R.layout.row_session, sessions);
+        this.adapter = new SessionAdapter(this, sessions);
 
+        sessionList.setHasFixedSize(true);
         sessionList.setAdapter(adapter);
-        sessionList.setOnItemClickListener(new OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                Session session = (Session) parent.getItemAtPosition(position);
-                System.out.println(session);
-            }
-        });
+        sessionList.setLayoutManager(new LinearLayoutManager(this));
+        sessionList.addItemDecoration(new SimpleDividerItemDecoration(this));
     }
 
     @Override
