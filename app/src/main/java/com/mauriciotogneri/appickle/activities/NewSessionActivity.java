@@ -73,9 +73,8 @@ public class NewSessionActivity extends BaseActivity
         SessionsIndexStorage sessionsIndexStorage = new SessionsIndexStorage(this);
         sessionsIndexStorage.saveSession(session);
 
-        Bundle parameters = new Bundle();
-        parameters.putString(IntroSessionActivity.PARAMETER_SESSION_ID, session.id());
-        openActivity(IntroSessionActivity.class, parameters);
+        Intent intent = IntroSessionActivity.createIntent(this, session.id());
+        startActivity(intent);
 
         finish();
     }

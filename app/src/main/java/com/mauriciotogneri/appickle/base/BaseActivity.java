@@ -86,14 +86,7 @@ public abstract class BaseActivity extends AppCompatActivity
 
     protected void openActivity(Class clazz)
     {
-        openActivity(clazz, new Bundle());
-    }
-
-    protected void openActivity(Class clazz, Bundle parameters)
-    {
         Intent intent = new Intent(this, clazz);
-        intent.putExtras(parameters);
-
         startActivity(intent);
     }
 

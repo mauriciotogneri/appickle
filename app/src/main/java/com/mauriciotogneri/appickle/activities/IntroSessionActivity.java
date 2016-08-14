@@ -1,5 +1,7 @@
 package com.mauriciotogneri.appickle.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -17,7 +19,7 @@ import butterknife.ButterKnife;
 
 public class IntroSessionActivity extends BaseActivity
 {
-    public static final String PARAMETER_SESSION_ID = "session.id";
+    private static final String PARAMETER_SESSION_ID = "session.id";
 
     private Session session;
 
@@ -29,6 +31,17 @@ public class IntroSessionActivity extends BaseActivity
 
     @BindView(R.id.thumbnail_container)
     public ViewGroup thumbnailContainer;
+
+    public static Intent createIntent(Context context, String sessionId)
+    {
+        Bundle parameters = new Bundle();
+        parameters.putString(IntroSessionActivity.PARAMETER_SESSION_ID, sessionId);
+
+        Intent intent = new Intent(context, IntroSessionActivity.class);
+        intent.putExtras(parameters);
+
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

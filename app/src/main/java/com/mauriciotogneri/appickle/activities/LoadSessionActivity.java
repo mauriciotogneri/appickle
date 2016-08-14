@@ -1,5 +1,6 @@
 package com.mauriciotogneri.appickle.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +11,8 @@ import com.mauriciotogneri.appickle.adapters.SimpleDividerItemDecoration;
 import com.mauriciotogneri.appickle.base.BaseActivity;
 import com.mauriciotogneri.appickle.base.BaseListAdapter.OnItemSelected;
 import com.mauriciotogneri.appickle.model.Session;
+import com.mauriciotogneri.appickle.storage.SessionsIndexStorage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,10 +32,8 @@ public class LoadSessionActivity extends BaseActivity implements OnItemSelected<
 
         toolbarTitle(R.string.screen_load_title);
 
-        List<Session> sessions = new ArrayList<>();
-        sessions.add(new Session("1", "Title 1", "Description 1", new String[0]));
-        sessions.add(new Session("2", "Title 2", "Description 2", new String[0]));
-        sessions.add(new Session("3", "Title 3", "Description 3", new String[0]));
+        SessionsIndexStorage sessionsIndexStorage = new SessionsIndexStorage(this);
+        List<Session> sessions = sessionsIndexStorage.loadSessions();
 
         SessionAdapter adapter = new SessionAdapter(this, sessions, this);
 
@@ -53,6 +52,7 @@ public class LoadSessionActivity extends BaseActivity implements OnItemSelected<
     @Override
     public void onItemSelected(Session session)
     {
-        System.out.println(session);
+        Intent intent = IntroSessionActivity.createIntent(this, session.id());
+        startActivity(intent);
     }
 }

@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.mauriciotogneri.appickle.model.Session;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class SessionsIndexStorage extends BaseStorage
@@ -15,9 +17,22 @@ public class SessionsIndexStorage extends BaseStorage
         super(context, "storage");
     }
 
-    public Set<String> loadSessions()
+    public Set<String> loadSessionsIds()
     {
         return getStringSet(ATTRIBUTE_SESSIONS_INDEX);
+    }
+
+    public List<Session> loadSessions()
+    {
+        List<Session> sessions = new ArrayList<>();
+
+        for (String sessionId : loadSessionsIds())
+        {
+            SessionStorage sessionStorage = new SessionStorage(context(), sessionId);
+            sessions.add(sessionStorage.loadSession());
+        }
+
+        return sessions;
     }
 
     public void saveSession(Session session)
@@ -27,7 +42,7 @@ public class SessionsIndexStorage extends BaseStorage
         SessionStorage sessionStorage = new SessionStorage(context(), sessionId);
         sessionStorage.saveSession(session);
 
-        Set<String> sessionsIndex = loadSessions();
+        Set<String> sessionsIndex = loadSessionsIds();
         sessionsIndex.add(sessionId);
 
         saveSessions(sessionsIndex);

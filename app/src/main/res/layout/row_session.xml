@@ -5,24 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="@dimen/margin.default">
 
-    <TextView
-        android:id="@+id/session.title"
-        style="@style/labelText"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin.default"
-        android:textSize="@dimen/session.title.size"
-        android:textStyle="bold"
-        tools:text="@string/dummy.short"/>
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/session.description"
-        style="@style/labelText"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/session.title"
+            style="@style/labelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin.default"
+            android:textSize="@dimen/session.title.size"
+            android:textStyle="bold"
+            tools:text="@string/dummy.short"/>
+
+        <TextView
+            android:id="@+id/session.description"
+            style="@style/labelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/dummy.long"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="15dp"
         android:layout_height="wrap_content"
-        tools:text="@string/dummy.long"/>
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:src="@drawable/arrow"/>
 
 </LinearLayout>
