@@ -8,6 +8,7 @@ import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.adapters.SessionAdapter;
 import com.mauriciotogneri.appickle.adapters.SimpleDividerItemDecoration;
 import com.mauriciotogneri.appickle.base.BaseActivity;
+import com.mauriciotogneri.appickle.base.BaseListAdapter.OnItemSelected;
 import com.mauriciotogneri.appickle.model.Session;
 
 import java.util.ArrayList;
@@ -16,10 +17,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LoadSessionActivity extends BaseActivity
+public class LoadSessionActivity extends BaseActivity implements OnItemSelected<Session>
 {
-    private SessionAdapter adapter;
-
     @BindView(R.id.session_list)
     public RecyclerView sessionList;
 
@@ -37,7 +36,7 @@ public class LoadSessionActivity extends BaseActivity
         sessions.add(new Session("2", "Title 2", "Description 2", new String[0]));
         sessions.add(new Session("3", "Title 3", "Description 3", new String[0]));
 
-        this.adapter = new SessionAdapter(this, sessions);
+        SessionAdapter adapter = new SessionAdapter(this, sessions, this);
 
         sessionList.setHasFixedSize(true);
         sessionList.setAdapter(adapter);
@@ -49,5 +48,11 @@ public class LoadSessionActivity extends BaseActivity
     protected int layout()
     {
         return R.layout.screen_load;
+    }
+
+    @Override
+    public void onItemSelected(Session session)
+    {
+        System.out.println(session);
     }
 }

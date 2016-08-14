@@ -2,72 +2,68 @@ package com.mauriciotogneri.appickle.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.adapters.SessionAdapter.ViewHolder;
+import com.mauriciotogneri.appickle.base.BaseListAdapter;
+import com.mauriciotogneri.appickle.base.BaseListAdapter.OnViewHolderClicked;
 import com.mauriciotogneri.appickle.model.Session;
 
 import java.util.List;
 
-public class SessionAdapter extends RecyclerView.Adapter<ViewHolder>
+public class SessionAdapter extends BaseListAdapter<Session, ViewHolder> implements OnViewHolderClicked
 {
-    private List<Session> sessions;
-    private LayoutInflater inflater;
+    private OnItemSelected<Session> onItemSelected;
 
-    public SessionAdapter(Context context, List<Session> sessions)
+    public SessionAdapter(Context context, List<Session> sessions, OnItemSelected<Session> onItemSelected)
     {
-        this.sessions = sessions;
-        this.inflater = LayoutInflater.from(context);
+        super(context, R.layout.row_session, sessions);
+
+        this.onItemSelected = onItemSelected;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    protected ViewHolder viewHolder(View view)
     {
-        View viewView = inflater.inflate(R.layout.row_session, parent, false);
-
-        return new ViewHolder(viewView);
+        return new ViewHolder(view, this);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position)
+    protected void fillView(ViewHolder viewHolder, Session session)
     {
-        Session session = sessions.get(position);
-
         viewHolder.title.setText(session.title());
         viewHolder.description.setText(session.description());
     }
 
     @Override
-    public int getItemCount()
+    public void onViewHolderClicked(int position)
     {
-        return sessions.size();
+        onItemSelected.onItemSelected(item(position));
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         public final TextView title;
         public final TextView description;
+        private final OnViewHolderClicked onViewHolderClicked;
 
-        public ViewHolder(View view)
+        public ViewHolder(View view, OnViewHolderClicked onViewHolderClicked)
         {
             super(view);
 
             this.title = (TextView) view.findViewById(R.id.session_title);
             this.description = (TextView) view.findViewById(R.id.session_description);
 
+            this.onViewHolderClicked = onViewHolderClicked;
             view.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view)
         {
-            int position = getLayoutPosition();
-            Session session = sessions.get(position);
-            System.out.println(session);
+            onViewHolderClicked.onViewHolderClicked(getLayoutPosition());
         }
     }
 }

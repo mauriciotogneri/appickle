@@ -1,29 +1,52 @@
 package com.mauriciotogneri.appickle.base;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import java.util.List;
 
-public abstract class BaseListAdapter<T, V> extends ArrayAdapter<T>
+public abstract class BaseListAdapter<T, V extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<V>
 {
-    protected final LayoutInflater inflater;
     private final int resourceId;
+    private final List<T> items;
+    private final LayoutInflater inflater;
 
-    public BaseListAdapter(Context context, int resourceId, List<T> list)
+    public BaseListAdapter(Context context, int resourceId, List<T> items)
     {
-        super(context, resourceId, list);
-
-        this.inflater = LayoutInflater.from(context);
         this.resourceId = resourceId;
+        this.items = items;
+        this.inflater = LayoutInflater.from(context);
     }
 
-    protected abstract void fillView(V viewHolder, T item, int position);
+    @Override
+    public V onCreateViewHolder(ViewGroup parent, int viewType)
+    {
+        return viewHolder(inflater.inflate(resourceId, parent, false));
+    }
 
-    protected abstract V getViewHolder(View view);
+    @Override
+    public void onBindViewHolder(V viewHolder, int position)
+    {
+        fillView(viewHolder, items.get(position));
+    }
+
+    @Override
+    public int getItemCount()
+    {
+        return items.size();
+    }
+
+    protected abstract V viewHolder(View view);
+
+    protected abstract void fillView(V viewHolder, T item);
+
+    protected T item(int position)
+    {
+        return items.get(position);
+    }
 
     public void update()
     {
@@ -32,34 +55,19 @@ public abstract class BaseListAdapter<T, V> extends ArrayAdapter<T>
 
     public void update(List<T> list)
     {
-        clear();
-        addAll(list);
-        notifyDataSetChanged();
+        items.clear();
+        items.addAll(list);
+
+        update();
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public View getView(int position, View convertView, ViewGroup parent)
+    public interface OnViewHolderClicked
     {
-        V viewHolder;
-        View rowView = convertView;
+        void onViewHolderClicked(int position);
+    }
 
-        if (rowView == null)
-        {
-            rowView = inflater.inflate(resourceId, parent, false);
-
-            viewHolder = getViewHolder(rowView);
-            rowView.setTag(viewHolder);
-        }
-        else
-        {
-            viewHolder = (V) rowView.getTag();
-        }
-
-        T item = getItem(position);
-
-        fillView(viewHolder, item, position);
-
-        return rowView;
+    public interface OnItemSelected<T>
+    {
+        void onItemSelected(T item);
     }
 }
