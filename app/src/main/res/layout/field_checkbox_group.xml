@@ -9,8 +9,8 @@
     <include
         layout="@layout/field_description"/>
 
-    <RadioGroup
-        android:id="@+id/field.selectable.radioGroup"
+    <LinearLayout
+        android:id="@+id/field.selectable.checkboxGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"/>

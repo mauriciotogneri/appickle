@@ -7,17 +7,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.mauriciotogneri.appickle.R;
-import com.mauriciotogneri.appickle.json.JsonSurveyField;
 import com.mauriciotogneri.appickle.json.JsonSurveyField.Type;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class RadioField extends SurveyField
+public class RadioField extends SelectableField<RadioButton>
 {
-    private final List<RadioButton> buttons = new ArrayList<>();
-    private final List<FieldValue> values;
-
     public RadioField(Type type,
                       String id,
                       String description,
@@ -25,9 +20,7 @@ public class RadioField extends SurveyField
                       String result,
                       List<FieldValue> values)
     {
-        super(type, id, description, required, result);
-
-        this.values = values;
+        super(type, id, description, required, result, values);
     }
 
     @Override
@@ -52,20 +45,14 @@ public class RadioField extends SurveyField
                 radioGroup.check(button.getId());
             }
 
-            buttons.add(button);
+            elements.add(button);
         }
-    }
-
-    @Override
-    public boolean isFilled()
-    {
-        return result() != null;
     }
 
     @Override
     public String result()
     {
-        for (RadioButton button : buttons)
+        for (RadioButton button : elements)
         {
             if (button.isChecked())
             {
@@ -74,11 +61,5 @@ public class RadioField extends SurveyField
         }
 
         return null;
-    }
-
-    @Override
-    public JsonSurveyField json()
-    {
-        return new JsonSurveyField(id, type, description, required, null, null, null, fromList(values), result);
     }
 }
