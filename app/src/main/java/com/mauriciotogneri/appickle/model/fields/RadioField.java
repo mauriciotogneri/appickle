@@ -33,7 +33,7 @@ public class RadioField extends SelectableField<RadioButton>
 
         for (FieldValue value : values)
         {
-            RadioButton button = (RadioButton) inflater.inflate(R.layout.field_radio, radioGroup, false);
+            RadioButton button = (RadioButton) inflater.inflate(R.layout.field_radio_item, radioGroup, false);
             button.setId(index++);
             button.setText(value.label());
             button.setTag(value.key());

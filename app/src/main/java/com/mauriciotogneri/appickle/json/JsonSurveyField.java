@@ -1,6 +1,7 @@
 package com.mauriciotogneri.appickle.json;
 
 import com.mauriciotogneri.appickle.model.fields.CheckboxField;
+import com.mauriciotogneri.appickle.model.fields.DropdownField;
 import com.mauriciotogneri.appickle.model.fields.RadioField;
 import com.mauriciotogneri.appickle.model.fields.StandardField;
 import com.mauriciotogneri.appickle.model.fields.SurveyField;
@@ -30,7 +31,7 @@ public class JsonSurveyField extends JsonEntity<SurveyField>
     {
         standard,
         radio,
-        select,
+        dropdown,
         checkbox,
         toggle,
         range,
@@ -84,8 +85,10 @@ public class JsonSurveyField extends JsonEntity<SurveyField>
                 return new StandardField(id, description, required, result, format, placeholder, defaultValue);
 
             case radio:
-            case select:
                 return new RadioField(type, id, description, required, result, fromList(values));
+
+            case dropdown:
+                return new DropdownField(type, id, description, required, result, fromList(values));
 
             case checkbox:
                 return new CheckboxField(type, id, description, required, result, fromList(values));

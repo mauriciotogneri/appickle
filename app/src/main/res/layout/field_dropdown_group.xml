@@ -9,10 +9,19 @@
     <include
         layout="@layout/field_description"/>
 
-    <RadioGroup
-        android:id="@+id/field.selectable.radioGroup"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"/>
+        android:background="@drawable/dropdown_border"
+        android:paddingRight="10dp">
+
+        <Spinner
+            android:id="@+id/field.selectable.dropdownGroup"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:dropDownVerticalOffset="55dp"
+            android:popupBackground="#FFFFFF"/>
+
+    </LinearLayout>
 
 </LinearLayout>

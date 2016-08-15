@@ -31,7 +31,7 @@ public class CheckboxField extends SelectableField<CheckBox>
 
         for (FieldValue value : values)
         {
-            CheckBox checkbox = (CheckBox) inflater.inflate(R.layout.field_checkbox, checkboxGroup, false);
+            CheckBox checkbox = (CheckBox) inflater.inflate(R.layout.field_checkbox_item, checkboxGroup, false);
             checkbox.setText(value.label());
             checkbox.setChecked(value.isSelected());
             checkbox.setTag(value.key());
