@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.json.JsonSurveyField;
@@ -15,7 +14,7 @@ import com.mauriciotogneri.appickle.json.JsonSurveyField.Type;
 
 public class StandardField extends SurveyField
 {
-    private View view;
+    private EditText input;
     private final Format format;
     private final String placeholder;
     private final String defaultValue;
@@ -23,12 +22,12 @@ public class StandardField extends SurveyField
     public StandardField(String id,
                          String description,
                          Boolean required,
-                         String value,
+                         String result,
                          Format format,
                          String placeholder,
                          String defaultValue)
     {
-        super(id, description, required, value);
+        super(Type.standard, id, description, required, result);
 
         this.format = format;
         this.placeholder = placeholder;
@@ -38,21 +37,9 @@ public class StandardField extends SurveyField
     @Override
     public void init(LayoutInflater inflater, ViewGroup parent)
     {
-        view = inflater.inflate(R.layout.field_standard, parent, false);
-        parent.addView(view);
+        View view = inflate(inflater, parent, R.layout.field_standard);
 
-        TextView descriptionLabel = (TextView) view.findViewById(R.id.field_standard_description);
-
-        if (!TextUtils.isEmpty(description))
-        {
-            descriptionLabel.setText(description);
-        }
-        else
-        {
-            descriptionLabel.setVisibility(View.GONE);
-        }
-
-        EditText input = (EditText) view.findViewById(R.id.field_standard_input);
+        this.input = (EditText) view.findViewById(R.id.field_standard_input);
 
         if (!TextUtils.isEmpty(defaultValue))
         {
@@ -75,20 +62,18 @@ public class StandardField extends SurveyField
     @Override
     public boolean isFilled()
     {
-        return !TextUtils.isEmpty(value());
+        return !TextUtils.isEmpty(result());
     }
 
     @Override
-    public String value()
+    public String result()
     {
-        EditText input = (EditText) view.findViewById(R.id.field_standard_input);
-
         return input.getText().toString();
     }
 
     @Override
     public JsonSurveyField json()
     {
-        return new JsonSurveyField(id, Type.standard, description, required, format, placeholder, defaultValue, value);
+        return new JsonSurveyField(id, type, description, required, format, placeholder, defaultValue, null, result);
     }
 }

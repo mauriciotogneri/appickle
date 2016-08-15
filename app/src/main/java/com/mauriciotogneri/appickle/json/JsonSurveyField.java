@@ -1,7 +1,10 @@
 package com.mauriciotogneri.appickle.json;
 
+import com.mauriciotogneri.appickle.model.fields.RadioField;
 import com.mauriciotogneri.appickle.model.fields.StandardField;
 import com.mauriciotogneri.appickle.model.fields.SurveyField;
+
+import java.util.List;
 
 public class JsonSurveyField extends JsonEntity<SurveyField>
 {
@@ -16,13 +19,15 @@ public class JsonSurveyField extends JsonEntity<SurveyField>
     private final String placeholder;
     private final String defaultValue;
 
+    // radio|select|checkbox
+    private final List<JsonFieldValue> values;
+
     // result
-    private final String value;
+    private final String result;
 
     public enum Type
     {
         standard,
-        text,
         radio,
         select,
         checkbox,
@@ -56,7 +61,7 @@ public class JsonSurveyField extends JsonEntity<SurveyField>
         }
     }
 
-    public JsonSurveyField(String id, Type type, String description, Boolean required, Format format, String placeholder, String defaultValue, String value)
+    public JsonSurveyField(String id, Type type, String description, Boolean required, Format format, String placeholder, String defaultValue, List<JsonFieldValue> values, String result)
     {
         this.id = id;
         this.type = type;
@@ -65,7 +70,8 @@ public class JsonSurveyField extends JsonEntity<SurveyField>
         this.format = format;
         this.placeholder = placeholder;
         this.defaultValue = defaultValue;
-        this.value = value;
+        this.values = values;
+        this.result = result;
     }
 
     @Override
@@ -74,16 +80,13 @@ public class JsonSurveyField extends JsonEntity<SurveyField>
         switch (type)
         {
             case standard:
-                return new StandardField(id, description, required, value, format, placeholder, defaultValue);
+                return new StandardField(id, description, required, result, format, placeholder, defaultValue);
 
-            case text:
-                break;
             case radio:
-                break;
             case select:
-                break;
             case checkbox:
-                break;
+                return new RadioField(type, id, description, required, result, fromList(values));
+
             case toggle:
                 break;
             case range:
