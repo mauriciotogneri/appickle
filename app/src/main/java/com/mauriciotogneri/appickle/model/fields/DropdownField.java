@@ -19,11 +19,12 @@ public class DropdownField extends SelectableField<View>
     public DropdownField(Type type,
                          String id,
                          String description,
+                         String error,
                          Boolean required,
                          String result,
                          List<FieldValue> values)
     {
-        super(type, id, description, required, result, values);
+        super(type, id, description, error, required, result, values);
     }
 
     @Override
@@ -69,5 +70,10 @@ public class DropdownField extends SelectableField<View>
         }
 
         return null;
+    }
+
+    @Override
+    protected void enableError(boolean enable)
+    {
     }
 }

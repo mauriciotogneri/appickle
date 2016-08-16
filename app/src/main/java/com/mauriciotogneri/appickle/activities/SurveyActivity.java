@@ -21,6 +21,8 @@ public class SurveyActivity extends BaseActivity
 {
     private static final String PARAMETER_SESSION_ID = "session.id";
 
+    private Session session;
+
     @BindView(R.id.screen_survey_fieldContainer)
     public ViewGroup fieldContainer;
 
@@ -42,7 +44,8 @@ public class SurveyActivity extends BaseActivity
 
         ButterKnife.bind(this);
 
-        displaySurvey(session().survey());
+        this.session = session();
+        displaySurvey(session.survey());
 
         toolbarTitle(R.string.screen_survey_title);
     }
@@ -78,8 +81,6 @@ public class SurveyActivity extends BaseActivity
 
     private boolean validateSurvey()
     {
-        Session session = session();
-
         for (SurveyField field : session.survey().fields())
         {
             if (!field.validate())

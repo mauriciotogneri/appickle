@@ -15,6 +15,7 @@ public class JsonSurveyField extends JsonEntity<SurveyField>
     private final String id;
     private final Type type;
     private final String description;
+    private final String error;
     private final Boolean required;
 
     // standard
@@ -67,11 +68,12 @@ public class JsonSurveyField extends JsonEntity<SurveyField>
         }
     }
 
-    public JsonSurveyField(String id, Type type, String description, Boolean required, Format format, String placeholder, String defaultValue, List<JsonFieldValue> values, Boolean selected, String result)
+    public JsonSurveyField(String id, Type type, String description, String error, Boolean required, Format format, String placeholder, String defaultValue, List<JsonFieldValue> values, Boolean selected, String result)
     {
         this.id = id;
         this.type = type;
         this.description = description;
+        this.error = error;
         this.required = required;
         this.format = format;
         this.placeholder = placeholder;
@@ -87,19 +89,19 @@ public class JsonSurveyField extends JsonEntity<SurveyField>
         switch (type)
         {
             case standard:
-                return new StandardField(id, description, required, result, format, placeholder, defaultValue);
+                return new StandardField(id, description, error, required, result, format, placeholder, defaultValue);
 
             case radio:
-                return new RadioField(type, id, description, required, result, fromList(values));
+                return new RadioField(type, id, description, error, required, result, fromList(values));
 
             case dropdown:
-                return new DropdownField(type, id, description, required, result, fromList(values));
+                return new DropdownField(type, id, description, error, required, result, fromList(values));
 
             case checkbox:
-                return new CheckboxField(type, id, description, required, result, fromList(values));
+                return new CheckboxField(type, id, description, error, required, result, fromList(values));
 
             case toggle:
-                return new ToggleField(type, id, description, required, result, selected);
+                return new ToggleField(id, description, error, required, result, selected);
 
             case range:
                 break;

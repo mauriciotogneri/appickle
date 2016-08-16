@@ -16,11 +16,12 @@ public abstract class SelectableField<T extends View> extends SurveyField
     public SelectableField(Type type,
                            String id,
                            String description,
+                           String error,
                            Boolean required,
                            String result,
                            List<FieldValue> values)
     {
-        super(type, id, description, required, result);
+        super(type, id, description, error, required, result);
 
         this.values = values;
     }
@@ -34,6 +35,6 @@ public abstract class SelectableField<T extends View> extends SurveyField
     @Override
     public final JsonSurveyField json()
     {
-        return new JsonSurveyField(id, type, description, required, null, null, null, fromList(values), null, result);
+        return new JsonSurveyField(id, type, description, error, required, null, null, null, fromList(values), null, result);
     }
 }

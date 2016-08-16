@@ -15,11 +15,12 @@ public class CheckboxField extends SelectableField<CheckBox>
     public CheckboxField(Type type,
                          String id,
                          String description,
+                         String error,
                          Boolean required,
                          String result,
                          List<FieldValue> values)
     {
-        super(type, id, description, required, result, values);
+        super(type, id, description, error, required, result, values);
     }
 
     @Override
@@ -53,5 +54,10 @@ public class CheckboxField extends SelectableField<CheckBox>
         }
 
         return null;
+    }
+
+    @Override
+    protected void enableError(boolean enable)
+    {
     }
 }

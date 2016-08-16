@@ -15,19 +15,21 @@ import com.mauriciotogneri.appickle.json.JsonSurveyField.Type;
 public class StandardField extends SurveyField
 {
     private EditText input;
+    private TextInputLayout inputLayout;
     private final Format format;
     private final String placeholder;
     private final String defaultValue;
 
     public StandardField(String id,
                          String description,
+                         String error,
                          Boolean required,
                          String result,
                          Format format,
                          String placeholder,
                          String defaultValue)
     {
-        super(Type.standard, id, description, required, result);
+        super(Type.standard, id, description, error, required, result);
 
         this.format = format;
         this.placeholder = placeholder;
@@ -51,7 +53,7 @@ public class StandardField extends SurveyField
             input.setInputType(format.value());
         }
 
-        TextInputLayout inputLayout = (TextInputLayout) view.findViewById(R.id.field_standard_inputLayout);
+        this.inputLayout = (TextInputLayout) view.findViewById(R.id.field_standard_inputLayout);
 
         if (!TextUtils.isEmpty(placeholder))
         {
@@ -72,8 +74,19 @@ public class StandardField extends SurveyField
     }
 
     @Override
+    protected void enableError(boolean enable)
+    {
+        if (enable)
+        {
+            inputLayout.setError(error);
+        }
+
+        inputLayout.setErrorEnabled(enable);
+    }
+
+    @Override
     public JsonSurveyField json()
     {
-        return new JsonSurveyField(id, type, description, required, format, placeholder, defaultValue, null, null, result);
+        return new JsonSurveyField(id, type, description, error, required, format, placeholder, defaultValue, null, null, result);
     }
 }

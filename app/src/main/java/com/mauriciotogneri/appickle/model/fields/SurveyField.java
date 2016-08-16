@@ -16,14 +16,16 @@ public abstract class SurveyField extends ModelEntity<JsonSurveyField>
     protected final Type type;
     protected final String id;
     protected final String description;
+    protected final String error;
     protected final Boolean required;
     protected String result;
 
-    protected SurveyField(Type type, String id, String description, Boolean required, String result)
+    protected SurveyField(Type type, String id, String description, String error, Boolean required, String result)
     {
         this.type = type;
         this.id = id;
         this.description = description;
+        this.error = error;
         this.required = required;
         this.result = result;
     }
@@ -33,6 +35,8 @@ public abstract class SurveyField extends ModelEntity<JsonSurveyField>
     protected abstract boolean isFilled();
 
     protected abstract String result();
+
+    protected abstract void enableError(boolean enable);
 
     protected View inflate(LayoutInflater inflater, ViewGroup parent, int resourceId)
     {
@@ -55,15 +59,21 @@ public abstract class SurveyField extends ModelEntity<JsonSurveyField>
 
     public boolean validate()
     {
+        boolean result;
+
         if (isFilled())
         {
             this.result = result();
 
-            return true;
+            result = true;
         }
         else
         {
-            return !required;
+            result = !required;
         }
+
+        enableError(!result);
+
+        return result;
     }
 }

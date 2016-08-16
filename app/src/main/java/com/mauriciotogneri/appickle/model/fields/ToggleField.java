@@ -14,14 +14,14 @@ public class ToggleField extends SurveyField
     private SwitchCompat toggle;
     private Boolean selected;
 
-    public ToggleField(Type type,
-                       String id,
+    public ToggleField(String id,
                        String description,
+                       String error,
                        Boolean required,
                        String result,
                        Boolean selected)
     {
-        super(type, id, description, required, result);
+        super(Type.toggle, id, description, error, required, result);
 
         this.selected = selected;
     }
@@ -48,8 +48,13 @@ public class ToggleField extends SurveyField
     }
 
     @Override
+    protected void enableError(boolean enable)
+    {
+    }
+
+    @Override
     public JsonSurveyField json()
     {
-        return new JsonSurveyField(id, type, description, required, null, null, null, null, selected, result);
+        return new JsonSurveyField(id, type, description, error, required, null, null, null, null, selected, result);
     }
 }
