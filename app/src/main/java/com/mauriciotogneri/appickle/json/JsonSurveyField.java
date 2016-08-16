@@ -5,6 +5,7 @@ import com.mauriciotogneri.appickle.model.fields.DropdownField;
 import com.mauriciotogneri.appickle.model.fields.RadioField;
 import com.mauriciotogneri.appickle.model.fields.StandardField;
 import com.mauriciotogneri.appickle.model.fields.SurveyField;
+import com.mauriciotogneri.appickle.model.fields.ToggleField;
 
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class JsonSurveyField extends JsonEntity<SurveyField>
 
     // radio|select|checkbox
     private final List<JsonFieldValue> values;
+
+    // toggle
+    private final Boolean selected;
 
     // result
     private final String result;
@@ -63,7 +67,7 @@ public class JsonSurveyField extends JsonEntity<SurveyField>
         }
     }
 
-    public JsonSurveyField(String id, Type type, String description, Boolean required, Format format, String placeholder, String defaultValue, List<JsonFieldValue> values, String result)
+    public JsonSurveyField(String id, Type type, String description, Boolean required, Format format, String placeholder, String defaultValue, List<JsonFieldValue> values, Boolean selected, String result)
     {
         this.id = id;
         this.type = type;
@@ -73,6 +77,7 @@ public class JsonSurveyField extends JsonEntity<SurveyField>
         this.placeholder = placeholder;
         this.defaultValue = defaultValue;
         this.values = values;
+        this.selected = selected;
         this.result = result;
     }
 
@@ -94,7 +99,8 @@ public class JsonSurveyField extends JsonEntity<SurveyField>
                 return new CheckboxField(type, id, description, required, result, fromList(values));
 
             case toggle:
-                break;
+                return new ToggleField(type, id, description, required, result, selected);
+
             case range:
                 break;
             case date:

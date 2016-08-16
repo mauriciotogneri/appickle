@@ -34,6 +34,6 @@ public abstract class SelectableField<T extends View> extends SurveyField
     @Override
     public final JsonSurveyField json()
     {
-        return new JsonSurveyField(id, type, description, required, null, null, null, fromList(values), result);
+        return new JsonSurveyField(id, type, description, required, null, null, null, fromList(values), null, result);
     }
 }

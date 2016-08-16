@@ -9,6 +9,8 @@
         <item name="android:textColorSecondary">@color/textSecondary</item>
         <item name="colorControlHighlight">@color/controlHighlight</item>
 
+        <item name="android:colorForeground">#AAAAAA</item>
+
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 

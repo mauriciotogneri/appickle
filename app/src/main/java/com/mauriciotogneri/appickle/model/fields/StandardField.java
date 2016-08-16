@@ -74,6 +74,6 @@ public class StandardField extends SurveyField
     @Override
     public JsonSurveyField json()
     {
-        return new JsonSurveyField(id, type, description, required, format, placeholder, defaultValue, null, result);
+        return new JsonSurveyField(id, type, description, required, format, placeholder, defaultValue, null, null, result);
     }
 }
