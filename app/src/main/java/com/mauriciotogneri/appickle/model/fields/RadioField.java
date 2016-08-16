@@ -63,9 +63,4 @@ public class RadioField extends SelectableField<RadioButton>
 
         return null;
     }
-
-    @Override
-    protected void enableError(boolean enable)
-    {
-    }
 }

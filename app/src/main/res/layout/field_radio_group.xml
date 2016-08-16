@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RadioGroup
+    android:id="@+id/field.selectable.radioGroup"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="@dimen/margin.default">
-
-    <include
-        layout="@layout/field_description"/>
-
-    <RadioGroup
-        android:id="@+id/field.selectable.radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"/>
-
-</LinearLayout>
+    android:orientation="vertical"/>

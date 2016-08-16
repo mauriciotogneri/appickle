@@ -19,6 +19,7 @@ public abstract class SurveyField extends ModelEntity<JsonSurveyField>
     protected final String error;
     protected final Boolean required;
     protected String result;
+    private TextView errorLabel;
 
     protected SurveyField(Type type, String id, String description, String error, Boolean required, String result)
     {
@@ -36,14 +37,15 @@ public abstract class SurveyField extends ModelEntity<JsonSurveyField>
 
     protected abstract String result();
 
-    protected abstract void enableError(boolean enable);
-
     protected View inflate(LayoutInflater inflater, ViewGroup parent, int resourceId)
     {
-        View view = inflater.inflate(resourceId, parent, false);
+        View view = inflater.inflate(R.layout.field_base, parent, false);
         parent.addView(view);
 
-        TextView descriptionLabel = (TextView) view.findViewById(R.id.field_standard_description);
+        ViewGroup container = (ViewGroup) view.findViewById(R.id.field_base_container);
+        container.addView(inflater.inflate(resourceId, container, false));
+
+        TextView descriptionLabel = (TextView) view.findViewById(R.id.field_description);
 
         if (!TextUtils.isEmpty(description))
         {
@@ -54,26 +56,43 @@ public abstract class SurveyField extends ModelEntity<JsonSurveyField>
             descriptionLabel.setVisibility(View.GONE);
         }
 
+        errorLabel = (TextView) view.findViewById(R.id.field_error);
+
+        if (!TextUtils.isEmpty(error))
+        {
+            errorLabel.setText(error);
+        }
+
         return view;
     }
 
     public boolean validate()
     {
-        boolean result;
+        boolean valid;
 
         if (isFilled())
         {
             this.result = result();
 
-            result = true;
+            valid = true;
         }
         else
         {
-            result = !required;
+            valid = !required;
         }
 
-        enableError(!result);
+        if (valid)
+        {
+            errorLabel.setVisibility(View.GONE);
+        }
+        else
+        {
+            if (!TextUtils.isEmpty(error))
+            {
+                errorLabel.setVisibility(View.VISIBLE);
+            }
+        }
 
-        return result;
+        return valid;
     }
 }

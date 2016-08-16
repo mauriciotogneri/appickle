@@ -55,9 +55,4 @@ public class CheckboxField extends SelectableField<CheckBox>
 
         return null;
     }
-
-    @Override
-    protected void enableError(boolean enable)
-    {
-    }
 }

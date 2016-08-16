@@ -71,9 +71,4 @@ public class DropdownField extends SelectableField<View>
 
         return null;
     }
-
-    @Override
-    protected void enableError(boolean enable)
-    {
-    }
 }

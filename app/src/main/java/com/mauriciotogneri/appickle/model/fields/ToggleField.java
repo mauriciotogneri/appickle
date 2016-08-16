@@ -48,11 +48,6 @@ public class ToggleField extends SurveyField
     }
 
     @Override
-    protected void enableError(boolean enable)
-    {
-    }
-
-    @Override
     public JsonSurveyField json()
     {
         return new JsonSurveyField(id, type, description, error, required, null, null, null, null, selected, result);
