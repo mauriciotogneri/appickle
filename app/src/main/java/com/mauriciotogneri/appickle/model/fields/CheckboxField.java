@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.json.JsonSurveyField.Type;
+import com.mauriciotogneri.appickle.pickers.PickerSelector;
 
 import java.util.List;
 
@@ -24,15 +25,15 @@ public class CheckboxField extends SelectableField<CheckBox>
     }
 
     @Override
-    public void init(LayoutInflater inflater, ViewGroup parent)
+    public void init(LayoutInflater inflater, ViewGroup parent, PickerSelector selector)
     {
-        View view = inflate(inflater, parent, R.layout.field_checkbox_group);
+        View view = inflate(inflater, parent, R.layout.view_field_checkbox_group);
 
         ViewGroup checkboxGroup = (ViewGroup) view.findViewById(R.id.field_selectable_checkboxGroup);
 
         for (FieldValue value : values)
         {
-            CheckBox checkbox = (CheckBox) inflater.inflate(R.layout.field_checkbox_item, checkboxGroup, false);
+            CheckBox checkbox = (CheckBox) inflater.inflate(R.layout.view_field_checkbox_item, checkboxGroup, false);
             checkbox.setText(value.label());
             checkbox.setChecked(value.isSelected());
             checkbox.setTag(value.key());

@@ -3,8 +3,10 @@ package com.mauriciotogneri.appickle.json;
 import com.mauriciotogneri.appickle.model.fields.CheckboxField;
 import com.mauriciotogneri.appickle.model.fields.DropdownField;
 import com.mauriciotogneri.appickle.model.fields.RadioField;
+import com.mauriciotogneri.appickle.model.fields.DateField;
 import com.mauriciotogneri.appickle.model.fields.StandardField;
 import com.mauriciotogneri.appickle.model.fields.SurveyField;
+import com.mauriciotogneri.appickle.model.fields.TimeField;
 import com.mauriciotogneri.appickle.model.fields.ToggleField;
 
 import java.util.List;
@@ -39,7 +41,6 @@ public class JsonSurveyField extends JsonEntity<SurveyField>
         dropdown,
         checkbox,
         toggle,
-        range,
         date,
         time
     }
@@ -103,12 +104,11 @@ public class JsonSurveyField extends JsonEntity<SurveyField>
             case toggle:
                 return new ToggleField(id, description, error, required, result, selected);
 
-            case range:
-                break;
             case date:
-                break;
+                return new DateField(id, description, error, required, result);
+
             case time:
-                break;
+                return new TimeField(id, description, error, required, result);
         }
 
         throw new RuntimeException();

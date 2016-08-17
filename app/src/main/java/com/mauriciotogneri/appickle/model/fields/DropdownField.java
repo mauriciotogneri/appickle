@@ -8,6 +8,7 @@ import android.widget.Spinner;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.json.JsonSurveyField.Type;
+import com.mauriciotogneri.appickle.pickers.PickerSelector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +29,9 @@ public class DropdownField extends SelectableField<View>
     }
 
     @Override
-    public void init(LayoutInflater inflater, ViewGroup parent)
+    public void init(LayoutInflater inflater, ViewGroup parent, PickerSelector selector)
     {
-        View view = inflate(inflater, parent, R.layout.field_dropdown_group);
+        View view = inflate(inflater, parent, R.layout.view_field_dropdown_group);
 
         List<String> list = new ArrayList<>();
         int selectedIndex = -1;
@@ -47,10 +48,10 @@ public class DropdownField extends SelectableField<View>
             }
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(), R.layout.field_dropdown_item, list);
-        adapter.setDropDownViewResource(R.layout.field_dropdown_element);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(), R.layout.view_field_dropdown_item, list);
+        adapter.setDropDownViewResource(R.layout.view_field_dropdown_element);
 
-        Spinner spinner = (Spinner) view.findViewById(R.id.field_selectable_dropdownGroup);
+        spinner = (Spinner) view.findViewById(R.id.field_selectable_dropdownGroup);
         spinner.setAdapter(adapter);
 
         if (selectedIndex != -1)

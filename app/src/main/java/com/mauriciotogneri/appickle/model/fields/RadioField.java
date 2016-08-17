@@ -8,6 +8,7 @@ import android.widget.RadioGroup;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.json.JsonSurveyField.Type;
+import com.mauriciotogneri.appickle.pickers.PickerSelector;
 
 import java.util.List;
 
@@ -25,16 +26,16 @@ public class RadioField extends SelectableField<RadioButton>
     }
 
     @Override
-    public void init(LayoutInflater inflater, ViewGroup parent)
+    public void init(LayoutInflater inflater, ViewGroup parent, PickerSelector selector)
     {
-        View view = inflate(inflater, parent, R.layout.field_radio_group);
+        View view = inflate(inflater, parent, R.layout.view_field_radio_group);
 
         RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.field_selectable_radioGroup);
         int index = 1;
 
         for (FieldValue value : values)
         {
-            RadioButton button = (RadioButton) inflater.inflate(R.layout.field_radio_item, radioGroup, false);
+            RadioButton button = (RadioButton) inflater.inflate(R.layout.view_field_radio_item, radioGroup, false);
             button.setId(index++);
             button.setText(value.label());
             button.setTag(value.key());

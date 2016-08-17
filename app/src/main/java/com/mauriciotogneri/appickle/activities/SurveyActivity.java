@@ -3,6 +3,7 @@ package com.mauriciotogneri.appickle.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -10,14 +11,19 @@ import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.base.BaseActivity;
 import com.mauriciotogneri.appickle.model.Session;
 import com.mauriciotogneri.appickle.model.Survey;
+import com.mauriciotogneri.appickle.model.fields.DateField;
 import com.mauriciotogneri.appickle.model.fields.SurveyField;
+import com.mauriciotogneri.appickle.model.fields.TimeField;
+import com.mauriciotogneri.appickle.pickers.DatePickerFragment;
+import com.mauriciotogneri.appickle.pickers.PickerSelector;
+import com.mauriciotogneri.appickle.pickers.TimePickerFragment;
 import com.mauriciotogneri.appickle.storage.SessionStorage;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SurveyActivity extends BaseActivity
+public class SurveyActivity extends BaseActivity implements PickerSelector
 {
     private static final String PARAMETER_SESSION_ID = "session.id";
 
@@ -65,10 +71,9 @@ public class SurveyActivity extends BaseActivity
 
         for (SurveyField field : survey.fields())
         {
-            field.init(inflater, fieldContainer);
+            field.init(inflater, fieldContainer, this);
         }
     }
-
 
     @OnClick(R.id.screen_survey_button_start)
     public void onButtonStart()
@@ -77,6 +82,20 @@ public class SurveyActivity extends BaseActivity
         {
             openActivity(FeaturesSummaryActivity.class);
         }
+    }
+
+    @Override
+    public void onPickDate(DateField dateField)
+    {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    @Override
+    public void onPickTime(TimeField timeField)
+    {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
     private boolean validateSurvey()

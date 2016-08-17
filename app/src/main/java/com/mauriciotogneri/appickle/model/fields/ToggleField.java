@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.json.JsonSurveyField;
 import com.mauriciotogneri.appickle.json.JsonSurveyField.Type;
+import com.mauriciotogneri.appickle.pickers.PickerSelector;
 
 public class ToggleField extends SurveyField
 {
@@ -27,9 +28,9 @@ public class ToggleField extends SurveyField
     }
 
     @Override
-    public void init(LayoutInflater inflater, ViewGroup parent)
+    public void init(LayoutInflater inflater, ViewGroup parent, PickerSelector selector)
     {
-        View view = inflate(inflater, parent, R.layout.field_toggle);
+        View view = inflate(inflater, parent, R.layout.view_field_toggle);
 
         toggle = (SwitchCompat) view.findViewById(R.id.field_toggle);
         toggle.setChecked((selected != null) && selected);

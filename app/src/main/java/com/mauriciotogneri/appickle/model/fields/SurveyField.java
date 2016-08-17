@@ -10,6 +10,7 @@ import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.json.JsonSurveyField;
 import com.mauriciotogneri.appickle.json.JsonSurveyField.Type;
 import com.mauriciotogneri.appickle.model.ModelEntity;
+import com.mauriciotogneri.appickle.pickers.PickerSelector;
 
 public abstract class SurveyField extends ModelEntity<JsonSurveyField>
 {
@@ -31,7 +32,7 @@ public abstract class SurveyField extends ModelEntity<JsonSurveyField>
         this.result = result;
     }
 
-    public abstract void init(LayoutInflater inflater, ViewGroup parent);
+    public abstract void init(LayoutInflater inflater, ViewGroup parent, PickerSelector selector);
 
     protected abstract boolean isFilled();
 
@@ -39,7 +40,7 @@ public abstract class SurveyField extends ModelEntity<JsonSurveyField>
 
     protected View inflate(LayoutInflater inflater, ViewGroup parent, int resourceId)
     {
-        View view = inflater.inflate(R.layout.field_base, parent, false);
+        View view = inflater.inflate(R.layout.view_field_base, parent, false);
         parent.addView(view);
 
         ViewGroup container = (ViewGroup) view.findViewById(R.id.field_base_container);

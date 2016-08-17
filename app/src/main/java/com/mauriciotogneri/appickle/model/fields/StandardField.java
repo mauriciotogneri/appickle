@@ -11,6 +11,7 @@ import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.json.JsonSurveyField;
 import com.mauriciotogneri.appickle.json.JsonSurveyField.Format;
 import com.mauriciotogneri.appickle.json.JsonSurveyField.Type;
+import com.mauriciotogneri.appickle.pickers.PickerSelector;
 
 public class StandardField extends SurveyField
 {
@@ -36,9 +37,9 @@ public class StandardField extends SurveyField
     }
 
     @Override
-    public void init(LayoutInflater inflater, ViewGroup parent)
+    public void init(LayoutInflater inflater, ViewGroup parent, PickerSelector selector)
     {
-        View view = inflate(inflater, parent, R.layout.field_standard);
+        View view = inflate(inflater, parent, R.layout.view_field_standard);
 
         this.input = (EditText) view.findViewById(R.id.field_standard_input);
 
