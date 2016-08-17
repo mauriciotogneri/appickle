@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.adapters.SessionAdapter;
-import com.mauriciotogneri.appickle.adapters.SimpleDividerItemDecoration;
 import com.mauriciotogneri.appickle.base.BaseActivity;
 import com.mauriciotogneri.appickle.base.BaseListAdapter.OnItemSelected;
 import com.mauriciotogneri.appickle.model.Session;
@@ -40,7 +39,6 @@ public class LoadSessionActivity extends BaseActivity implements OnItemSelected<
         sessionList.setHasFixedSize(true);
         sessionList.setAdapter(adapter);
         sessionList.setLayoutManager(new LinearLayoutManager(this));
-        sessionList.addItemDecoration(new SimpleDividerItemDecoration(this));
     }
 
     @Override
