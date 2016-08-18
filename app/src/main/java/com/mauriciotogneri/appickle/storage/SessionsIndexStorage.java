@@ -2,7 +2,7 @@ package com.mauriciotogneri.appickle.storage;
 
 import android.content.Context;
 
-import com.mauriciotogneri.appickle.model.Session;
+import com.mauriciotogneri.appickle.model.session.Session;
 
 import java.util.ArrayList;
 import java.util.List;

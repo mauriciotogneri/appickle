@@ -3,7 +3,7 @@ package com.mauriciotogneri.appickle.storage;
 import android.content.Context;
 
 import com.mauriciotogneri.appickle.json.JsonSession;
-import com.mauriciotogneri.appickle.model.Session;
+import com.mauriciotogneri.appickle.model.session.Session;
 
 public class SessionStorage extends BaseStorage
 {

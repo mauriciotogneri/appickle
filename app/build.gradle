@@ -71,5 +71,7 @@ dependencies
     compile 'com.google.code.gson:gson:2.7'
     compile 'ch.acra:acra:4.9.0'
 
+    testCompile 'junit:junit:4.12'
+
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
 }

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.base.BaseActivity;
-import com.mauriciotogneri.appickle.model.Session;
+import com.mauriciotogneri.appickle.model.session.Session;
 import com.mauriciotogneri.appickle.storage.SessionStorage;
 import com.squareup.picasso.Picasso;
 

@@ -9,7 +9,7 @@ import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.adapters.SessionAdapter.ViewHolder;
 import com.mauriciotogneri.appickle.base.BaseListAdapter;
 import com.mauriciotogneri.appickle.base.BaseListAdapter.OnViewHolderClicked;
-import com.mauriciotogneri.appickle.model.Session;
+import com.mauriciotogneri.appickle.model.session.Session;
 
 import java.util.List;
 

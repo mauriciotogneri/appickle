@@ -1,6 +1,6 @@
 package com.mauriciotogneri.appickle.json;
 
-import com.mauriciotogneri.appickle.model.Survey;
+import com.mauriciotogneri.appickle.model.session.Survey;
 
 import java.util.List;
 

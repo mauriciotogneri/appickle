@@ -9,7 +9,7 @@ import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.adapters.SessionAdapter;
 import com.mauriciotogneri.appickle.base.BaseActivity;
 import com.mauriciotogneri.appickle.base.BaseListAdapter.OnItemSelected;
-import com.mauriciotogneri.appickle.model.Session;
+import com.mauriciotogneri.appickle.model.session.Session;
 import com.mauriciotogneri.appickle.storage.SessionsIndexStorage;
 
 import java.util.List;

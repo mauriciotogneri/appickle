@@ -1,6 +1,7 @@
-package com.mauriciotogneri.appickle.model;
+package com.mauriciotogneri.appickle.model.session;
 
 import com.mauriciotogneri.appickle.json.JsonSurvey;
+import com.mauriciotogneri.appickle.model.ModelEntity;
 import com.mauriciotogneri.appickle.model.fields.SurveyField;
 
 import java.util.List;

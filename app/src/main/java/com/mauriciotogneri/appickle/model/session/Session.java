@@ -1,6 +1,7 @@
-package com.mauriciotogneri.appickle.model;
+package com.mauriciotogneri.appickle.model.session;
 
 import com.mauriciotogneri.appickle.json.JsonSession;
+import com.mauriciotogneri.appickle.model.ModelEntity;
 import com.mauriciotogneri.appickle.model.reports.Report;
 
 import java.util.List;

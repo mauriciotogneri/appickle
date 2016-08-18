@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.base.BaseActivity;
-import com.mauriciotogneri.appickle.model.Session;
-import com.mauriciotogneri.appickle.model.Survey;
+import com.mauriciotogneri.appickle.model.session.Session;
+import com.mauriciotogneri.appickle.model.session.Survey;
 import com.mauriciotogneri.appickle.model.fields.DateField;
 import com.mauriciotogneri.appickle.model.fields.SurveyField;
 import com.mauriciotogneri.appickle.model.fields.TimeField;
