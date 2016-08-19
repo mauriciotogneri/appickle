@@ -2,8 +2,16 @@ package com.mauriciotogneri.appickle.parser.tokens;
 
 public class ExamplesToken extends Token
 {
-    public ExamplesToken()
+    private final String name;
+
+    public ExamplesToken(String name)
     {
+        this.name = name;
+    }
+
+    public String name()
+    {
+        return name;
     }
 
     @Override

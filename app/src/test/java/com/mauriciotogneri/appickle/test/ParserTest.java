@@ -18,8 +18,6 @@ public class ParserTest
         File file = new File("../sample.feature");
 
         TokenType tokenType = new TokenType(
-                "#",
-                "@",
                 "Feature:",
                 "Background:",
                 "Scenario:",
@@ -32,7 +30,7 @@ public class ParserTest
                 "But");
 
         FeatureParser featureParser = new FeatureParser(new FileInputStream(file), tokenType);
-        featureParser.features();
+        featureParser.feature();
 
         assertEquals(true, true);
     }

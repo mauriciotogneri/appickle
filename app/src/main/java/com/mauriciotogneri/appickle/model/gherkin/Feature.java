@@ -1,9 +1,12 @@
 package com.mauriciotogneri.appickle.model.gherkin;
 
+import com.mauriciotogneri.appickle.json.gherkin.JsonFeature;
+import com.mauriciotogneri.appickle.model.ModelEntity;
+
 import java.util.Iterator;
 import java.util.List;
 
-public class Feature implements Iterable<Scenario>
+public class Feature extends ModelEntity<JsonFeature> implements Iterable<Scenario>
 {
     private final List<String> tags;
     private final String name;
@@ -24,5 +27,11 @@ public class Feature implements Iterable<Scenario>
     public Iterator<Scenario> iterator()
     {
         return scenarios.iterator();
+    }
+
+    @Override
+    public JsonFeature json()
+    {
+        return new JsonFeature(); // TODO
     }
 }

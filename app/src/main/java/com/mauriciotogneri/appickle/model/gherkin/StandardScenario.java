@@ -1,7 +1,5 @@
 package com.mauriciotogneri.appickle.model.gherkin;
 
-import com.mauriciotogneri.appickle.model.gherkin.Scenario;
-
 import java.util.Iterator;
 import java.util.List;
 

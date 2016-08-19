@@ -91,9 +91,9 @@ public class Token
         return new FeatureToken(line);
     }
 
-    private static Token backgroundToken()
+    private static Token backgroundToken(String line)
     {
-        return new BackgroundToken();
+        return new BackgroundToken(line);
     }
 
     private static Token scenarioToken(String line)
@@ -106,9 +106,9 @@ public class Token
         return new ScenarioOutlineToken(line);
     }
 
-    private static Token examplesToken()
+    private static Token examplesToken(String line)
     {
-        return new ExamplesToken();
+        return new ExamplesToken(line);
     }
 
     private static Token givenToken(String line)
@@ -152,7 +152,7 @@ public class Token
                 return featureToken(lexeme);
 
             case BACKGROUND:
-                return backgroundToken();
+                return backgroundToken(lexeme);
 
             case SCENARIO:
                 return scenarioToken(lexeme);
@@ -161,7 +161,7 @@ public class Token
                 return scenarioOutlineToken(lexeme);
 
             case EXAMPLES:
-                return examplesToken();
+                return examplesToken(lexeme);
 
             case GIVEN:
                 return givenToken(lexeme);

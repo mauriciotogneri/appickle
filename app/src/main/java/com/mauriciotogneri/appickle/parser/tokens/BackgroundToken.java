@@ -2,8 +2,16 @@ package com.mauriciotogneri.appickle.parser.tokens;
 
 public class BackgroundToken extends Token
 {
-    public BackgroundToken()
+    private final String name;
+
+    public BackgroundToken(String name)
     {
+        this.name = name;
+    }
+
+    public String name()
+    {
+        return name;
     }
 
     @Override

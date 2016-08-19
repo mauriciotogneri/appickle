@@ -1,6 +1,8 @@
 package com.mauriciotogneri.appickle.parser;
 
+import com.mauriciotogneri.appickle.model.gherkin.Background;
 import com.mauriciotogneri.appickle.model.gherkin.Feature;
+import com.mauriciotogneri.appickle.model.gherkin.Scenario;
 import com.mauriciotogneri.appickle.parser.TokenType.Type;
 import com.mauriciotogneri.appickle.parser.tokens.Token;
 
@@ -22,17 +24,14 @@ public class FeatureParser
         this.tokenType = tokenType;
     }
 
-    public List<Feature> features() throws IOException
+    public Feature feature() throws IOException
     {
-        List<Feature> features = new ArrayList<>();
-
         for (Token token : tokens())
         {
             // TODO
-            System.out.println(token);
         }
 
-        return features;
+        return new Feature(new ArrayList<String>(), "", new ArrayList<String>(), new ArrayList<Background>(), new ArrayList<Scenario>());
     }
 
     private List<Token> tokens() throws IOException

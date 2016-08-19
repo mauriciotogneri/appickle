@@ -1,24 +1,25 @@
 package com.mauriciotogneri.appickle.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.google.gson.Gson;
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.base.BaseActivity;
-import com.mauriciotogneri.appickle.json.JsonSession;
+import com.mauriciotogneri.appickle.json.JsonSessionDefinition;
 import com.mauriciotogneri.appickle.model.session.Session;
+import com.mauriciotogneri.appickle.network.GetRequest;
 import com.mauriciotogneri.appickle.resources.FileContent;
 import com.mauriciotogneri.appickle.storage.SessionsIndexStorage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class NewSessionActivity extends BaseActivity
 {
@@ -32,47 +33,166 @@ public class NewSessionActivity extends BaseActivity
         toolbarTitle(R.string.screen_new_title);
 
         ButterKnife.bind(this);
-
-        sessionFromInternet();
     }
 
-    // TODO: remove
-    private void sessionFromInternet()
+    private void sessionFromInternet(final String url)
     {
-        Thread thread = new Thread(new Runnable()
+        final ProgressDialog progressDialog = progressDialog();
+
+        new AsyncTask<Void, Void, String>()
         {
             @Override
-            public void run()
+            protected String doInBackground(Void... voids)
             {
                 try
                 {
-                    OkHttpClient client = new OkHttpClient();
-
-                    Request request = new Request.Builder().url("http://zeronest.com/appickle/session.json").build();
-
-                    Response response = client.newCall(request).execute();
-
-                    JsonSession jsonSession = new Gson().fromJson(response.body().string(), JsonSession.class);
-
-                    openIntro(jsonSession.model());
+                    GetRequest getRequest = new GetRequest(url);
+                    return getRequest.content();
                 }
                 catch (Exception e)
                 {
-                    e.printStackTrace();
-
-                    errorDialog(R.string.screen_new_button_file_error);
+                    return null;
                 }
             }
-        });
-        thread.start();
+
+            @Override
+            protected void onPostExecute(String content)
+            {
+                super.onPostExecute(content);
+
+                if (content != null)
+                {
+                    try
+                    {
+                        processSessionJson(content, progressDialog);
+                    }
+                    catch (Exception e)
+                    {
+                        progressDialog.dismiss();
+                        errorLoadingFromInternet();
+                    }
+                }
+                else
+                {
+                    progressDialog.dismiss();
+                    errorLoadingFromInternet();
+                }
+            }
+        }.execute();
     }
 
-    private Session sessionFromUri(Uri uri) throws IOException
+    private void sessionFromFile(final Uri uri)
     {
-        FileContent fileContent = new FileContent(uri);
-        JsonSession jsonSession = new Gson().fromJson(fileContent.content(), JsonSession.class);
+        final ProgressDialog progressDialog = progressDialog();
 
-        return jsonSession.model();
+        new AsyncTask<Void, Void, String>()
+        {
+            @Override
+            protected String doInBackground(Void... voids)
+            {
+                try
+                {
+                    FileContent fileContent = new FileContent(uri);
+                    return fileContent.content();
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(String content)
+            {
+                super.onPostExecute(content);
+
+                if (content != null)
+                {
+                    try
+                    {
+                        processSessionJson(content, progressDialog);
+                    }
+                    catch (Exception e)
+                    {
+                        progressDialog.dismiss();
+                        errorLoadingFromFile();
+                    }
+                }
+                else
+                {
+                    progressDialog.dismiss();
+                    errorLoadingFromFile();
+                }
+            }
+        }.execute();
+    }
+
+    private void processSessionJson(String content, final ProgressDialog progressDialog) throws IOException
+    {
+        final JsonSessionDefinition jsonSession = JsonSessionDefinition.fromJsonString(content);
+
+        new AsyncTask<Void, Void, Session>()
+        {
+            @Override
+            protected Session doInBackground(Void... voids)
+            {
+                try
+                {
+                    List<String> features = downloadFeatures(jsonSession.features());
+
+                    return jsonSession.model(features);
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Session session)
+            {
+                super.onPostExecute(session);
+
+                progressDialog.dismiss();
+
+                if (session != null)
+                {
+                    openIntro(session);
+                }
+                else
+                {
+                    errorDownloadingSession();
+                }
+            }
+        }.execute();
+    }
+
+    private void errorLoadingFromInternet()
+    {
+        errorDialog(R.string.screen_new_button_qrCode_error);
+    }
+
+    private void errorLoadingFromFile()
+    {
+        errorDialog(R.string.screen_new_button_file_error);
+    }
+
+    private void errorDownloadingSession()
+    {
+        errorDialog(R.string.screen_new_button_download_error);
+    }
+
+    private List<String> downloadFeatures(List<String> featureUrls) throws IOException
+    {
+        List<String> result = new ArrayList<>();
+
+        for (String url : featureUrls)
+        {
+            GetRequest getRequest = new GetRequest(url);
+            result.add(getRequest.content());
+        }
+
+        return result;
     }
 
     private void openIntro(Session session)
@@ -84,6 +204,13 @@ public class NewSessionActivity extends BaseActivity
         startActivity(intent);
 
         finish();
+    }
+
+    @OnClick(R.id.screen_new_button_qrCode)
+    public void onButtonFromQrCode()
+    {
+        // TODO
+        sessionFromInternet("http://zeronest.com/appickle/session.json");
     }
 
     @OnClick(R.id.screen_new_button_file)
@@ -100,19 +227,22 @@ public class NewSessionActivity extends BaseActivity
         if ((requestCode == SELECT_FILE_REQUEST_CODE) && (resultCode == RESULT_OK))
         {
             Uri uri = data.getData();
-
-            try
-            {
-                Session session = sessionFromUri(uri);
-                openIntro(session);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-
-                errorDialog(R.string.screen_new_button_file_error);
-            }
+            sessionFromFile(uri);
         }
+    }
+
+    private ProgressDialog progressDialog()
+    {
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getString(R.string.dialog_downloadingSession));
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        //progressDialog.setContentView(R.layout.dialog_wait);
+
+        //TextView label = (TextView) progressDialog.findViewById(R.id.dialog_wait_text);
+        //label.setText(R.string.dialog_downloadingSession);
+
+        return progressDialog;
     }
 
     @Override

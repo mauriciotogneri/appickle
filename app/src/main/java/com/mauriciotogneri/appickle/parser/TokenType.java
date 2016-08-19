@@ -2,8 +2,8 @@ package com.mauriciotogneri.appickle.parser;
 
 public class TokenType
 {
-    private final String commentValue;
-    private final String tagValue;
+    private final String commentValue = "#";
+    private final String tagValue = "@";
     private final String featureValue;
     private final String backgroundValue;
     private final String scenarioValue;
@@ -32,10 +32,8 @@ public class TokenType
         FREE_TEXT
     }
 
-    public TokenType(String commentValue, String tagValue, String featureValue, String backgroundValue, String scenarioValue, String scenarioOutlineValue, String examplesValue, String givenValue, String whenValue, String thenValue, String andValue, String butValue)
+    public TokenType(String featureValue, String backgroundValue, String scenarioValue, String scenarioOutlineValue, String examplesValue, String givenValue, String whenValue, String thenValue, String andValue, String butValue)
     {
-        this.commentValue = commentValue;
-        this.tagValue = tagValue;
         this.featureValue = featureValue;
         this.backgroundValue = backgroundValue;
         this.scenarioValue = scenarioValue;
