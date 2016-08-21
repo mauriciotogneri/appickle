@@ -20,6 +20,9 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import gherkin.AstBuilder;
+import gherkin.Parser;
+import gherkin.ast.GherkinDocument;
 
 public class NewSessionActivity extends BaseActivity
 {
@@ -189,7 +192,13 @@ public class NewSessionActivity extends BaseActivity
         for (String url : featureUrls)
         {
             GetRequest getRequest = new GetRequest(url);
-            result.add(getRequest.content());
+            String content = getRequest.content();
+
+            result.add(content);
+
+            Parser<GherkinDocument> parser = new Parser<>(new AstBuilder());
+            GherkinDocument gherkinDocument = parser.parse(content);
+            System.out.println(gherkinDocument);
         }
 
         return result;
