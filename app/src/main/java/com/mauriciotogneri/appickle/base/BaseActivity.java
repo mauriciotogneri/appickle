@@ -15,9 +15,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mauriciotogneri.appickle.R;
+import com.mauriciotogneri.uibinder.UiBinder;
 
 public abstract class BaseActivity extends AppCompatActivity
 {
+    private final UiBinder uiBinder = new UiBinder();
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -30,6 +33,8 @@ public abstract class BaseActivity extends AppCompatActivity
         layoutInflater.inflate(layout(), view, true);
 
         setupToolbar();
+
+        uiBinder.bind(this);
     }
 
     private void setupToolbar()

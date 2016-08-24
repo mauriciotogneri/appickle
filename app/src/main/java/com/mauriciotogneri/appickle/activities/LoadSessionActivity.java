@@ -11,11 +11,9 @@ import com.mauriciotogneri.appickle.base.BaseActivity;
 import com.mauriciotogneri.appickle.base.BaseListAdapter.OnItemSelected;
 import com.mauriciotogneri.appickle.model.session.Session;
 import com.mauriciotogneri.appickle.storage.SessionsIndexStorage;
+import com.mauriciotogneri.uibinder.annotations.BindView;
 
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class LoadSessionActivity extends BaseActivity implements OnItemSelected<Session>
 {
@@ -26,8 +24,6 @@ public class LoadSessionActivity extends BaseActivity implements OnItemSelected<
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        ButterKnife.bind(this);
 
         toolbarTitle(R.string.screen_load_title);
 

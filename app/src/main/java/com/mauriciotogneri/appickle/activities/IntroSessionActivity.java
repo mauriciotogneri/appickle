@@ -12,11 +12,9 @@ import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.base.BaseActivity;
 import com.mauriciotogneri.appickle.model.session.Session;
 import com.mauriciotogneri.appickle.storage.SessionStorage;
+import com.mauriciotogneri.uibinder.annotations.BindView;
+import com.mauriciotogneri.uibinder.annotations.OnClick;
 import com.squareup.picasso.Picasso;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class IntroSessionActivity extends BaseActivity
 {
@@ -46,8 +44,6 @@ public class IntroSessionActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        ButterKnife.bind(this);
 
         String sessionId = parameter(PARAMETER_SESSION_ID);
 

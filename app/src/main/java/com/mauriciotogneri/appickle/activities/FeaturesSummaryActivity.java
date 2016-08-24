@@ -5,8 +5,6 @@ import android.os.Bundle;
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.base.BaseActivity;
 
-import butterknife.ButterKnife;
-
 public class FeaturesSummaryActivity extends BaseActivity
 {
     @Override
@@ -15,8 +13,6 @@ public class FeaturesSummaryActivity extends BaseActivity
         super.onCreate(savedInstanceState);
 
         toolbarTitle(R.string.screen_features_title);
-
-        ButterKnife.bind(this);
     }
 
     @Override

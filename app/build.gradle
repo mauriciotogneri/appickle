@@ -1,10 +1,9 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 
 android
 {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.2"
 
     dexOptions
     {
@@ -64,12 +63,10 @@ dependencies
     compile 'com.android.support:design:24.2.0'
     compile 'com.android.support:recyclerview-v7:24.2.0'
 
-    //compile 'info.cukes:gherkin:2.12.2'
-    //compile 'io.cucumber:gherkin3:3.1.2'
-    compile 'io.cucumber:gherkin-jvm-deps:1.0.4'
     compile 'com.mauriciotogneri:entitystorage:1.0.0'
-    compile 'com.mauriciotogneri:uibinder:0.0.2'
-    compile 'com.jakewharton:butterknife:8.2.1'
+    compile 'com.mauriciotogneri:uibinder:0.0.3'
+
+    compile 'io.cucumber:gherkin-jvm-deps:1.0.4'
     compile 'joda-time:joda-time:2.9.4'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
@@ -77,6 +74,4 @@ dependencies
     compile 'ch.acra:acra:4.9.0'
 
     testCompile 'junit:junit:4.12'
-
-    apt 'com.jakewharton:butterknife-compiler:8.2.1'
 }

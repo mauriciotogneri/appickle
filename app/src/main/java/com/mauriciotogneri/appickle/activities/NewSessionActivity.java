@@ -13,13 +13,12 @@ import com.mauriciotogneri.appickle.model.session.Session;
 import com.mauriciotogneri.appickle.network.GetRequest;
 import com.mauriciotogneri.appickle.resources.FileContent;
 import com.mauriciotogneri.appickle.storage.SessionsIndexStorage;
+import com.mauriciotogneri.uibinder.annotations.OnClick;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import gherkin.AstBuilder;
 import gherkin.Parser;
 import gherkin.ast.GherkinDocument;
@@ -34,8 +33,6 @@ public class NewSessionActivity extends BaseActivity
         super.onCreate(savedInstanceState);
 
         toolbarTitle(R.string.screen_new_title);
-
-        ButterKnife.bind(this);
     }
 
     private void sessionFromInternet(final String url)

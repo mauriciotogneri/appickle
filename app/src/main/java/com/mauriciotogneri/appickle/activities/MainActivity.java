@@ -4,9 +4,7 @@ import android.os.Bundle;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.base.BaseActivity;
-
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import com.mauriciotogneri.uibinder.annotations.OnClick;
 
 public class MainActivity extends BaseActivity
 {
@@ -16,8 +14,6 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
 
         toolbarTitle(R.string.app_name);
-
-        ButterKnife.bind(this);
     }
 
     @OnClick(R.id.screen_main_button_new)

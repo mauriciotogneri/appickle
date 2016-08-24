@@ -9,19 +9,17 @@ import android.view.ViewGroup;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.base.BaseActivity;
-import com.mauriciotogneri.appickle.model.session.Session;
-import com.mauriciotogneri.appickle.model.session.Survey;
 import com.mauriciotogneri.appickle.model.fields.DateField;
 import com.mauriciotogneri.appickle.model.fields.SurveyField;
 import com.mauriciotogneri.appickle.model.fields.TimeField;
+import com.mauriciotogneri.appickle.model.session.Session;
+import com.mauriciotogneri.appickle.model.session.Survey;
 import com.mauriciotogneri.appickle.pickers.DatePickerFragment;
 import com.mauriciotogneri.appickle.pickers.PickerSelector;
 import com.mauriciotogneri.appickle.pickers.TimePickerFragment;
 import com.mauriciotogneri.appickle.storage.SessionStorage;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import com.mauriciotogneri.uibinder.annotations.BindView;
+import com.mauriciotogneri.uibinder.annotations.OnClick;
 
 public class SurveyActivity extends BaseActivity implements PickerSelector
 {
@@ -47,8 +45,6 @@ public class SurveyActivity extends BaseActivity implements PickerSelector
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        ButterKnife.bind(this);
 
         this.session = session();
         displaySurvey(session.survey());
