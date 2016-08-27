@@ -64,7 +64,7 @@ dependencies
     compile 'com.android.support:recyclerview-v7:24.2.0'
 
     compile 'com.mauriciotogneri:entitystorage:1.0.0'
-    compile 'com.mauriciotogneri:uibinder:0.0.3'
+    compile 'com.mauriciotogneri:uibinder:1.0.0'
 
     compile 'io.cucumber:gherkin-jvm-deps:1.0.4'
     compile 'joda-time:joda-time:2.9.4'
