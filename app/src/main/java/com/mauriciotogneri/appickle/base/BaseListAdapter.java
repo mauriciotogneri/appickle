@@ -61,6 +61,13 @@ public abstract class BaseListAdapter<T, V extends RecyclerView.ViewHolder> exte
         update();
     }
 
+    public void add(T element)
+    {
+        items.add(element);
+
+        update();
+    }
+
     public interface OnViewHolderClicked
     {
         void onViewHolderClicked(int position);

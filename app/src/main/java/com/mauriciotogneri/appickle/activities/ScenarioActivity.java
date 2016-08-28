@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.adapters.StepAdapter;
@@ -70,13 +71,45 @@ public class ScenarioActivity extends BaseActivity
         stepsList.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    @OnClick(R.id.scenario_screen)
+    @OnClick(R.id.steps_list_input)
     public void onStepListClick()
     {
         if (stepPosition < steps.size())
         {
-            adapter.update(steps.subList(0, ++stepPosition));
+            final int position = stepPosition++;
+
+            adapter.add(steps.get(position));
+
+            //            Handler handler = new Handler(Looper.getMainLooper());
+            //            handler.post(new Runnable()
+            //            {
+            //                @Override
+            //                public void run()
+            //                {
+            //                    View view = stepsList.getLayoutManager().findViewByPosition(position);
+            //                    Animation fadeInAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
+            //                    view.startAnimation(fadeInAnimation);
+            //                }
+            //            });
         }
+    }
+
+    @OnClick(R.id.scenario_button_comment)
+    public void onCommentButtonClick()
+    {
+        Toast.makeText(this, "COMMENT!", Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.scenario_button_bug)
+    public void onBugButtonClick()
+    {
+        Toast.makeText(this, "BUG!", Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.scenario_button_skip)
+    public void onSkipButtonClick()
+    {
+        Toast.makeText(this, "SKIP!", Toast.LENGTH_SHORT).show();
     }
 
     @Override

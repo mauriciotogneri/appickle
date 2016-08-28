@@ -11,6 +11,6 @@ public class Step
 
     public String content()
     {
-        return String.format("%s %s", step.getKeyword(), step.getText());
+        return String.format("<b>%s</b> %s", step.getKeyword(), step.getText());
     }
 }

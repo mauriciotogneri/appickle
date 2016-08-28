@@ -2,6 +2,7 @@ package com.mauriciotogneri.appickle.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -28,7 +29,7 @@ public class StepAdapter extends BaseListAdapter<Step, ViewHolder>
     @Override
     protected void fillView(ViewHolder viewHolder, Step step)
     {
-        viewHolder.content.setText(step.content());
+        viewHolder.content.setText(Html.fromHtml(step.content()));
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder
