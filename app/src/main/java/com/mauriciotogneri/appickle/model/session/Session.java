@@ -3,7 +3,12 @@ package com.mauriciotogneri.appickle.model.session;
 import com.mauriciotogneri.appickle.json.JsonCodec;
 import com.mauriciotogneri.appickle.model.reports.Report;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import gherkin.AstBuilder;
+import gherkin.Parser;
+import gherkin.ast.GherkinDocument;
 
 public class Session
 {
@@ -13,9 +18,9 @@ public class Session
     private final List<String> thumbnails;
     private final Survey survey;
     private final Report report;
-    private final List<Feature> features;
+    private final List<String> features;
 
-    public Session(String id, String title, String description, List<String> thumbnails, Survey survey, Report report, List<Feature> features)
+    public Session(String id, String title, String description, List<String> thumbnails, Survey survey, Report report, List<String> features)
     {
         this.id = id;
         this.title = title;
@@ -56,9 +61,24 @@ public class Session
         return report;
     }
 
-    public List<Feature> features()
+    public List<String> features()
     {
         return features;
+    }
+
+    public List<Feature> parsedFeature()
+    {
+        List<Feature> result = new ArrayList<>();
+
+        for (String feature : features)
+        {
+            Parser<GherkinDocument> parser = new Parser<>(new AstBuilder());
+            GherkinDocument gherkinDocument = parser.parse(feature);
+
+            result.add(new Feature(gherkinDocument.getFeature()));
+        }
+
+        return result;
     }
 
     public String toJson()

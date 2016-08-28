@@ -40,7 +40,7 @@ public class SessionAdapter extends BaseListAdapter<Session, ViewHolder> impleme
     @Override
     public void onViewHolderClicked(int position)
     {
-        onItemSelected.onItemSelected(item(position));
+        onItemSelected.onItemSelected(item(position), position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener

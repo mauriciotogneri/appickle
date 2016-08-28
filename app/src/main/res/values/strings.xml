@@ -26,4 +26,6 @@
 
     <string name="screen.features.title">Features</string>
 
+    <string name="screen.scenarios.title">Scenarios</string>
+
 </resources>

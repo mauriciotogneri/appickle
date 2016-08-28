@@ -59,6 +59,10 @@
             android:name=".activities.FeaturesSummaryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"/>
 
+        <activity
+            android:name=".activities.ScenariosSummaryActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+
     </application>
 
 </manifest>

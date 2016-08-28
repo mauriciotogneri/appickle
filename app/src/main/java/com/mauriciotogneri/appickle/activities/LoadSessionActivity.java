@@ -19,7 +19,7 @@ import java.util.List;
 public class LoadSessionActivity extends BaseActivity implements OnItemSelected<Session>
 {
     @BindView(R.id.session_list)
-    public RecyclerView sessionList;
+    public RecyclerView sessionsList;
 
     public static Intent createIntent(Context context)
     {
@@ -38,9 +38,9 @@ public class LoadSessionActivity extends BaseActivity implements OnItemSelected<
 
         SessionAdapter adapter = new SessionAdapter(this, sessions, this);
 
-        sessionList.setHasFixedSize(true);
-        sessionList.setAdapter(adapter);
-        sessionList.setLayoutManager(new LinearLayoutManager(this));
+        sessionsList.setHasFixedSize(true);
+        sessionsList.setAdapter(adapter);
+        sessionsList.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -50,7 +50,7 @@ public class LoadSessionActivity extends BaseActivity implements OnItemSelected<
     }
 
     @Override
-    public void onItemSelected(Session session)
+    public void onItemSelected(Session session, int position)
     {
         Intent intent = IntroSessionActivity.createIntent(this, session.id());
         startActivity(intent);

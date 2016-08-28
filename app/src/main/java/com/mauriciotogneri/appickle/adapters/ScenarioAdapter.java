@@ -7,20 +7,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mauriciotogneri.appickle.R;
-import com.mauriciotogneri.appickle.adapters.FeatureAdapter.ViewHolder;
+import com.mauriciotogneri.appickle.adapters.ScenarioAdapter.ViewHolder;
 import com.mauriciotogneri.appickle.base.BaseListAdapter;
 import com.mauriciotogneri.appickle.base.BaseListAdapter.OnViewHolderClicked;
-import com.mauriciotogneri.appickle.model.session.Feature;
+import com.mauriciotogneri.appickle.model.session.Scenario;
 
 import java.util.List;
 
-public class FeatureAdapter extends BaseListAdapter<Feature, ViewHolder> implements OnViewHolderClicked
+public class ScenarioAdapter extends BaseListAdapter<Scenario, ViewHolder> implements OnViewHolderClicked
 {
-    private OnItemSelected<Feature> onItemSelected;
+    private OnItemSelected<Scenario> onItemSelected;
 
-    public FeatureAdapter(Context context, List<Feature> features, OnItemSelected<Feature> onItemSelected)
+    public ScenarioAdapter(Context context, List<Scenario> scenarios, OnItemSelected<Scenario> onItemSelected)
     {
-        super(context, R.layout.row_feature, features);
+        super(context, R.layout.row_scenario, scenarios);
 
         this.onItemSelected = onItemSelected;
     }
@@ -32,10 +32,10 @@ public class FeatureAdapter extends BaseListAdapter<Feature, ViewHolder> impleme
     }
 
     @Override
-    protected void fillView(ViewHolder viewHolder, Feature feature)
+    protected void fillView(ViewHolder viewHolder, Scenario scenario)
     {
-        viewHolder.title.setText(feature.name());
-        viewHolder.description.setText(feature.description());
+        viewHolder.title.setText(scenario.name());
+        viewHolder.description.setText(scenario.description());
     }
 
     @Override
@@ -55,9 +55,9 @@ public class FeatureAdapter extends BaseListAdapter<Feature, ViewHolder> impleme
         {
             super(view);
 
-            this.title = (TextView) view.findViewById(R.id.feature_title);
-            this.description = (TextView) view.findViewById(R.id.feature_description);
-            this.status = (ImageView) view.findViewById(R.id.feature_status);
+            this.title = (TextView) view.findViewById(R.id.scenario_title);
+            this.description = (TextView) view.findViewById(R.id.scenario_description);
+            this.status = (ImageView) view.findViewById(R.id.scenario_status);
 
             this.onViewHolderClicked = onViewHolderClicked;
             view.setOnClickListener(this);

@@ -23,8 +23,6 @@ import com.mauriciotogneri.appickle.model.reports.EmailReport;
 import com.mauriciotogneri.appickle.model.reports.HttpReport;
 import com.mauriciotogneri.appickle.model.reports.Report;
 import com.mauriciotogneri.appickle.model.reports.Report.Output;
-import com.mauriciotogneri.appickle.model.session.Feature;
-import com.mauriciotogneri.appickle.model.session.Feature.Status;
 import com.mauriciotogneri.appickle.model.session.Session;
 import com.mauriciotogneri.appickle.model.session.Survey;
 
@@ -39,7 +37,6 @@ public class JsonCodec
     {
         this.gson = new GsonBuilder()
                 .registerTypeAdapter(Session.class, new SessionAdapter())
-                .registerTypeAdapter(Feature.class, new FeatureAdapter())
                 .registerTypeAdapter(Survey.class, new SurveyAdapter())
                 .registerTypeHierarchyAdapter(SurveyField.class, new SurveyFieldAdapter())
                 .registerTypeAdapter(FieldValue.class, new FieldValueAdapter())
@@ -89,7 +86,7 @@ public class JsonCodec
             List<String> thumbnails = json.getList(THUMBNAILS, String.class, context);
             Survey survey = context.deserialize(json.get(SURVEY), Survey.class);
             Report report = context.deserialize(json.get(REPORT), Report.class);
-            List<Feature> features = json.getList(FEATURES, Feature.class, context);
+            List<String> features = json.getList(FEATURES, String.class, context);
 
             return new Session(id, title, description, thumbnails, survey, report, features);
         }
@@ -104,42 +101,6 @@ public class JsonCodec
             result.add(SURVEY, context.serialize(session.survey()));
             result.add(REPORT, context.serialize(session.report()));
             result.add(FEATURES, toArray(session.features(), context));
-
-            return result;
-        }
-    }
-
-    public static class FeatureAdapter implements JsonSerializer<Feature>, JsonDeserializer<Feature>
-    {
-        private static final String CONTENT = "content";
-        private static final String STATUS = "status";
-
-        public Feature deserialize(JsonElement element, Type type, JsonDeserializationContext context)
-        {
-            JsonObjectWrapper json = new JsonObjectWrapper(element);
-
-            String content = json.getString(CONTENT);
-            Status status = json.getEnum(STATUS, Status.class);
-
-            if (status == null)
-            {
-                status = Status.PENDING;
-            }
-
-            return new Feature(content, status);
-        }
-
-        public JsonElement serialize(Feature feature, Type type, JsonSerializationContext context)
-        {
-            Status status = feature.status();
-
-            JsonObject result = new JsonObject();
-            result.addProperty(CONTENT, feature.content());
-
-            if (status != null)
-            {
-                result.addProperty(STATUS, status.toString());
-            }
 
             return result;
         }

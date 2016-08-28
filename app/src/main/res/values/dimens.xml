@@ -9,4 +9,6 @@
 
     <dimen name="feature.title.size">20sp</dimen>
 
+    <dimen name="scenario.title.size">20sp</dimen>
+
 </resources>

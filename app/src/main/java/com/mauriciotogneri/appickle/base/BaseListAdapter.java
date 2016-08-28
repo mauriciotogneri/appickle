@@ -68,6 +68,6 @@ public abstract class BaseListAdapter<T, V extends RecyclerView.ViewHolder> exte
 
     public interface OnItemSelected<T>
     {
-        void onItemSelected(T item);
+        void onItemSelected(T item, int position);
     }
 }

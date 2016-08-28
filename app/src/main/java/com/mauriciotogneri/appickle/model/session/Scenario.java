@@ -2,29 +2,26 @@ package com.mauriciotogneri.appickle.model.session;
 
 import android.text.TextUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import gherkin.ast.ScenarioDefinition;
 
-public class Feature
+public class Scenario
 {
-    private final gherkin.ast.Feature feature;
+    private final ScenarioDefinition scenario;
 
-    public Feature(gherkin.ast.Feature feature)
+    public Scenario(ScenarioDefinition scenario)
     {
-        this.feature = feature;
+        this.scenario = scenario;
     }
 
     public String name()
     {
-        return feature.getName();
+        return scenario.getName();
     }
 
     public String description()
     {
         StringBuilder builder = new StringBuilder();
-        String description = feature.getDescription();
+        String description = scenario.getDescription();
 
         if (!TextUtils.isEmpty(description))
         {
@@ -42,17 +39,5 @@ public class Feature
         }
 
         return builder.toString();
-    }
-
-    public List<Scenario> scenarios()
-    {
-        List<Scenario> result = new ArrayList<>();
-
-        for (ScenarioDefinition scenario : feature.getChildren())
-        {
-            result.add(new Scenario(scenario));
-        }
-
-        return result;
     }
 }
