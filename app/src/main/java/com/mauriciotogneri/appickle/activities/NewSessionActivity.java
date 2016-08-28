@@ -8,20 +8,11 @@ import android.os.Bundle;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.base.BaseActivity;
-import com.mauriciotogneri.appickle.json.JsonSessionDefinition;
 import com.mauriciotogneri.appickle.model.session.Session;
 import com.mauriciotogneri.appickle.network.GetRequest;
 import com.mauriciotogneri.appickle.resources.FileContent;
-import com.mauriciotogneri.appickle.storage.SessionsIndexStorage;
+import com.mauriciotogneri.appickle.storage.SessionStorage;
 import com.mauriciotogneri.uibinder.annotations.OnClick;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import gherkin.AstBuilder;
-import gherkin.Parser;
-import gherkin.ast.GherkinDocument;
 
 public class NewSessionActivity extends BaseActivity
 {
@@ -51,6 +42,8 @@ public class NewSessionActivity extends BaseActivity
                 }
                 catch (Exception e)
                 {
+                    e.printStackTrace();
+
                     return null;
                 }
             }
@@ -64,19 +57,30 @@ public class NewSessionActivity extends BaseActivity
                 {
                     try
                     {
-                        processSessionJson(content, progressDialog);
+                        Session session = Session.fromJsonString(content);
+
+                        if (session != null)
+                        {
+                            openIntro(session);
+                        }
+                        else
+                        {
+                            errorLoadingFromInternet();
+                        }
                     }
                     catch (Exception e)
                     {
-                        progressDialog.dismiss();
+                        e.printStackTrace();
+
                         errorLoadingFromInternet();
                     }
                 }
                 else
                 {
-                    progressDialog.dismiss();
                     errorLoadingFromInternet();
                 }
+
+                progressDialog.dismiss();
             }
         }.execute();
     }
@@ -97,6 +101,8 @@ public class NewSessionActivity extends BaseActivity
                 }
                 catch (Exception e)
                 {
+                    e.printStackTrace();
+
                     return null;
                 }
             }
@@ -110,59 +116,30 @@ public class NewSessionActivity extends BaseActivity
                 {
                     try
                     {
-                        processSessionJson(content, progressDialog);
+                        Session session = Session.fromJsonString(content);
+
+                        if (session != null)
+                        {
+                            openIntro(session);
+                        }
+                        else
+                        {
+                            errorLoadingFromFile();
+                        }
                     }
                     catch (Exception e)
                     {
-                        progressDialog.dismiss();
+                        e.printStackTrace();
+
                         errorLoadingFromFile();
                     }
                 }
                 else
                 {
-                    progressDialog.dismiss();
                     errorLoadingFromFile();
                 }
-            }
-        }.execute();
-    }
-
-    private void processSessionJson(String content, final ProgressDialog progressDialog) throws IOException
-    {
-        final JsonSessionDefinition jsonSession = JsonSessionDefinition.fromJsonString(content);
-
-        new AsyncTask<Void, Void, Session>()
-        {
-            @Override
-            protected Session doInBackground(Void... voids)
-            {
-                try
-                {
-                    List<String> features = downloadFeatures(jsonSession.features());
-
-                    return jsonSession.model(features);
-                }
-                catch (Exception e)
-                {
-                    return null;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(Session session)
-            {
-                super.onPostExecute(session);
 
                 progressDialog.dismiss();
-
-                if (session != null)
-                {
-                    openIntro(session);
-                }
-                else
-                {
-                    errorDownloadingSession();
-                }
             }
         }.execute();
     }
@@ -177,34 +154,10 @@ public class NewSessionActivity extends BaseActivity
         errorDialog(R.string.screen_new_button_file_error);
     }
 
-    private void errorDownloadingSession()
-    {
-        errorDialog(R.string.screen_new_button_download_error);
-    }
-
-    private List<String> downloadFeatures(List<String> featureUrls) throws IOException
-    {
-        List<String> result = new ArrayList<>();
-
-        for (String url : featureUrls)
-        {
-            GetRequest getRequest = new GetRequest(url);
-            String content = getRequest.content();
-
-            result.add(content);
-
-            Parser<GherkinDocument> parser = new Parser<>(new AstBuilder());
-            GherkinDocument gherkinDocument = parser.parse(content);
-            System.out.println(gherkinDocument);
-        }
-
-        return result;
-    }
-
     private void openIntro(Session session)
     {
-        SessionsIndexStorage sessionsIndexStorage = new SessionsIndexStorage(this);
-        sessionsIndexStorage.saveSession(session);
+        SessionStorage sessionStorage = new SessionStorage(this);
+        sessionStorage.addEntity(session);
 
         Intent intent = IntroSessionActivity.createIntent(this, session.id());
         startActivity(intent);

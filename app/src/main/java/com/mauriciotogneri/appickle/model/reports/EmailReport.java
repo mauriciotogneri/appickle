@@ -1,9 +1,5 @@
 package com.mauriciotogneri.appickle.model.reports;
 
-import com.mauriciotogneri.appickle.json.JsonReport;
-import com.mauriciotogneri.appickle.json.JsonReport.Output;
-import com.mauriciotogneri.appickle.json.JsonReport.Target;
-
 public class EmailReport extends Report
 {
     private final String email;
@@ -17,9 +13,13 @@ public class EmailReport extends Report
         this.subject = subject;
     }
 
-    @Override
-    public JsonReport json()
+    public String email()
     {
-        return new JsonReport(Target.http, null, email, subject, output);
+        return email;
+    }
+
+    public String subject()
+    {
+        return subject;
     }
 }

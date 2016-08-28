@@ -23,7 +23,7 @@
             "tags": [
                 "@uat"
             ],
-            "type": "standard",
+            "type": "text",
             "description": [
                 "Some determinable business situation"
             ],

@@ -47,8 +47,8 @@ public class IntroSessionActivity extends BaseActivity
 
         String sessionId = parameter(PARAMETER_SESSION_ID);
 
-        SessionStorage sessionStorage = new SessionStorage(this, sessionId);
-        displaySession(sessionStorage.loadSession());
+        SessionStorage sessionStorage = new SessionStorage(this);
+        displaySession(sessionStorage.entity(sessionId));
 
         toolbarTitle(R.string.screen_intro_title);
     }

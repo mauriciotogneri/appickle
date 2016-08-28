@@ -10,7 +10,7 @@ import com.mauriciotogneri.appickle.adapters.SessionAdapter;
 import com.mauriciotogneri.appickle.base.BaseActivity;
 import com.mauriciotogneri.appickle.base.BaseListAdapter.OnItemSelected;
 import com.mauriciotogneri.appickle.model.session.Session;
-import com.mauriciotogneri.appickle.storage.SessionsIndexStorage;
+import com.mauriciotogneri.appickle.storage.SessionStorage;
 import com.mauriciotogneri.uibinder.annotations.BindView;
 
 import java.util.List;
@@ -27,8 +27,8 @@ public class LoadSessionActivity extends BaseActivity implements OnItemSelected<
 
         toolbarTitle(R.string.screen_load_title);
 
-        SessionsIndexStorage sessionsIndexStorage = new SessionsIndexStorage(this);
-        List<Session> sessions = sessionsIndexStorage.loadSessions();
+        SessionStorage sessionStorage = new SessionStorage(this);
+        List<Session> sessions = sessionStorage.entities();
 
         SessionAdapter adapter = new SessionAdapter(this, sessions, this);
 

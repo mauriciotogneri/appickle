@@ -1,20 +1,14 @@
 package com.mauriciotogneri.appickle.model.fields;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-
-import com.mauriciotogneri.appickle.R;
-import com.mauriciotogneri.appickle.json.JsonSurveyField.Type;
-import com.mauriciotogneri.appickle.pickers.PickerSelector;
+import com.mauriciotogneri.appickle.json.JsonCodec.SurveyFieldAdapter.FieldType;
 
 import java.util.List;
 
-public class RadioField extends SelectableField<RadioButton>
+public class RadioField extends SurveyField
 {
-    public RadioField(Type type,
+    private final List<FieldValue> values;
+
+    public RadioField(FieldType type,
                       String id,
                       String description,
                       String error,
@@ -22,46 +16,13 @@ public class RadioField extends SelectableField<RadioButton>
                       String result,
                       List<FieldValue> values)
     {
-        super(type, id, description, error, required, result, values);
+        super(type, id, description, error, required, result);
+
+        this.values = values;
     }
 
-    @Override
-    public void init(LayoutInflater inflater, ViewGroup parent, PickerSelector selector)
+    public List<FieldValue> values()
     {
-        View view = inflate(inflater, parent, R.layout.view_field_radio_group);
-
-        RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.field_selectable_radioGroup);
-        int index = 1;
-
-        for (FieldValue value : values)
-        {
-            RadioButton button = (RadioButton) inflater.inflate(R.layout.view_field_radio_item, radioGroup, false);
-            button.setId(index++);
-            button.setText(value.label());
-            button.setTag(value.key());
-
-            radioGroup.addView(button);
-
-            if (value.isSelected())
-            {
-                radioGroup.check(button.getId());
-            }
-
-            elements.add(button);
-        }
-    }
-
-    @Override
-    public String result()
-    {
-        for (RadioButton button : elements)
-        {
-            if (button.isChecked())
-            {
-                return button.getTag().toString();
-            }
-        }
-
-        return null;
+        return values;
     }
 }

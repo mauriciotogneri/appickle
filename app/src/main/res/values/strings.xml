@@ -15,7 +15,6 @@
     <string name="screen.new.button.qrCode.error">Error loading session from Internet</string>
     <string name="screen.new.button.file">From file</string>
     <string name="screen.new.button.file.error">Error loading session from file</string>
-    <string name="screen.new.button.download.error">Error download session</string>
 
     <string name="screen.load.title">Load session</string>
 

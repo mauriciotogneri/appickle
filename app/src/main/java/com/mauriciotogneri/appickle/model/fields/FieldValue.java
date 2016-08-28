@@ -1,9 +1,6 @@
 package com.mauriciotogneri.appickle.model.fields;
 
-import com.mauriciotogneri.appickle.json.JsonFieldValue;
-import com.mauriciotogneri.appickle.model.ModelEntity;
-
-public class FieldValue extends ModelEntity<JsonFieldValue>
+public class FieldValue
 {
     private final String key;
     private final String label;
@@ -29,11 +26,5 @@ public class FieldValue extends ModelEntity<JsonFieldValue>
     public Boolean isSelected()
     {
         return (selected != null) && selected;
-    }
-
-    @Override
-    public JsonFieldValue json()
-    {
-        return new JsonFieldValue(key, label, selected);
     }
 }

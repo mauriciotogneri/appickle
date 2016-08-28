@@ -1,23 +1,18 @@
 package com.mauriciotogneri.appickle.model.reports;
 
-import com.mauriciotogneri.appickle.json.JsonReport;
-import com.mauriciotogneri.appickle.json.JsonReport.Output;
-import com.mauriciotogneri.appickle.json.JsonReport.Target;
-
 public class HttpReport extends Report
 {
-    private final String url;
+    private final String uri;
 
-    public HttpReport(String url, Output output)
+    public HttpReport(String uri, Output output)
     {
         super(output);
 
-        this.url = url;
+        this.uri = uri;
     }
 
-    @Override
-    public JsonReport json()
+    public String uri()
     {
-        return new JsonReport(Target.http, url, null, null, output);
+        return uri;
     }
 }

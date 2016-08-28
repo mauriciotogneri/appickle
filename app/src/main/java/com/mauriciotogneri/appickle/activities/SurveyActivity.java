@@ -18,14 +18,20 @@ import com.mauriciotogneri.appickle.pickers.DatePickerFragment;
 import com.mauriciotogneri.appickle.pickers.PickerSelector;
 import com.mauriciotogneri.appickle.pickers.TimePickerFragment;
 import com.mauriciotogneri.appickle.storage.SessionStorage;
+import com.mauriciotogneri.appickle.widgets.SurveyFieldWidget;
 import com.mauriciotogneri.uibinder.annotations.BindView;
 import com.mauriciotogneri.uibinder.annotations.OnClick;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SurveyActivity extends BaseActivity implements PickerSelector
 {
     private static final String PARAMETER_SESSION_ID = "session.id";
 
     private Session session;
+
+    private final List<SurveyFieldWidget> widgets = new ArrayList<>();
 
     @BindView(R.id.screen_survey_fieldContainer)
     public ViewGroup fieldContainer;
@@ -56,9 +62,9 @@ public class SurveyActivity extends BaseActivity implements PickerSelector
     {
         String sessionId = parameter(PARAMETER_SESSION_ID);
 
-        SessionStorage sessionStorage = new SessionStorage(this, sessionId);
+        SessionStorage sessionStorage = new SessionStorage(this);
 
-        return sessionStorage.loadSession();
+        return sessionStorage.entity(sessionId);
     }
 
     private void displaySurvey(Survey survey)
@@ -67,7 +73,10 @@ public class SurveyActivity extends BaseActivity implements PickerSelector
 
         for (SurveyField field : survey.fields())
         {
-            field.init(inflater, fieldContainer, this);
+            SurveyFieldWidget widget = SurveyFieldWidget.fromField(field);
+            widget.init(inflater, fieldContainer, this);
+
+            widgets.add(widget);
         }
     }
 
@@ -96,9 +105,9 @@ public class SurveyActivity extends BaseActivity implements PickerSelector
 
     private boolean validateSurvey()
     {
-        for (SurveyField field : session.survey().fields())
+        for (SurveyFieldWidget widget : widgets)
         {
-            if (!field.validate())
+            if (!widget.validate())
             {
                 return false;
             }

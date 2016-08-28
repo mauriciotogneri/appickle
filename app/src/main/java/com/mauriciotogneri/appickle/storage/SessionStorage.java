@@ -2,27 +2,35 @@ package com.mauriciotogneri.appickle.storage;
 
 import android.content.Context;
 
-import com.mauriciotogneri.appickle.json.JsonSession;
 import com.mauriciotogneri.appickle.model.session.Session;
+import com.mauriciotogneri.entitystorage.Converter;
+import com.mauriciotogneri.entitystorage.EntityStorage;
 
-public class SessionStorage extends BaseStorage
+public class SessionStorage extends EntityStorage<Session>
 {
-    private static final String ATTRIBUTE_JSON = "session.json";
-
-    public SessionStorage(Context context, String sessionId)
+    private static final Converter<Session> converter = new Converter<Session>()
     {
-        super(context, String.format("session_%s", sessionId));
-    }
+        @Override
+        public String key(Session session)
+        {
+            return session.id();
+        }
 
-    public Session loadSession()
+        @Override
+        public String content(Session session)
+        {
+            return session.toJson();
+        }
+
+        @Override
+        public Session create(String key, String content)
+        {
+            return Session.fromJsonString(content);
+        }
+    };
+
+    public SessionStorage(Context context)
     {
-        JsonSession json = getJsonObject(ATTRIBUTE_JSON, JsonSession.class);
-
-        return json.model();
-    }
-
-    public void saveSession(Session session)
-    {
-        putJson(ATTRIBUTE_JSON, session.json());
+        super(context, "session", ".index", converter);
     }
 }

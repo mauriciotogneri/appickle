@@ -1,28 +1,17 @@
 package com.mauriciotogneri.appickle.model.fields;
 
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import com.mauriciotogneri.appickle.json.JsonCodec.SurveyFieldAdapter.FieldType;
 
-import com.mauriciotogneri.appickle.R;
-import com.mauriciotogneri.appickle.json.JsonSurveyField;
-import com.mauriciotogneri.appickle.json.JsonSurveyField.Type;
-import com.mauriciotogneri.appickle.model.ModelEntity;
-import com.mauriciotogneri.appickle.pickers.PickerSelector;
-
-public abstract class SurveyField extends ModelEntity<JsonSurveyField>
+public abstract class SurveyField
 {
-    protected final Type type;
-    protected final String id;
-    protected final String description;
-    protected final String error;
-    protected final Boolean required;
-    protected String result;
-    private TextView errorLabel;
+    private final FieldType type;
+    private final String id;
+    private final String description;
+    private final String error;
+    private final Boolean required;
+    private String result;
 
-    protected SurveyField(Type type, String id, String description, String error, Boolean required, String result)
+    protected SurveyField(FieldType type, String id, String description, String error, Boolean required, String result)
     {
         this.type = type;
         this.id = id;
@@ -32,68 +21,33 @@ public abstract class SurveyField extends ModelEntity<JsonSurveyField>
         this.result = result;
     }
 
-    public abstract void init(LayoutInflater inflater, ViewGroup parent, PickerSelector selector);
-
-    protected abstract boolean isFilled();
-
-    protected abstract String result();
-
-    protected View inflate(LayoutInflater inflater, ViewGroup parent, int resourceId)
+    public String id()
     {
-        View view = inflater.inflate(R.layout.view_field_base, parent, false);
-        parent.addView(view);
-
-        ViewGroup container = (ViewGroup) view.findViewById(R.id.field_base_container);
-        container.addView(inflater.inflate(resourceId, container, false));
-
-        TextView descriptionLabel = (TextView) view.findViewById(R.id.field_description);
-
-        if (!TextUtils.isEmpty(description))
-        {
-            descriptionLabel.setText(description);
-        }
-        else
-        {
-            descriptionLabel.setVisibility(View.GONE);
-        }
-
-        errorLabel = (TextView) view.findViewById(R.id.field_error);
-
-        if (!TextUtils.isEmpty(error))
-        {
-            errorLabel.setText(error);
-        }
-
-        return view;
+        return id;
     }
 
-    public boolean validate()
+    public String description()
     {
-        boolean valid;
+        return description;
+    }
 
-        if (isFilled())
-        {
-            this.result = result();
+    public String error()
+    {
+        return error;
+    }
 
-            valid = true;
-        }
-        else
-        {
-            valid = !required;
-        }
+    public Boolean required()
+    {
+        return required;
+    }
 
-        if (valid)
-        {
-            errorLabel.setVisibility(View.GONE);
-        }
-        else
-        {
-            if (!TextUtils.isEmpty(error))
-            {
-                errorLabel.setVisibility(View.VISIBLE);
-            }
-        }
+    public String result()
+    {
+        return result;
+    }
 
-        return valid;
+    public void result(String result)
+    {
+        this.result = result;
     }
 }

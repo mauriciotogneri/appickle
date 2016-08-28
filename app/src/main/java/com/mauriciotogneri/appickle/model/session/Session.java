@@ -1,13 +1,11 @@
 package com.mauriciotogneri.appickle.model.session;
 
-import com.mauriciotogneri.appickle.json.JsonSession;
-import com.mauriciotogneri.appickle.model.ModelEntity;
-import com.mauriciotogneri.appickle.model.gherkin.Feature;
+import com.mauriciotogneri.appickle.json.JsonCodec;
 import com.mauriciotogneri.appickle.model.reports.Report;
 
 import java.util.List;
 
-public class Session extends ModelEntity<JsonSession>
+public class Session
 {
     private final String id;
     private final String title;
@@ -15,9 +13,9 @@ public class Session extends ModelEntity<JsonSession>
     private final List<String> thumbnails;
     private final Survey survey;
     private final Report report;
-    private final List<Feature> features;
+    private final List<String> features;
 
-    public Session(String id, String title, String description, List<String> thumbnails, Survey survey, Report report, List<Feature> features)
+    public Session(String id, String title, String description, List<String> thumbnails, Survey survey, Report report, List<String> features)
     {
         this.id = id;
         this.title = title;
@@ -53,9 +51,23 @@ public class Session extends ModelEntity<JsonSession>
         return survey;
     }
 
-    @Override
-    public JsonSession json()
+    public Report report()
     {
-        return new JsonSession(id, title, description, thumbnails, survey.json(), report.json(), fromList(features));
+        return report;
+    }
+
+    public List<String> features()
+    {
+        return features;
+    }
+
+    public String toJson()
+    {
+        return new JsonCodec().toJson(this);
+    }
+
+    public static Session fromJsonString(String string)
+    {
+        return new JsonCodec().fromString(string, Session.class);
     }
 }

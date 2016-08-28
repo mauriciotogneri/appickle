@@ -1,23 +1,14 @@
 package com.mauriciotogneri.appickle.model.fields;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import com.mauriciotogneri.appickle.json.JsonCodec.SurveyFieldAdapter.FieldType;
 
-import com.mauriciotogneri.appickle.R;
-import com.mauriciotogneri.appickle.json.JsonSurveyField.Type;
-import com.mauriciotogneri.appickle.pickers.PickerSelector;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class DropdownField extends SelectableField<View>
+public class DropdownField extends SurveyField
 {
-    private Spinner spinner;
+    private final List<FieldValue> values;
 
-    public DropdownField(Type type,
+    public DropdownField(FieldType type,
                          String id,
                          String description,
                          String error,
@@ -25,51 +16,13 @@ public class DropdownField extends SelectableField<View>
                          String result,
                          List<FieldValue> values)
     {
-        super(type, id, description, error, required, result, values);
+        super(type, id, description, error, required, result);
+
+        this.values = values;
     }
 
-    @Override
-    public void init(LayoutInflater inflater, ViewGroup parent, PickerSelector selector)
+    public List<FieldValue> values()
     {
-        View view = inflate(inflater, parent, R.layout.view_field_dropdown_group);
-
-        List<String> list = new ArrayList<>();
-        int selectedIndex = -1;
-
-        for (int i = 0; i < values.size(); i++)
-        {
-            FieldValue value = values.get(i);
-
-            list.add(value.label());
-
-            if (value.isSelected())
-            {
-                selectedIndex = i;
-            }
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(), R.layout.view_field_dropdown_item, list);
-        adapter.setDropDownViewResource(R.layout.view_field_dropdown_element);
-
-        spinner = (Spinner) view.findViewById(R.id.field_selectable_dropdownGroup);
-        spinner.setAdapter(adapter);
-
-        if (selectedIndex != -1)
-        {
-            spinner.setSelection(selectedIndex);
-        }
-    }
-
-    @Override
-    public String result()
-    {
-        if (spinner != null)
-        {
-            int position = spinner.getSelectedItemPosition();
-
-            return values.get(position).key();
-        }
-
-        return null;
+        return values;
     }
 }

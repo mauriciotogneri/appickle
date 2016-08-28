@@ -55,6 +55,10 @@
             android:name=".activities.SurveyActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"/>
 
+        <activity
+            android:name=".activities.FeaturesSummaryActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+
     </application>
 
 </manifest>
