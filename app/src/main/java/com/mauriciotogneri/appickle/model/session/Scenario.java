@@ -2,6 +2,9 @@ package com.mauriciotogneri.appickle.model.session;
 
 import android.text.TextUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gherkin.ast.ScenarioDefinition;
 
 public class Scenario
@@ -39,5 +42,17 @@ public class Scenario
         }
 
         return builder.toString();
+    }
+
+    public List<Step> steps()
+    {
+        List<Step> result = new ArrayList<>();
+
+        for (gherkin.ast.Step step : scenario.getSteps())
+        {
+            result.add(new Step(step));
+        }
+
+        return result;
     }
 }
