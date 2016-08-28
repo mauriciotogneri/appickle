@@ -25,17 +25,17 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/session.title"
+                android:id="@+id/feature.title"
                 style="@style/labelText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin.default"
-                android:textSize="@dimen/session.title.size"
+                android:textSize="@dimen/feature.title.size"
                 android:textStyle="bold"
                 tools:text="@string/dummy.short"/>
 
             <TextView
-                android:id="@+id/session.description"
+                android:id="@+id/feature.description"
                 style="@style/labelText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,11 +44,12 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_width="15dp"
+            android:id="@+id/feature.status"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/arrow"/>
+            android:layout_marginLeft="@dimen/margin.default"
+            android:src="@drawable/status_valid"/>
 
     </LinearLayout>
 

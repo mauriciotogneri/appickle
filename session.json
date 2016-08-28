@@ -1,47 +1,57 @@
 {
     "id": "a6ec7cda-1eb7-497b-95cc-605f5b8d3952",
-    "title": "This is a sample index",
-    "description": "This is a sample description for the index",
+    "title": "This is a sample session",
+    "description": "This is a sample description for the session. It should example briefly the purpose of the feature. Some extra information can be added too.",
     "thumbnails": [
-        "http://www.example.com/image1.jpg",
-        "http://www.example.com/image2.jpg",
-        "http://www.example.com/image3.jpg"
+        "http://zeronest.com/appickle/thumbnail1.jpg",
+        "http://zeronest.com/appickle/thumbnail2.jpg",
+        "http://zeronest.com/appickle/thumbnail3.jpg"
     ],
     "survey": {
         "description": "We need some data from you before we start",
         "fields": [
             {
                 "id": "field_id_1",
-                "type": "field",
-                "format": "text|integer|decimal|telephone|email|uri",
-                "description": "The description",
-                "placeholder": "Input here",
-                "default": "Bla bla bla",
+                "type": "text",
+                "format": "text",
+                "description": "Your full name",
+                "placeholder": "Name",
+                "defaultValue": "John Smith",
+                "error": "You need to enter your name",
                 "required": true
             },
             {
                 "id": "field_id_2",
-                "type": "text",
-                "description": "The description",
-                "placeholder": "Input here",
-                "default": "",
-                "required": true
-            },
-            {
-                "id": "field_id_3",
-                "type": "radio|select",
+                "type": "radio",
                 "description": "The description",
                 "values": [
                     {
                         "key": "A",
-                        "label": "Android"
+                        "label": "Android",
+                        "selected": true
                     },
                     {
                         "key": "I",
                         "label": "iOS"
                     }
                 ],
-                "default": "A",
+                "required": true
+            },
+            {
+                "id": "field_id_3",
+                "type": "dropdown",
+                "description": "The description",
+                "values": [
+                    {
+                        "key": "B",
+                        "label": "Black"
+                    },
+                    {
+                        "key": "W",
+                        "label": "White",
+                        "selected": true
+                    }
+                ],
                 "required": true
             },
             {
@@ -50,14 +60,13 @@
                 "description": "The description",
                 "values": [
                     {
-                        "key": "A",
-                        "label": "Android",
-                        "default": true
+                        "key": "P",
+                        "label": "Positive",
+                        "selected": true
                     },
                     {
-                        "key": "I",
-                        "label": "iOS",
-                        "default": true
+                        "key": "N",
+                        "label": "Negative"
                     }
                 ],
                 "required": true
@@ -66,16 +75,13 @@
                 "id": "field_id_5",
                 "type": "toggle",
                 "description": "The description",
-                "default": true,
+                "selected": true,
                 "required": true
             },
             {
                 "id": "field_id_6",
-                "type": "range",
+                "type": "date",
                 "description": "The description",
-                "min": 0,
-                "max": 100,
-                "default": 0,
                 "required": true
             },
             {
@@ -83,34 +89,19 @@
                 "type": "time",
                 "description": "The description",
                 "required": true
-            },
-            {
-                "id": "field_id_8",
-                "type": "date",
-                "description": "The description",
-                "required": true
             }
         ]
     },
     "report": {
-        "type": "http|email",
+        "target": "http",
         "uri": "http://www.example.com/report",
         "email": "resport@company.com",
         "subject": "Report result",
-        "output": "json|html"
+        "output": "json"
     },
     "features": [
-        {
-            "id": "feature_1",
-            "uri": "http://www.example.com/features/file1.feature"
-        },
-        {
-            "id": "feature_2",
-            "uri": "http://www.example.com/features/file2.feature"
-        },
-        {
-            "id": "feature_3",
-            "uri": "http://www.example.com/features/file3.feature"
-        }
+        "@super_tag @awesome_tag\nFeature: Serve coffee\n  Coffee should not be served until paid for\n  Coffee should not be served until the button has been pressed\n  If there is no coffee left then money should be refunded\n\n  Background: Will be repeated\n    Given a global administrator named \"Greg\"\n    And a blog named \"Greg's anti-tax rants\"\n    And a customer named \"Wilson\"\n    And a blog named \"Expensive Therapy\" owned by \"Wilson\"\n\n  @scenario1\n  Scenario: Buy last coffee\n  In order to buy the last coffee\n  As a costumer of the shop\n  I want to order a coffee\n    Given there is 1 coffee left in the machine\n    And I have deposited 1$\n    When I press the \"strong coffee\" button\n    And I wait for a few seconds\n    Then I should be served a coffee\n    But in less than 10 seconds\n\n  @scenario2\n  Scenario Outline: eating\n  In order to eat\n  As a hungry person\n  I want to order a pizza\n    Given there are <start> cucumbers\n    When I eat <eat> cucumbers\n    Then I should have <left> cucumbers\n\n    Examples:\n      | start | eat | left |\n      | 12    | 5   | 7    |\n      | 20    | 5   | 15   |",
+        "@super_tag @awesome_tag\nFeature: Serve coffee\n  Coffee should not be served until paid for\n  Coffee should not be served until the button has been pressed\n  If there is no coffee left then money should be refunded\n\n  Background: Will be repeated\n    Given a global administrator named \"Greg\"\n    And a blog named \"Greg's anti-tax rants\"\n    And a customer named \"Wilson\"\n    And a blog named \"Expensive Therapy\" owned by \"Wilson\"\n\n  @scenario1\n  Scenario: Buy last coffee\n  In order to buy the last coffee\n  As a costumer of the shop\n  I want to order a coffee\n    Given there is 1 coffee left in the machine\n    And I have deposited 1$\n    When I press the \"strong coffee\" button\n    And I wait for a few seconds\n    Then I should be served a coffee\n    But in less than 10 seconds\n\n  @scenario2\n  Scenario Outline: eating\n  In order to eat\n  As a hungry person\n  I want to order a pizza\n    Given there are <start> cucumbers\n    When I eat <eat> cucumbers\n    Then I should have <left> cucumbers\n\n    Examples:\n      | start | eat | left |\n      | 12    | 5   | 7    |\n      | 20    | 5   | 15   |",
+        "@super_tag @awesome_tag\nFeature: Serve coffee\n  Coffee should not be served until paid for\n  Coffee should not be served until the button has been pressed\n  If there is no coffee left then money should be refunded\n\n  Background: Will be repeated\n    Given a global administrator named \"Greg\"\n    And a blog named \"Greg's anti-tax rants\"\n    And a customer named \"Wilson\"\n    And a blog named \"Expensive Therapy\" owned by \"Wilson\"\n\n  @scenario1\n  Scenario: Buy last coffee\n  In order to buy the last coffee\n  As a costumer of the shop\n  I want to order a coffee\n    Given there is 1 coffee left in the machine\n    And I have deposited 1$\n    When I press the \"strong coffee\" button\n    And I wait for a few seconds\n    Then I should be served a coffee\n    But in less than 10 seconds\n\n  @scenario2\n  Scenario Outline: eating\n  In order to eat\n  As a hungry person\n  I want to order a pizza\n    Given there are <start> cucumbers\n    When I eat <eat> cucumbers\n    Then I should have <left> cucumbers\n\n    Examples:\n      | start | eat | left |\n      | 12    | 5   | 7    |\n      | 20    | 5   | 15   |"
     ]
 }

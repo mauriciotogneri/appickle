@@ -1,5 +1,6 @@
 package com.mauriciotogneri.appickle.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +20,11 @@ public class LoadSessionActivity extends BaseActivity implements OnItemSelected<
 {
     @BindView(R.id.session_list)
     public RecyclerView sessionList;
+
+    public static Intent createIntent(Context context)
+    {
+        return new Intent(context, LoadSessionActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

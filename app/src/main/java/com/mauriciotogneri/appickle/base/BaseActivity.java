@@ -99,12 +99,6 @@ public abstract class BaseActivity extends AppCompatActivity
         });
     }
 
-    protected void openActivity(Class clazz)
-    {
-        Intent intent = new Intent(this, clazz);
-        startActivity(intent);
-    }
-
     protected abstract int layout();
 
     protected boolean displayBackButton()

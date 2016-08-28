@@ -1,5 +1,7 @@
 package com.mauriciotogneri.appickle.json;
 
+import android.text.TextUtils;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
@@ -30,6 +32,22 @@ public class JsonObjectWrapper
     public JsonArray getArray(String key)
     {
         return json.has(key) ? json.get(key).getAsJsonArray() : new JsonArray();
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T extends Enum> T getEnum(String key, Class<T> enumType)
+    {
+        String value = getString(key);
+
+        for (Object object : enumType.getEnumConstants())
+        {
+            if (TextUtils.equals(value, object.toString()))
+            {
+                return (T) object;
+            }
+        }
+
+        return null;
     }
 
     public JsonElement get(String key)

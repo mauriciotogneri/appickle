@@ -7,4 +7,6 @@
 
     <dimen name="session.title.size">20sp</dimen>
 
+    <dimen name="feature.title.size">20sp</dimen>
+
 </resources>

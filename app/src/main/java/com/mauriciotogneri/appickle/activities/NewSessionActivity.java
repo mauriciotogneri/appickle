@@ -1,6 +1,7 @@
 package com.mauriciotogneri.appickle.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -17,6 +18,11 @@ import com.mauriciotogneri.uibinder.annotations.OnClick;
 public class NewSessionActivity extends BaseActivity
 {
     private static final int SELECT_FILE_REQUEST_CODE = 1000;
+
+    public static Intent createIntent(Context context)
+    {
+        return new Intent(context, NewSessionActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

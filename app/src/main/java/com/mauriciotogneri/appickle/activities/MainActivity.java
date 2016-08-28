@@ -19,13 +19,13 @@ public class MainActivity extends BaseActivity
     @OnClick(R.id.screen_main_button_new)
     public void onButtonNew()
     {
-        openActivity(NewSessionActivity.class);
+        startActivity(NewSessionActivity.createIntent(this));
     }
 
     @OnClick(R.id.screen_main_button_load)
     public void onButtonLoad()
     {
-        openActivity(LoadSessionActivity.class);
+        startActivity(LoadSessionActivity.createIntent(this));
     }
 
     @Override

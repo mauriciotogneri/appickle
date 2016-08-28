@@ -85,7 +85,8 @@ public class SurveyActivity extends BaseActivity implements PickerSelector
     {
         if (validateSurvey())
         {
-            openActivity(FeaturesSummaryActivity.class);
+            String sessionId = parameter(PARAMETER_SESSION_ID);
+            startActivity(FeaturesSummaryActivity.createIntent(this, sessionId));
         }
     }
 

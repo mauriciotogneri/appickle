@@ -13,9 +13,9 @@ public class Session
     private final List<String> thumbnails;
     private final Survey survey;
     private final Report report;
-    private final List<String> features;
+    private final List<Feature> features;
 
-    public Session(String id, String title, String description, List<String> thumbnails, Survey survey, Report report, List<String> features)
+    public Session(String id, String title, String description, List<String> thumbnails, Survey survey, Report report, List<Feature> features)
     {
         this.id = id;
         this.title = title;
@@ -56,7 +56,7 @@ public class Session
         return report;
     }
 
-    public List<String> features()
+    public List<Feature> features()
     {
         return features;
     }
