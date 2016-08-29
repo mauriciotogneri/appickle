@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.mauriciotogneri.appickle.R;
@@ -29,6 +30,12 @@ public class ScenarioActivity extends BaseActivity
 
     @BindView(R.id.steps_list)
     public RecyclerView stepsList;
+
+    @BindView(R.id.scenario_button_next_enabled)
+    public View buttonNextEnabled;
+
+    @BindView(R.id.scenario_button_next_disabled)
+    public View buttonNextDisabled;
 
     private StepAdapter adapter;
     private int stepPosition = 0;
@@ -69,6 +76,8 @@ public class ScenarioActivity extends BaseActivity
         stepsList.setHasFixedSize(true);
         stepsList.setAdapter(adapter);
         stepsList.setLayoutManager(new LinearLayoutManager(this));
+
+        buttonNextDisabled.setEnabled(false);
     }
 
     @OnClick(R.id.steps_list_input)
@@ -92,24 +101,49 @@ public class ScenarioActivity extends BaseActivity
             //                }
             //            });
         }
+
+        if (stepPosition >= steps.size())
+        {
+            enableButtonNext(true);
+        }
     }
 
     @OnClick(R.id.scenario_button_comment)
-    public void onCommentButtonClick()
+    public void onButtonCommentClick()
     {
         Toast.makeText(this, "COMMENT!", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.scenario_button_bug)
-    public void onBugButtonClick()
+    public void onButtonBugClick()
     {
         Toast.makeText(this, "BUG!", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.scenario_button_skip)
-    public void onSkipButtonClick()
+    public void onButtonSkipClick()
     {
         Toast.makeText(this, "SKIP!", Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.scenario_button_next_enabled)
+    public void onButtonNextClick()
+    {
+        Toast.makeText(this, "NEXT!", Toast.LENGTH_SHORT).show();
+    }
+
+    private void enableButtonNext(boolean enable)
+    {
+        if (enable)
+        {
+            buttonNextEnabled.setVisibility(View.VISIBLE);
+            buttonNextDisabled.setVisibility(View.GONE);
+        }
+        else
+        {
+            buttonNextEnabled.setVisibility(View.GONE);
+            buttonNextDisabled.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

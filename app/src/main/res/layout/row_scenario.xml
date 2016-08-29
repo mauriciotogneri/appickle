@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/margin.default"
-            android:src="@drawable/status_valid"/>
+            android:src="@drawable/ic_status_passed"/>
 
     </LinearLayout>
 

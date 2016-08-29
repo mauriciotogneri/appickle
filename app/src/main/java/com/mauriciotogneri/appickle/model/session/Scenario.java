@@ -16,6 +16,14 @@ public class Scenario
         this.scenario = scenario;
     }
 
+    public enum Status
+    {
+        PENDING,
+        SKIPPED,
+        FAILED,
+        PASSED
+    }
+
     public String name()
     {
         return scenario.getName();

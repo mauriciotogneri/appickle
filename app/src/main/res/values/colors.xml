@@ -17,6 +17,7 @@
     <color name="list.separator">#CCCCCC</color>
 
     <color name="button.text">#FFFFFF</color>
+    <color name="button.disabled">#888888</color>
 
     <color name="text.default">#888888</color>
     <color name="text.error">#FF0000</color>

@@ -39,11 +39,11 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_width="15dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/arrow"/>
+            android:src="@drawable/ic_arrow_vector"/>
 
     </LinearLayout>
 
