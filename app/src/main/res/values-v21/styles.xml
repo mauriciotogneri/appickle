@@ -2,10 +2,14 @@
 <resources>
 
     <style name="floatingButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">15dp</item>
+    </style>
+
+    <style name="card">
+        <item name="cardCornerRadius">3dp</item>
+        <item name="cardElevation">5dp</item>
+        <item name="cardBackgroundColor">@color/screen.background</item>
         <item name="android:layout_margin">10dp</item>
-        <item name="android:clickable">true</item>
     </style>
 
 </resources>

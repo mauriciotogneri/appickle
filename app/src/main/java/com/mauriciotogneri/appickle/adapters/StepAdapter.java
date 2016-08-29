@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.mauriciotogneri.appickle.R;
@@ -39,6 +41,9 @@ public class StepAdapter extends BaseListAdapter<Step, ViewHolder>
         public ViewHolder(View view)
         {
             super(view);
+
+            Animation fadeInAnimation = AnimationUtils.loadAnimation(view.getContext(), R.anim.fade_in);
+            view.startAnimation(fadeInAnimation);
 
             this.content = (TextView) view.findViewById(R.id.step_content);
         }

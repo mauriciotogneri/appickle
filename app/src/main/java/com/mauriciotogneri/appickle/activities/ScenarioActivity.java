@@ -3,15 +3,11 @@ package com.mauriciotogneri.appickle.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.mauriciotogneri.appickle.R;
@@ -46,7 +42,6 @@ public class ScenarioActivity extends BaseActivity
     private StepAdapter adapter;
     private int stepPosition = 0;
     private final List<Step> steps = new ArrayList<>();
-    private final Handler handler = new Handler(Looper.getMainLooper());
 
     public static Intent createIntent(Context context, String sessionId, int featurePosition, int scenarioPosition)
     {
@@ -110,32 +105,12 @@ public class ScenarioActivity extends BaseActivity
             adapter.add(steps.get(position));
 
             stepsList.smoothScrollToPosition(position);
-            fadeRow(position);
         }
 
         if (stepPosition >= steps.size())
         {
             enableButtonNext(true);
         }
-    }
-
-    private void fadeRow(final int position)
-    {
-        handler.post(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                View view = stepsList.getLayoutManager().findViewByPosition(position);
-
-                if (view != null)
-                {
-                    Animation fadeInAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
-                    view.setVisibility(View.VISIBLE);
-                    view.startAnimation(fadeInAnimation);
-                }
-            }
-        });
     }
 
     @OnClick(R.id.scenario_button_comment)
@@ -153,13 +128,15 @@ public class ScenarioActivity extends BaseActivity
     @OnClick(R.id.scenario_button_skip)
     public void onButtonSkipClick()
     {
-        Toast.makeText(this, "SKIP!", Toast.LENGTH_SHORT).show();
+        // TODO
+        finish();
     }
 
     @OnClick(R.id.scenario_button_next_enabled)
     public void onButtonNextClick()
     {
-        Toast.makeText(this, "NEXT!", Toast.LENGTH_SHORT).show();
+        // TODO
+        finish();
     }
 
     private void enableButtonNext(boolean enable)
