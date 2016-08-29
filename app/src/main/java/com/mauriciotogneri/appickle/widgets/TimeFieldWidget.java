@@ -15,6 +15,7 @@ import org.joda.time.DateTime;
 public class TimeFieldWidget extends SurveyFieldWidget
 {
     private final TimeField timeField;
+    private TextView input;
 
     public TimeFieldWidget(TimeField timeField)
     {
@@ -28,7 +29,7 @@ public class TimeFieldWidget extends SurveyFieldWidget
     {
         View view = inflate(inflater, parent, R.layout.view_field_date_time);
 
-        TextView input = (TextView) view.findViewById(R.id.field_dateTime);
+        input = (TextView) view.findViewById(R.id.field_dateTime);
         input.setOnClickListener(new OnClickListener()
         {
             @Override
@@ -38,7 +39,12 @@ public class TimeFieldWidget extends SurveyFieldWidget
             }
         });
 
-        timeField.setTime(DateTime.now());
-        input.setText(timeField.result());
+        setTime(DateTime.now());
+    }
+
+    public void setTime(DateTime dateTime)
+    {
+        timeField.setTime(dateTime);
+        input.setText(TimeField.timeFormatter.print(dateTime));
     }
 }

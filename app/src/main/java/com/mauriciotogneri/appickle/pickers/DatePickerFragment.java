@@ -3,11 +3,13 @@ package com.mauriciotogneri.appickle.pickers;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
 
+import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.model.fields.DateField;
 
 import org.joda.time.DateTime;
@@ -15,6 +17,7 @@ import org.joda.time.DateTime;
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
 {
     private OnDateSelected listener;
+    private Boolean canceled = false;
 
     private static final String PARAMETER_DATE = "date";
     private static final String PARAMETER_ID = "id";
@@ -37,16 +40,33 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     {
         DateTime today = DateField.dateFormatter.parseDateTime(parameter(PARAMETER_DATE));
 
-        return new DatePickerDialog(getActivity(), this, today.getYear(), today.getMonthOfYear() - 1, today.getDayOfMonth());
+        DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, today.getYear(), today.getMonthOfYear() - 1, today.getDayOfMonth());
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.dialog_cancel), new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                if (which == DialogInterface.BUTTON_NEGATIVE)
+                {
+                    canceled = true;
+                }
+            }
+        });
+
+        return dialog;
     }
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day)
     {
-        String id = parameter(PARAMETER_ID);
-        DateTime dateTime = new DateTime().withYear(year).withMonthOfYear(month + 1).withDayOfMonth(day);
+        if (!canceled)
+        {
+            String id = parameter(PARAMETER_ID);
+            DateTime dateTime = new DateTime().withYear(year).withMonthOfYear(month + 1).withDayOfMonth(day);
 
-        listener.onDateSelected(dateTime, id);
+            listener.onDateSelected(dateTime, id);
+        }
     }
 
     private String parameter(String key)

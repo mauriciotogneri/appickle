@@ -8,7 +8,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 public class TimeField extends SurveyField
 {
-    private static final DateTimeFormatter timeFormatter = DateTimeFormat.forPattern("HH:mm");
+    public static final DateTimeFormatter timeFormatter = DateTimeFormat.forPattern("HH:mm");
 
     public TimeField(String id,
                      String description,
@@ -22,5 +22,10 @@ public class TimeField extends SurveyField
     public void setTime(DateTime dateTime)
     {
         result(timeFormatter.print(dateTime));
+    }
+
+    public DateTime time()
+    {
+        return timeFormatter.parseDateTime(result());
     }
 }

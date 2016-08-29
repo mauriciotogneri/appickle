@@ -4,6 +4,7 @@
     <string name="app.name">Appickle</string>
 
     <string name="dialog.ok">OK</string>
+    <string name="dialog.cancel">Cancel</string>
 
     <string name="dialog.downloadingSession">Loading session</string>
 

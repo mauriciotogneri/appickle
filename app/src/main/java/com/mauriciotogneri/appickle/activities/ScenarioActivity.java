@@ -105,28 +105,37 @@ public class ScenarioActivity extends BaseActivity
     {
         if (stepPosition < steps.size())
         {
-            final int position = stepPosition++;
+            int position = stepPosition++;
 
             adapter.add(steps.get(position));
 
-            handler.post(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    View view = stepsList.getLayoutManager().findViewByPosition(position);
-                    view.setVisibility(View.VISIBLE);
-
-                    Animation fadeInAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
-                    view.startAnimation(fadeInAnimation);
-                }
-            });
+            stepsList.smoothScrollToPosition(position);
+            fadeRow(position);
         }
 
         if (stepPosition >= steps.size())
         {
             enableButtonNext(true);
         }
+    }
+
+    private void fadeRow(final int position)
+    {
+        handler.post(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                View view = stepsList.getLayoutManager().findViewByPosition(position);
+
+                if (view != null)
+                {
+                    Animation fadeInAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
+                    view.setVisibility(View.VISIBLE);
+                    view.startAnimation(fadeInAnimation);
+                }
+            }
+        });
     }
 
     @OnClick(R.id.scenario_button_comment)

@@ -19,9 +19,11 @@ import com.mauriciotogneri.appickle.pickers.DatePickerFragment;
 import com.mauriciotogneri.appickle.pickers.DatePickerFragment.OnDateSelected;
 import com.mauriciotogneri.appickle.pickers.PickerSelector;
 import com.mauriciotogneri.appickle.pickers.TimePickerFragment;
+import com.mauriciotogneri.appickle.pickers.TimePickerFragment.OnTimeSelected;
 import com.mauriciotogneri.appickle.storage.SessionStorage;
 import com.mauriciotogneri.appickle.widgets.DateFieldWidget;
 import com.mauriciotogneri.appickle.widgets.SurveyFieldWidget;
+import com.mauriciotogneri.appickle.widgets.TimeFieldWidget;
 import com.mauriciotogneri.uibinder.annotations.BindView;
 import com.mauriciotogneri.uibinder.annotations.OnClick;
 
@@ -30,7 +32,7 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SurveyActivity extends BaseActivity implements PickerSelector, OnDateSelected
+public class SurveyActivity extends BaseActivity implements PickerSelector, OnDateSelected, OnTimeSelected
 {
     private static final String PARAMETER_SESSION_ID = "session.id";
 
@@ -118,8 +120,21 @@ public class SurveyActivity extends BaseActivity implements PickerSelector, OnDa
     @Override
     public void onPickTime(TimeField timeField, String id)
     {
-        DialogFragment newFragment = new TimePickerFragment();
+        DialogFragment newFragment = TimePickerFragment.create(timeField.time(), id);
         newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    @Override
+    public void onTimeSelected(DateTime dateTime, String id)
+    {
+        for (SurveyFieldWidget widget : widgets)
+        {
+            if (TextUtils.equals(id, widget.id()))
+            {
+                TimeFieldWidget timeFieldWidget = (TimeFieldWidget) widget;
+                timeFieldWidget.setTime(dateTime);
+            }
+        }
     }
 
     private boolean validateSurvey()
