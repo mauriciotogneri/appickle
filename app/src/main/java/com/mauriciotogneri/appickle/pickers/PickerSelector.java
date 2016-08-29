@@ -5,7 +5,7 @@ import com.mauriciotogneri.appickle.model.fields.TimeField;
 
 public interface PickerSelector
 {
-    void onPickDate(DateField dateField);
+    void onPickDate(DateField dateField, String id);
 
-    void onPickTime(TimeField timeField);
+    void onPickTime(TimeField timeField, String id);
 }

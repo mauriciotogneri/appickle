@@ -1,5 +1,6 @@
 package com.mauriciotogneri.appickle.widgets;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,9 +13,12 @@ import com.mauriciotogneri.appickle.pickers.PickerSelector;
 
 import org.joda.time.DateTime;
 
+import java.text.DateFormat;
+
 public class DateFieldWidget extends SurveyFieldWidget
 {
     private final DateField dateField;
+    private TextView input;
 
     public DateFieldWidget(DateField dateField)
     {
@@ -28,17 +32,24 @@ public class DateFieldWidget extends SurveyFieldWidget
     {
         View view = inflate(inflater, parent, R.layout.view_field_date_time);
 
-        TextView input = (TextView) view.findViewById(R.id.field_dateTime);
+        input = (TextView) view.findViewById(R.id.field_dateTime);
         input.setOnClickListener(new OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                selector.onPickDate(dateField);
+                selector.onPickDate(dateField, dateField.id());
             }
         });
 
-        dateField.setDate(DateTime.now());
-        input.setText(dateField.result());
+        setDate(DateTime.now(), view.getContext());
+    }
+
+    public void setDate(DateTime dateTime, Context context)
+    {
+        dateField.setDate(dateTime);
+
+        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
+        input.setText(dateFormat.format(dateTime.toDate()));
     }
 }

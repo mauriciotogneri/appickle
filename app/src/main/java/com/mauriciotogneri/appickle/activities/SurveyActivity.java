@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -15,17 +16,21 @@ import com.mauriciotogneri.appickle.model.fields.TimeField;
 import com.mauriciotogneri.appickle.model.session.Session;
 import com.mauriciotogneri.appickle.model.session.Survey;
 import com.mauriciotogneri.appickle.pickers.DatePickerFragment;
+import com.mauriciotogneri.appickle.pickers.DatePickerFragment.OnDateSelected;
 import com.mauriciotogneri.appickle.pickers.PickerSelector;
 import com.mauriciotogneri.appickle.pickers.TimePickerFragment;
 import com.mauriciotogneri.appickle.storage.SessionStorage;
+import com.mauriciotogneri.appickle.widgets.DateFieldWidget;
 import com.mauriciotogneri.appickle.widgets.SurveyFieldWidget;
 import com.mauriciotogneri.uibinder.annotations.BindView;
 import com.mauriciotogneri.uibinder.annotations.OnClick;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class SurveyActivity extends BaseActivity implements PickerSelector
+public class SurveyActivity extends BaseActivity implements PickerSelector, OnDateSelected
 {
     private static final String PARAMETER_SESSION_ID = "session.id";
 
@@ -91,14 +96,27 @@ public class SurveyActivity extends BaseActivity implements PickerSelector
     }
 
     @Override
-    public void onPickDate(DateField dateField)
+    public void onPickDate(DateField dateField, String id)
     {
-        DialogFragment newFragment = new DatePickerFragment();
+        DialogFragment newFragment = DatePickerFragment.create(dateField.dateTime(), id);
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
     @Override
-    public void onPickTime(TimeField timeField)
+    public void onDateSelected(DateTime dateTime, String id)
+    {
+        for (SurveyFieldWidget widget : widgets)
+        {
+            if (TextUtils.equals(id, widget.id()))
+            {
+                DateFieldWidget dateFieldWidget = (DateFieldWidget) widget;
+                dateFieldWidget.setDate(dateTime, this);
+            }
+        }
+    }
+
+    @Override
+    public void onPickTime(TimeField timeField, String id)
     {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");

@@ -46,6 +46,7 @@ public class ScenarioActivity extends BaseActivity
     private StepAdapter adapter;
     private int stepPosition = 0;
     private final List<Step> steps = new ArrayList<>();
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
     public static Intent createIntent(Context context, String sessionId, int featurePosition, int scenarioPosition)
     {
@@ -108,7 +109,6 @@ public class ScenarioActivity extends BaseActivity
 
             adapter.add(steps.get(position));
 
-            Handler handler = new Handler(Looper.getMainLooper());
             handler.post(new Runnable()
             {
                 @Override

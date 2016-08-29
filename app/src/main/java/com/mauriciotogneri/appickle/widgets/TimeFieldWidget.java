@@ -34,7 +34,7 @@ public class TimeFieldWidget extends SurveyFieldWidget
             @Override
             public void onClick(View view)
             {
-                selector.onPickTime(timeField);
+                selector.onPickTime(timeField, timeField.id());
             }
         });
 

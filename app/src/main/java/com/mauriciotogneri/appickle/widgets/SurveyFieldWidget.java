@@ -27,6 +27,11 @@ public abstract class SurveyFieldWidget
         this.field = field;
     }
 
+    public String id()
+    {
+        return field.id();
+    }
+
     public View inflate(LayoutInflater inflater, ViewGroup parent, int resourceId)
     {
         View view = inflater.inflate(R.layout.view_field_base, parent, false);
