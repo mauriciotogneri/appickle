@@ -3,9 +3,15 @@ package com.mauriciotogneri.appickle.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.mauriciotogneri.appickle.R;
@@ -78,10 +84,23 @@ public class ScenarioActivity extends BaseActivity
         stepsList.setLayoutManager(new LinearLayoutManager(this));
 
         buttonNextDisabled.setEnabled(false);
+
+        stepsList.setOnTouchListener(new OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent)
+            {
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP)
+                {
+                    displayNextStep();
+                }
+
+                return false;
+            }
+        });
     }
 
-    @OnClick(R.id.steps_list_input)
-    public void onStepListClick()
+    private void displayNextStep()
     {
         if (stepPosition < steps.size())
         {
@@ -89,17 +108,19 @@ public class ScenarioActivity extends BaseActivity
 
             adapter.add(steps.get(position));
 
-            //            Handler handler = new Handler(Looper.getMainLooper());
-            //            handler.post(new Runnable()
-            //            {
-            //                @Override
-            //                public void run()
-            //                {
-            //                    View view = stepsList.getLayoutManager().findViewByPosition(position);
-            //                    Animation fadeInAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
-            //                    view.startAnimation(fadeInAnimation);
-            //                }
-            //            });
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    View view = stepsList.getLayoutManager().findViewByPosition(position);
+                    view.setVisibility(View.VISIBLE);
+
+                    Animation fadeInAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
+                    view.startAnimation(fadeInAnimation);
+                }
+            });
         }
 
         if (stepPosition >= steps.size())
