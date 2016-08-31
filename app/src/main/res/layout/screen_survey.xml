@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/screen.survey.description"
+        style="@style/labelText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin.default"
+        android:paddingLeft="@dimen/margin.default"
+        android:paddingRight="@dimen/margin.default"
+        android:paddingTop="@dimen/margin.default"
+        tools:text="@string/dummy.long"/>
+
     <ScrollView
+        android:id="@+id/screen.survey.scrollViewContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ScrollView;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.model.fields.ToggleField;
@@ -15,9 +16,9 @@ public class ToggleFieldWidget extends SurveyFieldWidget
 {
     private final ToggleField toggleField;
 
-    public ToggleFieldWidget(ToggleField toggleField)
+    public ToggleFieldWidget(ToggleField toggleField, ScrollView containerScrollView)
     {
-        super(toggleField);
+        super(toggleField, containerScrollView);
 
         this.toggleField = toggleField;
     }

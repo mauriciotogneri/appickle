@@ -1,30 +1,28 @@
 package com.mauriciotogneri.appickle.widgets;
 
+import android.graphics.Point;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.mauriciotogneri.appickle.R;
-import com.mauriciotogneri.appickle.model.fields.CheckboxField;
-import com.mauriciotogneri.appickle.model.fields.DateField;
-import com.mauriciotogneri.appickle.model.fields.DropdownField;
-import com.mauriciotogneri.appickle.model.fields.RadioField;
 import com.mauriciotogneri.appickle.model.fields.SurveyField;
-import com.mauriciotogneri.appickle.model.fields.TextField;
-import com.mauriciotogneri.appickle.model.fields.TimeField;
-import com.mauriciotogneri.appickle.model.fields.ToggleField;
 import com.mauriciotogneri.appickle.pickers.PickerSelector;
 
 public abstract class SurveyFieldWidget
 {
     private final SurveyField field;
+    private final ScrollView containerScrollView;
     private TextView errorLabel;
 
-    public SurveyFieldWidget(SurveyField field)
+    public SurveyFieldWidget(SurveyField field, ScrollView containerScrollView)
     {
         this.field = field;
+        this.containerScrollView = containerScrollView;
     }
 
     public String id()
@@ -76,45 +74,27 @@ public abstract class SurveyFieldWidget
             if (!TextUtils.isEmpty(field.error()))
             {
                 errorLabel.setVisibility(View.VISIBLE);
+
+                Point childOffset = new Point();
+                deepChildOffset(containerScrollView, errorLabel.getParent().getParent(), (ViewGroup)errorLabel.getParent(), childOffset);
+                containerScrollView.smoothScrollTo(0, childOffset.y);
             }
         }
 
         return valid;
     }
 
-    public static SurveyFieldWidget fromField(SurveyField field)
+    private void deepChildOffset(ViewGroup mainParent, ViewParent parent, View child, Point accumulatedOffset)
     {
-        if (field instanceof TextField)
+        ViewGroup parentGroup = (ViewGroup) parent;
+        accumulatedOffset.x += child.getLeft();
+        accumulatedOffset.y += child.getTop();
+
+        if (parentGroup.equals(mainParent))
         {
-            return new TextFieldWidget((TextField) field);
+            return;
         }
-        else if (field instanceof RadioField)
-        {
-            return new RadioFieldWidget((RadioField) field);
-        }
-        else if (field instanceof DropdownField)
-        {
-            return new DropdownFieldWidget((DropdownField) field);
-        }
-        else if (field instanceof CheckboxField)
-        {
-            return new CheckboxFieldWidget((CheckboxField) field);
-        }
-        else if (field instanceof ToggleField)
-        {
-            return new ToggleFieldWidget((ToggleField) field);
-        }
-        else if (field instanceof DateField)
-        {
-            return new DateFieldWidget((DateField) field);
-        }
-        else if (field instanceof TimeField)
-        {
-            return new TimeFieldWidget((TimeField) field);
-        }
-        else
-        {
-            throw new RuntimeException();
-        }
+
+        deepChildOffset(mainParent, parentGroup.getParent(), parentGroup, accumulatedOffset);
     }
 }

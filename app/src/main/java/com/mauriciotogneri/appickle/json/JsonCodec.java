@@ -141,6 +141,7 @@ public class JsonCodec
         private static final String FORMAT = "format";
         private static final String PLACEHOLDER = "placeholder";
         private static final String DEFAULT_VALUE = "defaultValue";
+        private static final String NOW = "now";
         private static final String VALUES = "values";
         private static final String SELECTED = "selected";
         private static final String RESULT = "result";
@@ -216,10 +217,12 @@ public class JsonCodec
                     return new ToggleField(id, description, error, required, result, toggleSelected);
 
                 case date:
-                    return new DateField(id, description, error, required, result);
+                    Boolean setDateAsNow = json.getBoolean(NOW);
+                    return new DateField(id, description, error, required, result, setDateAsNow);
 
                 case time:
-                    return new TimeField(id, description, error, required, result);
+                    Boolean setTimeAsNow = json.getBoolean(NOW);
+                    return new TimeField(id, description, error, required, result, setTimeAsNow);
             }
 
             throw new RuntimeException();
@@ -268,11 +271,15 @@ public class JsonCodec
             }
             else if (field instanceof DateField)
             {
+                DateField dateField = (DateField) field;
                 result.addProperty(TYPE, FieldType.date.toString());
+                result.addProperty(NOW, dateField.setAsNow());
             }
             else if (field instanceof TimeField)
             {
+                TimeField timeField = (TimeField) field;
                 result.addProperty(TYPE, FieldType.time.toString());
+                result.addProperty(NOW, timeField.setAsNow());
             }
             else
             {

@@ -7,6 +7,8 @@ import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.base.BaseActivity;
@@ -39,6 +41,12 @@ public class SurveyActivity extends BaseActivity implements PickerSelector, OnDa
     private Session session;
 
     private final List<SurveyFieldWidget> widgets = new ArrayList<>();
+
+    @BindView(R.id.screen_survey_description)
+    public TextView surveyDescription;
+
+    @BindView(R.id.screen_survey_scrollViewContainer)
+    public ScrollView scrollViewContainer;
 
     @BindView(R.id.screen_survey_fieldContainer)
     public ViewGroup fieldContainer;
@@ -76,11 +84,13 @@ public class SurveyActivity extends BaseActivity implements PickerSelector, OnDa
 
     private void displaySurvey(Survey survey)
     {
+        surveyDescription.setText(survey.description());
+
         LayoutInflater inflater = LayoutInflater.from(this);
 
         for (SurveyField field : survey.fields())
         {
-            SurveyFieldWidget widget = SurveyFieldWidget.fromField(field);
+            SurveyFieldWidget widget = field.widget(scrollViewContainer);
             widget.init(inflater, fieldContainer, this);
 
             widgets.add(widget);

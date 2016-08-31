@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.mauriciotogneri.appickle.R;
@@ -20,9 +21,9 @@ public class DateFieldWidget extends SurveyFieldWidget
     private final DateField dateField;
     private TextView input;
 
-    public DateFieldWidget(DateField dateField)
+    public DateFieldWidget(DateField dateField, ScrollView containerScrollView)
     {
-        super(dateField);
+        super(dateField, containerScrollView);
 
         this.dateField = dateField;
     }
@@ -42,7 +43,10 @@ public class DateFieldWidget extends SurveyFieldWidget
             }
         });
 
-        setDate(DateTime.now(), view.getContext());
+        if (dateField.setAsNow())
+        {
+            setDate(DateTime.now(), view.getContext());
+        }
     }
 
     public void setDate(DateTime dateTime, Context context)

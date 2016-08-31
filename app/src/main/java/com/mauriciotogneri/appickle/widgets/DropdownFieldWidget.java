@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 
 import com.mauriciotogneri.appickle.R;
@@ -20,9 +21,9 @@ public class DropdownFieldWidget extends SurveyFieldWidget
 {
     private final DropdownField dropdownField;
 
-    public DropdownFieldWidget(DropdownField dropdownField)
+    public DropdownFieldWidget(DropdownField dropdownField, ScrollView containerScrollView)
     {
-        super(dropdownField);
+        super(dropdownField, containerScrollView);
 
         this.dropdownField = dropdownField;
     }

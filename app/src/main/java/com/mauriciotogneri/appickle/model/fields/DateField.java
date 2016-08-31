@@ -8,15 +8,25 @@ import org.joda.time.format.DateTimeFormatter;
 
 public class DateField extends SurveyField
 {
+    private final Boolean setAsNow;
+
     public static final DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 
     public DateField(String id,
                      String description,
                      String error,
                      Boolean required,
-                     String result)
+                     String result,
+                     Boolean setAsNow)
     {
         super(FieldType.date, id, description, error, required, result);
+
+        this.setAsNow = setAsNow;
+    }
+
+    public Boolean setAsNow()
+    {
+        return setAsNow;
     }
 
     public void setDate(DateTime dateTime)
@@ -26,6 +36,13 @@ public class DateField extends SurveyField
 
     public DateTime dateTime()
     {
-        return dateFormatter.parseDateTime(result());
+        if (!isEmpty())
+        {
+            return dateFormatter.parseDateTime(result());
+        }
+        else
+        {
+            return DateTime.now();
+        }
     }
 }

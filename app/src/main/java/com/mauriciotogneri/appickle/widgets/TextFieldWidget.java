@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ScrollView;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.model.fields.TextField;
@@ -17,9 +18,9 @@ public class TextFieldWidget extends SurveyFieldWidget
 {
     private final TextField textField;
 
-    public TextFieldWidget(TextField textField)
+    public TextFieldWidget(TextField textField, ScrollView containerScrollView)
     {
-        super(textField);
+        super(textField, containerScrollView);
 
         this.textField = textField;
     }
@@ -29,9 +30,9 @@ public class TextFieldWidget extends SurveyFieldWidget
     {
         View view = inflate(inflater, parent, R.layout.view_field_standard);
 
-        EditText input = (EditText) view.findViewById(R.id.field_standard_input);
+        EditText editText = (EditText) view.findViewById(R.id.field_standard_input);
 
-        input.addTextChangedListener(new TextWatcher()
+        editText.addTextChangedListener(new TextWatcher()
         {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
@@ -46,7 +47,7 @@ public class TextFieldWidget extends SurveyFieldWidget
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
             {
-                String text = charSequence.toString();
+                String text = charSequence.toString().trim();
 
                 textField.result(TextUtils.isEmpty(text) ? null : text);
             }
@@ -54,7 +55,7 @@ public class TextFieldWidget extends SurveyFieldWidget
 
         if (textField.format() != null)
         {
-            input.setInputType(textField.format().value());
+            editText.setInputType(textField.format().value());
         }
 
         TextInputLayout inputLayout = (TextInputLayout) view.findViewById(R.id.field_standard_layout);
@@ -66,7 +67,7 @@ public class TextFieldWidget extends SurveyFieldWidget
 
         if (!TextUtils.isEmpty(textField.defaultValue()))
         {
-            input.setText(textField.defaultValue());
+            editText.setText(textField.defaultValue());
         }
     }
 }

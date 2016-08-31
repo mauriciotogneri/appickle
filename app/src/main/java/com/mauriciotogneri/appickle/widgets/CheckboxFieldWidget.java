@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ScrollView;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.model.fields.CheckboxField;
@@ -16,9 +17,9 @@ public class CheckboxFieldWidget extends SurveyFieldWidget
 {
     private final CheckboxField dropdownField;
 
-    public CheckboxFieldWidget(CheckboxField dropdownField)
+    public CheckboxFieldWidget(CheckboxField dropdownField, ScrollView containerScrollView)
     {
-        super(dropdownField);
+        super(dropdownField, containerScrollView);
 
         this.dropdownField = dropdownField;
     }

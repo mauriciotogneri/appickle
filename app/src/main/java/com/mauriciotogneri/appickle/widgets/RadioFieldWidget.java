@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.model.fields.FieldValue;
@@ -16,9 +17,9 @@ public class RadioFieldWidget extends SurveyFieldWidget
 {
     private final RadioField radioField;
 
-    public RadioFieldWidget(RadioField radioField)
+    public RadioFieldWidget(RadioField radioField, ScrollView containerScrollView)
     {
-        super(radioField);
+        super(radioField, containerScrollView);
 
         this.radioField = radioField;
     }
@@ -33,6 +34,7 @@ public class RadioFieldWidget extends SurveyFieldWidget
         for (FieldValue value : radioField.values())
         {
             RadioButton radioButton = (RadioButton) inflater.inflate(R.layout.view_field_radio_item, radioGroup, false);
+            radioGroup.addView(radioButton);
 
             radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
             {
@@ -46,8 +48,6 @@ public class RadioFieldWidget extends SurveyFieldWidget
             radioButton.setText(value.label());
             radioButton.setTag(value.key());
             radioButton.setChecked(value.isSelected());
-
-            radioGroup.addView(radioButton);
         }
     }
 }

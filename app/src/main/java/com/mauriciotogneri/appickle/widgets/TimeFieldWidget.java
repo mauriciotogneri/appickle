@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.mauriciotogneri.appickle.R;
@@ -17,9 +18,9 @@ public class TimeFieldWidget extends SurveyFieldWidget
     private final TimeField timeField;
     private TextView input;
 
-    public TimeFieldWidget(TimeField timeField)
+    public TimeFieldWidget(TimeField timeField, ScrollView containerScrollView)
     {
-        super(timeField);
+        super(timeField, containerScrollView);
 
         this.timeField = timeField;
     }
@@ -39,7 +40,10 @@ public class TimeFieldWidget extends SurveyFieldWidget
             }
         });
 
-        setTime(DateTime.now());
+        if (timeField.setAsNow())
+        {
+            setTime(DateTime.now());
+        }
     }
 
     public void setTime(DateTime dateTime)
