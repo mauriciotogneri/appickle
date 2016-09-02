@@ -5,18 +5,12 @@ import android.os.StrictMode;
 
 import com.mauriciotogneri.appickle.BuildConfig;
 
-import org.acra.ACRA;
-import org.acra.annotation.ReportsCrashes;
-
-@ReportsCrashes(formUri = "http://zeronest.com/acra/report.php")
 public class Appickle extends Application
 {
     @Override
     public void onCreate()
     {
         super.onCreate();
-
-        ACRA.init(this);
 
         if (BuildConfig.DEBUG)
         {

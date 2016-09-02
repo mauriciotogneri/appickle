@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "446844573465",
+    "firebase_url": "https://appickle-cabbb.firebaseio.com",
+    "project_id": "appickle-cabbb",
+    "storage_bucket": "appickle-cabbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446844573465:android:d93ab2b680e5abfb",
+        "android_client_info": {
+          "package_name": "com.mauriciotogneri.appickle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446844573465-2hjfv2a0sgatrohd8cr65n2miml63t4t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mauriciotogneri.appickle",
+            "certificate_hash": "808DCD3D2690FF6F4D7BF006A9693003DB48BC66"
+          }
+        },
+        {
+          "client_id": "446844573465-kni57obgo7oknkfngv85o6770t4q12tp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6SFQB2iFTExSRCDIFA0A1g1UCxaq6d7k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446844573465-kni57obgo7oknkfngv85o6770t4q12tp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

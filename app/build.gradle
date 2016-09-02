@@ -66,12 +66,15 @@ dependencies
     compile 'com.mauriciotogneri:entitystorage:1.0.0'
     compile 'com.mauriciotogneri:uibinder:1.0.0'
 
+    compile 'com.google.firebase:firebase-core:9.4.0'
+    compile 'com.google.firebase:firebase-crash:9.4.0'
     compile 'io.cucumber:gherkin-jvm-deps:1.0.4'
     compile 'joda-time:joda-time:2.9.4'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.google.code.gson:gson:2.7'
-    compile 'ch.acra:acra:4.9.0'
 
     testCompile 'junit:junit:4.12'
 }
+
+apply plugin: 'com.google.gms.google-services'
