@@ -3,8 +3,7 @@ package com.mauriciotogneri.appickle.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.adapters.SessionAdapter;
@@ -12,6 +11,7 @@ import com.mauriciotogneri.appickle.base.BaseActivity;
 import com.mauriciotogneri.appickle.base.BaseListAdapter.OnItemSelected;
 import com.mauriciotogneri.appickle.model.session.Session;
 import com.mauriciotogneri.appickle.storage.SessionStorage;
+import com.mauriciotogneri.appickle.widgets.CustomRecyclerView;
 import com.mauriciotogneri.uibinder.annotations.BindView;
 
 import java.util.List;
@@ -19,7 +19,10 @@ import java.util.List;
 public class LoadSessionActivity extends BaseActivity implements OnItemSelected<Session>
 {
     @BindView(R.id.session_list)
-    public RecyclerView sessionsList;
+    public CustomRecyclerView sessionsList;
+
+    @BindView(R.id.label_list_empty)
+    public View emptyLabel;
 
     public static Intent createIntent(Context context)
     {
@@ -36,11 +39,15 @@ public class LoadSessionActivity extends BaseActivity implements OnItemSelected<
         SessionStorage sessionStorage = new SessionStorage(this);
         List<Session> sessions = sessionStorage.entities();
 
-        SessionAdapter adapter = new SessionAdapter(this, sessions, this);
-
-        sessionsList.setHasFixedSize(true);
-        sessionsList.setAdapter(adapter);
-        sessionsList.setLayoutManager(new LinearLayoutManager(this));
+        if (!sessions.isEmpty())
+        {
+            sessionsList.fill(this, new SessionAdapter(this, sessions, this));
+        }
+        else
+        {
+            sessionsList.setVisibility(View.GONE);
+            emptyLabel.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

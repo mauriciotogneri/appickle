@@ -3,8 +3,7 @@ package com.mauriciotogneri.appickle.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.adapters.ScenarioAdapter;
@@ -14,6 +13,7 @@ import com.mauriciotogneri.appickle.model.session.Feature;
 import com.mauriciotogneri.appickle.model.session.Scenario;
 import com.mauriciotogneri.appickle.model.session.Session;
 import com.mauriciotogneri.appickle.storage.SessionStorage;
+import com.mauriciotogneri.appickle.widgets.CustomRecyclerView;
 import com.mauriciotogneri.uibinder.annotations.BindView;
 
 import java.util.List;
@@ -24,7 +24,10 @@ public class ScenariosSummaryActivity extends BaseActivity implements OnItemSele
     private static final String PARAMETER_FEATURE_POSITION = "feature.position";
 
     @BindView(R.id.scenarios_list)
-    public RecyclerView scenariosList;
+    public CustomRecyclerView scenariosList;
+
+    @BindView(R.id.label_list_empty)
+    public View emptyLabel;
 
     public static Intent createIntent(Context context, String sessionId, int featurePosition)
     {
@@ -53,11 +56,15 @@ public class ScenariosSummaryActivity extends BaseActivity implements OnItemSele
         List<Feature> features = session.parsedFeature();
         List<Scenario> scenarios = features.get(featurePosition).scenarios();
 
-        ScenarioAdapter adapter = new ScenarioAdapter(this, scenarios, this);
-
-        scenariosList.setHasFixedSize(true);
-        scenariosList.setAdapter(adapter);
-        scenariosList.setLayoutManager(new LinearLayoutManager(this));
+        if (!features.isEmpty())
+        {
+            scenariosList.fill(this, new ScenarioAdapter(this, scenarios, this));
+        }
+        else
+        {
+            scenariosList.setVisibility(View.GONE);
+            emptyLabel.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

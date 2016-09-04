@@ -8,6 +8,8 @@
 
     <string name="dialog.downloadingSession">Loading session</string>
 
+    <string name="list.emptyLabel">Empty list</string>
+
     <string name="screen.main.button.new">New session</string>
     <string name="screen.main.button.load">Load session</string>
 

@@ -3,8 +3,6 @@ package com.mauriciotogneri.appickle.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -18,6 +16,7 @@ import com.mauriciotogneri.appickle.model.session.Scenario;
 import com.mauriciotogneri.appickle.model.session.Session;
 import com.mauriciotogneri.appickle.model.session.Step;
 import com.mauriciotogneri.appickle.storage.SessionStorage;
+import com.mauriciotogneri.appickle.widgets.CustomRecyclerView;
 import com.mauriciotogneri.uibinder.annotations.BindView;
 import com.mauriciotogneri.uibinder.annotations.OnClick;
 
@@ -31,7 +30,7 @@ public class ScenarioActivity extends BaseActivity
     private static final String PARAMETER_SCENARIO_POSITION = "scenario.position";
 
     @BindView(R.id.steps_list)
-    public RecyclerView stepsList;
+    public CustomRecyclerView stepsList;
 
     @BindView(R.id.scenario_button_next_enabled)
     public View buttonNextEnabled;
@@ -75,9 +74,7 @@ public class ScenarioActivity extends BaseActivity
 
         adapter = new StepAdapter(this, new ArrayList<Step>());
 
-        stepsList.setHasFixedSize(true);
-        stepsList.setAdapter(adapter);
-        stepsList.setLayoutManager(new LinearLayoutManager(this));
+        stepsList.fill(this, adapter);
 
         buttonNextDisabled.setEnabled(false);
 
