@@ -1,22 +1,19 @@
 package com.mauriciotogneri.appickle.model.fields;
 
-import com.mauriciotogneri.appickle.json.JsonCodec.SurveyFieldAdapter.FieldType;
-
 import java.util.List;
 
 public class DropdownField extends SurveyField
 {
     private final List<FieldValue> values;
 
-    public DropdownField(FieldType type,
-                         String id,
+    public DropdownField(String id,
                          String description,
                          String error,
                          Boolean required,
                          String result,
                          List<FieldValue> values)
     {
-        super(type, id, description, error, required, result);
+        super(id, description, error, required, result);
 
         this.values = values;
     }

@@ -38,6 +38,7 @@ public class SurveyActivity extends BaseActivity implements PickerSelector, OnDa
 {
     private static final String PARAMETER_SESSION_ID = "session.id";
 
+    // TODO
     private Session session;
 
     private final List<SurveyFieldWidget> widgets = new ArrayList<>();

@@ -1,7 +1,5 @@
 package com.mauriciotogneri.appickle.model.fields;
 
-import com.mauriciotogneri.appickle.json.JsonCodec.SurveyFieldAdapter.FieldType;
-
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -19,7 +17,7 @@ public class DateField extends SurveyField
                      String result,
                      Boolean setAsNow)
     {
-        super(FieldType.date, id, description, error, required, result);
+        super(id, description, error, required, result);
 
         this.setAsNow = setAsNow;
     }

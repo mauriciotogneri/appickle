@@ -202,15 +202,15 @@ public class JsonCodec
 
                 case radio:
                     List<FieldValue> radioValues = json.getList(VALUES, FieldValue.class, context);
-                    return new RadioField(FieldType.radio, id, description, error, required, result, radioValues);
+                    return new RadioField(id, description, error, required, result, radioValues);
 
                 case dropdown:
                     List<FieldValue> dropdownValues = json.getList(VALUES, FieldValue.class, context);
-                    return new DropdownField(FieldType.dropdown, id, description, error, required, result, dropdownValues);
+                    return new DropdownField(id, description, error, required, result, dropdownValues);
 
                 case checkbox:
                     List<FieldValue> checkboxValue = json.getList(VALUES, FieldValue.class, context);
-                    return new CheckboxField(FieldType.checkbox, id, description, error, required, result, checkboxValue);
+                    return new CheckboxField(id, description, error, required, result, checkboxValue);
 
                 case toggle:
                     Boolean toggleSelected = json.getBoolean(SELECTED);

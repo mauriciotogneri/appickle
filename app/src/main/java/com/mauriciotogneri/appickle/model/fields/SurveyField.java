@@ -3,7 +3,6 @@ package com.mauriciotogneri.appickle.model.fields;
 import android.text.TextUtils;
 import android.widget.ScrollView;
 
-import com.mauriciotogneri.appickle.json.JsonCodec.SurveyFieldAdapter.FieldType;
 import com.mauriciotogneri.appickle.widgets.CheckboxFieldWidget;
 import com.mauriciotogneri.appickle.widgets.DateFieldWidget;
 import com.mauriciotogneri.appickle.widgets.DropdownFieldWidget;
@@ -15,16 +14,14 @@ import com.mauriciotogneri.appickle.widgets.ToggleFieldWidget;
 
 public abstract class SurveyField
 {
-    private final FieldType type;
     private final String id;
     private final String description;
     private final String error;
     private final Boolean required;
     private String result;
 
-    protected SurveyField(FieldType type, String id, String description, String error, Boolean required, String result)
+    protected SurveyField(String id, String description, String error, Boolean required, String result)
     {
-        this.type = type;
         this.id = id;
         this.description = description;
         this.error = error;

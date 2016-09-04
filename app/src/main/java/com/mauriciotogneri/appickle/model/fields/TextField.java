@@ -1,6 +1,5 @@
 package com.mauriciotogneri.appickle.model.fields;
 
-import com.mauriciotogneri.appickle.json.JsonCodec.SurveyFieldAdapter.FieldType;
 import com.mauriciotogneri.appickle.json.JsonCodec.SurveyFieldAdapter.Format;
 
 public class TextField extends SurveyField
@@ -18,7 +17,7 @@ public class TextField extends SurveyField
                      String placeholder,
                      String defaultValue)
     {
-        super(FieldType.text, id, description, error, required, result);
+        super(id, description, error, required, result);
 
         this.format = format;
         this.placeholder = placeholder;

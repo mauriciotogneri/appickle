@@ -1,7 +1,5 @@
 package com.mauriciotogneri.appickle.model.fields;
 
-import com.mauriciotogneri.appickle.json.JsonCodec.SurveyFieldAdapter.FieldType;
-
 public class ToggleField extends SurveyField
 {
     private final Boolean selected;
@@ -13,7 +11,7 @@ public class ToggleField extends SurveyField
                        String result,
                        Boolean selected)
     {
-        super(FieldType.toggle, id, description, error, required, result);
+        super(id, description, error, required, result);
 
         this.selected = selected;
     }
