@@ -111,18 +111,21 @@ public class ScenarioActivity extends BaseActivity
     }
 
     @OnClick(R.id.scenario_button_comment)
+    @SuppressWarnings("unused")
     public void onButtonCommentClick()
     {
         Toast.makeText(this, "COMMENT!", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.scenario_button_bug)
+    @SuppressWarnings("unused")
     public void onButtonBugClick()
     {
         Toast.makeText(this, "BUG!", Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.scenario_button_skip)
+    @SuppressWarnings("unused")
     public void onButtonSkipClick()
     {
         // TODO
@@ -130,6 +133,7 @@ public class ScenarioActivity extends BaseActivity
     }
 
     @OnClick(R.id.scenario_button_next_enabled)
+    @SuppressWarnings("unused")
     public void onButtonNextClick()
     {
         // TODO

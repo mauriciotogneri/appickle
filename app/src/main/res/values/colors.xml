@@ -18,6 +18,7 @@
 
     <color name="button.text">#FFFFFF</color>
     <color name="button.disabled">#888888</color>
+    <color name="button.secondary">#1CC965</color>
 
     <color name="text.default">#888888</color>
     <color name="text.error">#FF0000</color>

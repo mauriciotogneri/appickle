@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ScenarioAdapter extends BaseListAdapter<Scenario, ViewHolder> implements OnViewHolderClicked
 {
-    private OnItemSelected<Scenario> onItemSelected;
+    private final OnItemSelected<Scenario> onItemSelected;
 
     public ScenarioAdapter(Context context, List<Scenario> scenarios, OnItemSelected<Scenario> onItemSelected)
     {

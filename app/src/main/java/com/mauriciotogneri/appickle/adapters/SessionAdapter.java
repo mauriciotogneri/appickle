@@ -15,7 +15,7 @@ import java.util.List;
 
 public class SessionAdapter extends BaseListAdapter<Session, ViewHolder> implements OnViewHolderClicked
 {
-    private OnItemSelected<Session> onItemSelected;
+    private final OnItemSelected<Session> onItemSelected;
 
     public SessionAdapter(Context context, List<Session> sessions, OnItemSelected<Session> onItemSelected)
     {

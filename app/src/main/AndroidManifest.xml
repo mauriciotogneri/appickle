@@ -40,10 +40,6 @@
         </activity>
 
         <activity
-            android:name=".activities.NewSessionActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
-
-        <activity
             android:name=".activities.LoadSessionActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"/>
 

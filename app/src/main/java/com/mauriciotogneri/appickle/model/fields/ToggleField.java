@@ -4,7 +4,7 @@ import com.mauriciotogneri.appickle.json.JsonCodec.SurveyFieldAdapter.FieldType;
 
 public class ToggleField extends SurveyField
 {
-    private Boolean selected;
+    private final Boolean selected;
 
     public ToggleField(String id,
                        String description,

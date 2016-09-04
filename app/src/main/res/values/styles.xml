@@ -39,6 +39,15 @@
         <item name="android:paddingBottom">20dp</item>
     </style>
 
+    <style name="secondaryButton">
+        <item name="android:textColor">@color/button.text</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:background">@drawable/secondary_button_background</item>
+    </style>
+
     <style name="labelText">
         <item name="android:textColor">@color/text.default</item>
         <item name="android:textSize">@dimen/text.default</item>
@@ -52,10 +61,6 @@
 
     <style name="textInput">
         <item name="android:textColorHint">@color/hint</item>
-    </style>
-
-    <style name="checkbox">
-        <item name="android:textColor">@color/text.default</item>
     </style>
 
     <style name="floatingButton">

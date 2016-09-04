@@ -16,7 +16,7 @@ import java.util.List;
 
 public class FeatureAdapter extends BaseListAdapter<Feature, ViewHolder> implements OnViewHolderClicked
 {
-    private OnItemSelected<Feature> onItemSelected;
+    private final OnItemSelected<Feature> onItemSelected;
 
     public FeatureAdapter(Context context, List<Feature> features, OnItemSelected<Feature> onItemSelected)
     {

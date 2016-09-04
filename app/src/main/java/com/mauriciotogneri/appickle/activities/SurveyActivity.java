@@ -98,6 +98,7 @@ public class SurveyActivity extends BaseActivity implements PickerSelector, OnDa
     }
 
     @OnClick(R.id.screen_survey_button_start)
+    @SuppressWarnings("unused")
     public void onButtonStart()
     {
         if (validateSurvey())

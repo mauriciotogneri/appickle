@@ -79,6 +79,7 @@ public class IntroSessionActivity extends BaseActivity
     }
 
     @OnClick(R.id.screen_intro_button_next)
+    @SuppressWarnings("unused")
     public void onButtonNext()
     {
         String sessionId = parameter(PARAMETER_SESSION_ID);
