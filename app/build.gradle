@@ -63,11 +63,12 @@ dependencies
     compile 'com.android.support:design:24.2.0'
     compile 'com.android.support:recyclerview-v7:24.2.0'
 
-    compile 'com.mauriciotogneri:entitystorage:1.0.0'
-    compile 'com.mauriciotogneri:uibinder:1.0.0'
-
     compile 'com.google.firebase:firebase-core:9.4.0'
     compile 'com.google.firebase:firebase-crash:9.4.0'
+
+    compile 'com.mauriciotogneri:entitystorage:1.0.0'
+    compile 'com.mauriciotogneri:uibinder:1.0.1'
+
     compile 'io.cucumber:gherkin-jvm-deps:1.0.4'
     compile 'joda-time:joda-time:2.9.4'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'

@@ -104,6 +104,8 @@ public class SurveyActivity extends BaseActivity implements PickerSelector, OnDa
         {
             String sessionId = parameter(PARAMETER_SESSION_ID);
             startActivity(FeaturesSummaryActivity.createIntent(this, sessionId));
+
+            finish();
         }
     }
 
@@ -165,27 +167,4 @@ public class SurveyActivity extends BaseActivity implements PickerSelector, OnDa
     {
         return R.layout.screen_survey;
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings)
-        {
-            Toast.makeText(SurveyActivity.this, "CLICKED ON TOOLBAR ICON!", Toast.LENGTH_SHORT).show();
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 }

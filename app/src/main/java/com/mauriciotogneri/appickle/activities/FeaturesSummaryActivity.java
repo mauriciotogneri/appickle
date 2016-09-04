@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.mauriciotogneri.appickle.R;
 import com.mauriciotogneri.appickle.adapters.FeatureAdapter;
@@ -65,5 +67,29 @@ public class FeaturesSummaryActivity extends BaseActivity implements OnItemSelec
     {
         String sessionId = parameter(PARAMETER_SESSION_ID);
         startActivity(ScenariosSummaryActivity.createIntent(this, sessionId, position));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.menu_features, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id = item.getItemId();
+
+        if (id == R.id.menu_features_intro)
+        {
+            String sessionId = parameter(PARAMETER_SESSION_ID);
+            startActivity(IntroSessionActivity.createIntent(this, sessionId, false));
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

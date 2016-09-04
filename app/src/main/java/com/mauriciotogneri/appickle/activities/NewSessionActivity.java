@@ -165,7 +165,7 @@ public class NewSessionActivity extends BaseActivity
         SessionStorage sessionStorage = new SessionStorage(this);
         sessionStorage.addEntity(session);
 
-        Intent intent = IntroSessionActivity.createIntent(this, session.id());
+        Intent intent = IntroSessionActivity.createIntent(this, session.id(), true);
         startActivity(intent);
 
         finish();
@@ -202,10 +202,6 @@ public class NewSessionActivity extends BaseActivity
         progressDialog.setMessage(getString(R.string.dialog_downloadingSession));
         progressDialog.setCancelable(false);
         progressDialog.show();
-        //progressDialog.setContentView(R.layout.dialog_wait);
-
-        //TextView label = (TextView) progressDialog.findViewById(R.id.dialog_wait_text);
-        //label.setText(R.string.dialog_downloadingSession);
 
         return progressDialog;
     }

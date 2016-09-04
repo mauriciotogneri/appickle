@@ -19,7 +19,7 @@
 
     <string name="screen.load.title">Load session</string>
 
-    <string name="screen.intro.title">Session</string>
+    <string name="screen.intro.title">Intro</string>
     <string name="screen.intro.button.next">Next</string>
 
     <string name="screen.survey.title">Survey</string>

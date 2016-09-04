@@ -52,7 +52,8 @@ public class LoadSessionActivity extends BaseActivity implements OnItemSelected<
     @Override
     public void onItemSelected(Session session, int position)
     {
-        Intent intent = IntroSessionActivity.createIntent(this, session.id());
-        startActivity(intent);
+        startActivity(FeaturesSummaryActivity.createIntent(this, session.id()));
+
+        finish();
     }
 }
